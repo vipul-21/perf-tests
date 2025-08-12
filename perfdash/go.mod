@@ -1,13 +1,15 @@
 module k8s.io/perf-tests/perfdash
 
-go 1.22.4
+go 1.23.0
+
+toolchain go1.23.11
 
 require (
 	cloud.google.com/go v0.115.0 // indirect
 	cloud.google.com/go/storage v1.43.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/spf13/pflag v1.0.5
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	go.opencensus.io v0.24.0 // indirect
 	google.golang.org/api v0.192.0
 	gopkg.in/yaml.v2 v2.2.8
@@ -63,13 +65,13 @@ require (
 	go.opentelemetry.io/otel v1.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.24.0 // indirect
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
-	golang.org/x/crypto v0.25.0 // indirect
-	golang.org/x/net v0.27.0 // indirect
+	golang.org/x/crypto v0.40.0 // indirect
+	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
-	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.22.0 // indirect
-	golang.org/x/term v0.22.0 // indirect
-	golang.org/x/text v0.16.0 // indirect
+	golang.org/x/sync v0.16.0 // indirect
+	golang.org/x/sys v0.34.0 // indirect
+	golang.org/x/term v0.33.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 	golang.org/x/time v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20240730163845-b1a4ccb954bf // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240725223205-93522f1f2a9f // indirect
@@ -83,6 +85,20 @@ require (
 	k8s.io/client-go v0.0.0 // indirect
 	k8s.io/utils v0.0.0-20240711033017-18e509b52bc8
 	sigs.k8s.io/yaml v1.1.0 // indirect
+)
+
+require (
+	github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.10.1
+	github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.2
+)
+
+require (
+	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.18.1 // indirect
+	github.com/Azure/azure-sdk-for-go/sdk/internal v1.11.1 // indirect
+	github.com/AzureAD/microsoft-authentication-library-for-go v1.4.2 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.3 // indirect
+	github.com/kylelemons/godebug v1.1.0 // indirect
+	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c // indirect
 )
 
 replace (

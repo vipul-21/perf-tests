@@ -32,8 +32,9 @@ const (
 	errorDelay   = 10 * time.Second
 	maxBuilds    = 100
 
-	s3Mode  = "s3"
-	gcsMode = "gcs"
+	s3Mode    = "s3"
+	gcsMode   = "gcs"
+	azureMode = "azure"
 )
 
 var options = &DownloaderOptions{}
@@ -58,11 +59,21 @@ var (
 	// AWS S3 Specific flags
 	awsRegion = pflag.String("aws-region", "us-west-2", "AWS region of the S3 bucket")
 
+	// Azure Blob Storage Specific flags
+	azureAccountName      = pflag.String("azure-account-name", "", "Azure storage account name")
+	azureConnectionString = pflag.String("azure-connection-string", "", "Azure storage connection string")
+	azureUseDefaultCred   = pflag.Bool("azure-use-default-credential", false, "If true, use Azure Default Credential (managed identity, Azure CLI, etc.)")
+
+	// Microsoft Entra ID (Azure AD) Service Principal flags
+	azureClientID     = pflag.String("azure-client-id", "", "Microsoft Entra ID application (client) ID for service principal authentication")
+	azureClientSecret = pflag.String("azure-client-secret", "", "Microsoft Entra ID client secret for service principal authentication")
+	azureTenantID     = pflag.String("azure-tenant-id", "", "Microsoft Entra ID tenant ID for service principal authentication")
+
 	allowParsersForAllTests = pflag.Bool("allow-parsers-matching-all-tests", true, "Allow parsers for common measurement matching any test name")
 )
 
 func initDownloaderOptions() {
-	pflag.StringVar(&options.Mode, "mode", gcsMode, "Storage provider from which to download metrics from. Options are 's3' or 'gcs'. The default is 'gcs'.")
+	pflag.StringVar(&options.Mode, "mode", gcsMode, "Storage provider from which to download metrics from. Options are 's3', 'gcs', or 'azure'. The default is 'gcs'.")
 	pflag.BoolVar(&options.OverrideBuildCount, "force-builds", false, "Whether to enforce number of builds to process as passed via --builds flag. "+
 		"This would override values defined by \"perfDashBuildsCount\" label on prow job")
 	pflag.IntVar(&options.DefaultBuildsCount, "builds", maxBuilds, "Total builds number")
@@ -98,6 +109,8 @@ func run() error {
 		metricsBucket, err = NewGCSMetricsBucket(*logsBucket, *logsPath, *credentialPath, *useADC)
 	case s3Mode:
 		metricsBucket, err = NewS3MetricsBucket(*logsBucket, *logsPath, *awsRegion)
+	case azureMode:
+		metricsBucket, err = NewAzureMetricsBucket(*azureAccountName, *logsBucket, *logsPath, *azureConnectionString, *azureUseDefaultCred, *azureClientID, *azureClientSecret, *azureTenantID)
 	default:
 		return fmt.Errorf("unexpected mode: %s", options.Mode)
 	}
@@ -122,6 +135,7 @@ func run() error {
 		return nil
 	}
 
+	klog.Info("Reached here")
 	go func() {
 		for {
 			klog.Infof("Fetching new data...")
@@ -136,6 +150,7 @@ func run() error {
 		}
 	}()
 
+	klog.Info("Reached here")
 	klog.Infof("Starting server...")
 	http.Handle("/", http.FileServer(http.Dir(*wwwDir)))
 	http.HandleFunc("/jobnames", result.ServeJobNames)
@@ -150,6 +165,12 @@ func initGlobalConfig() {
 	globalConfig["logsBucket"] = *logsBucket
 	globalConfig["logsPath"] = *logsPath
 	globalConfig["storageURL"] = *storageURL
+	globalConfig["mode"] = options.Mode
+	if options.Mode == azureMode {
+		globalConfig["azureAccountName"] = *azureAccountName
+	} else if options.Mode == s3Mode {
+		globalConfig["awsRegion"] = *awsRegion
+	}
 }
 
 func serveConfig(res http.ResponseWriter, req *http.Request) {
