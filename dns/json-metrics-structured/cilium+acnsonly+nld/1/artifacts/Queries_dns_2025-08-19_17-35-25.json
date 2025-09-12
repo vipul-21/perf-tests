@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "dataItems": [
+    {
+      "data": {
+        "queries_completed": 780295,
+        "queries_lost": 0,
+        "queries_sent": 780295
+      },
+      "unit": "",
+      "labels": {
+        "dnsmasq_cache": "",
+        "dnsmasq_cpu": "",
+        "kubedns_cpu": "",
+        "max_qps": "",
+        "query_file": "all-queries.txt",
+        "run_length_seconds": "600"
+      }
+    }
+  ]
+}

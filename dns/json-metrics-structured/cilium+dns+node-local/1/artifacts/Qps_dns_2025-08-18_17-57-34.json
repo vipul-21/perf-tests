@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "dataItems": [
+    {
+      "data": {
+        "qps": 1300.563987
+      },
+      "unit": "1/s",
+      "labels": {
+        "dnsmasq_cache": "",
+        "dnsmasq_cpu": "",
+        "kubedns_cpu": "",
+        "max_qps": "",
+        "query_file": "all-queries.txt",
+        "run_length_seconds": "600"
+      }
+    }
+  ]
+}

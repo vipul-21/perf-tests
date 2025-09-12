@@ -287,3 +287,85 @@ inputs (e.g. Kubernetes deployment yaml) necessary to set the value.
 # Building the dnsperf image
 
 See [image/README.md](image/README.md).
+
+## Automated DNS Performance Script (daily_dns_perf.sh)
+
+This repository now includes an automation helper script `daily_dns_perf.sh` for running one-off or multi-run DNS performance tests and publishing results for a local perf dashboard (perfdash).
+
+### Prerequisites
+
+- A running Kubernetes cluster accessible via `kubectl` (KUBECONFIG set)
+- Python 3 + numpy (e.g. `pip install numpy`)
+- Go toolchain (for on-the-fly `go run` of the JSON conversion utility)
+- Built perfdash binary at: `$PERF_TESTS_ROOT/perfdash/perfdash` (build perfdash per its own instructions if missing)
+- (Optional) DNS proxy / Cilium Network Policy testing:
+  - Apply the provided CNP if validating DNS proxy behavior:
+    ```bash
+    kubectl apply -f dns/cnp.yaml
+    # or custom variant
+    kubectl apply -f dns/custom-cnp.yaml
+    ```
+- Open TCP port 8081 locally (or adjust the script if you need a different port)
+
+### Environment Variable
+
+`PERF_TESTS_ROOT` (optional) – root of the perf-tests workspace. Defaults to `/home/singhvipul/ws/perf-tests`.
+
+Example override:
+```bash
+export PERF_TESTS_ROOT=$HOME/src/perf-tests
+```
+
+### Supported DNS Type Combinations
+Run:
+```bash
+cd $PERF_TESTS_ROOT/dns
+./daily_dns_perf.sh --list-types
+```
+
+### Running Tests
+Single run:
+```bash
+./daily_dns_perf.sh --type cilium+kubedns
+```
+Multiple sequential runs (2 minute pause between runs):
+```bash
+./daily_dns_perf.sh --type cilium+kubedns --runs 3
+```
+
+Each run produces:
+- Raw output under: `$PERF_TESTS_ROOT/dns/out/<date>-<dns_type>-<time>`
+- Converted JSON metrics stored as perfdash builds under: `$PERF_TESTS_ROOT/dns/json-metrics-structured/<dns_type>/<build_number>/artifacts` plus a `build_info.json`.
+
+### Dashboard (Perfdash) Usage
+The script calls `restart_perfdash` after a successful run, launching perfdash in local mode on `http://localhost:8081/`.
+
+Manual start example (if you need to start it yourself):
+```bash
+cd $PERF_TESTS_ROOT/perfdash
+./perfdash \
+  --www \
+  --address=0.0.0.0:8081 \
+  --configPath=$PERF_TESTS_ROOT/perfdash/local-config.yaml \
+  --mode=local \
+  --logsPath=$PERF_TESTS_ROOT/dns/json-metrics-structured \
+  --dir=www \
+  --builds=30
+```
+
+If the dashboard shows no jobs:
+1. Verify `local-config.yaml` contains periodics/job definitions with tags matching your DNS type prefixes.
+2. Confirm JSON build directories exist and contain metric JSON files.
+3. Re-run the script for at least one DNS type.
+4. Tail the perfdash process logs (modify the script to redirect `nohup` output to a file for debugging if needed).
+
+### Cleaning Up
+Old builds (per DNS type) beyond the most recent 30 and dated archives beyond 30 days can be removed manually or by integrating a cleanup function (already present in earlier variants of the script if re-enabled).
+
+### Quick Troubleshooting
+| Symptom | Action |
+|---------|--------|
+| No new build appears | Check that `out/latest` points to the most recent run directory during conversion. |
+| Perfdash exits silently | Run perfdash in foreground without redirection to see parsing errors. |
+| Metrics missing for a run | Inspect `jsonify_output_run_<n>.log` inside the run output directory. |
+| Wrong root paths | Export `PERF_TESTS_ROOT` correctly before running the script. |

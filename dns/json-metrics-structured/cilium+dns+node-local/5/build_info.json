@@ -1,0 +1,7 @@
+{
+    "build_number": 5,
+    "date": "2025-08-18",
+    "dns_type": "cilium+dns+node-local",
+    "created_at": "2025-08-18T18:48:40+00:00",
+    "source_path": "/home/singhvipul/ws/perf-tests/dns/out/date-archive/2025-08-18/cilium+dns+node-local/artifacts/run_5"
+}

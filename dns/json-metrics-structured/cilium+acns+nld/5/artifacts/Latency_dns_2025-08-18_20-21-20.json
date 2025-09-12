@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "dataItems": [
+    {
+      "data": {
+        "avg_latency": 190.84900000000002,
+        "max_latency": 2318.3505000000005,
+        "min_latency": 10.348
+      },
+      "unit": "ms",
+      "labels": {
+        "dnsmasq_cache": "",
+        "dnsmasq_cpu": "",
+        "kubedns_cpu": "",
+        "max_qps": "",
+        "query_file": "all-queries.txt",
+        "run_length_seconds": "600"
+      }
+    }
+  ]
+}

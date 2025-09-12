@@ -1,0 +1,83 @@
+[2025-09-12 17:25:34] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 17:25:34] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 17:25:35] Saved test metadata to /home/singhvipul/ws/perf-tests/dns/out/2025-09-12-oss-sdp-only-17-25-34/test_metadata.json
+[2025-09-12 17:25:35] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 17:25:35] Executing: python3 py/run_perf.py --params /home/singhvipul/ws/perf-tests/dns/params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 17:31:09] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 17:31:09] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 17:31:09] Saved test metadata to /home/singhvipul/ws/perf-tests/dns/out/2025-09-12-oss-sdp-only-17-31-09/test_metadata.json
+[2025-09-12 17:31:09] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 17:31:09] Executing: python3 py/run_perf.py --params /home/singhvipul/ws/perf-tests/dns/params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 17:33:06] DNS performance test run 1/1 completed successfully for oss-sdp-only
+[2025-09-12 17:33:06] Converting run 1 results to JSON format...
+[2025-09-12 17:33:07] WARNING: go mod vendor failed for run 1, continuing anyway
+[2025-09-12 17:33:08] ERROR: Failed to convert results to JSON for oss-sdp-only (run 1)
+[2025-09-12 17:33:08] JSONIFY OUTPUT: go: downloading go1.24.1 (linux/amd64)
+[2025-09-12 17:33:08] JSONIFY OUTPUT: go: download go1.24.1: golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64: reading https://singhvipul:xxxxx@goproxyprod.goms.io/golang.org/toolchain/@v/v0.0.1-go1.24.1.linux-amd64.zip: 401 Unauthorized
+[2025-09-12 17:33:08] === Specific test for oss-sdp-only failed ===
+[2025-09-12 17:33:22] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 17:33:22] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 17:33:22] Saved test metadata to /home/singhvipul/ws/perf-tests/dns/out/2025-09-12-oss-sdp-only-17-33-22/test_metadata.json
+[2025-09-12 17:33:22] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 17:33:22] Executing: python3 py/run_perf.py --params /home/singhvipul/ws/perf-tests/dns/params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 17:35:13] DNS performance test run 1/1 completed successfully for oss-sdp-only
+[2025-09-12 17:35:13] Converting run 1 results to JSON format...
+[2025-09-12 17:35:39] Created perfdash build 1 for 2025-09-12/oss-sdp-only
+[2025-09-12 17:35:39] JSON conversion completed successfully for oss-sdp-only run 1 (Build: [2025-09-12 17:35:39] Created perfdash build 1 for 2025-09-12/oss-sdp-only
+1)
+[2025-09-12 17:35:39] All 1 DNS performance tests for oss-sdp-only completed successfully
+[2025-09-12 17:35:39] Restarting perfdash with updated configuration...
+[2025-09-12 17:35:41] Perfdash restarted on port 8081
+[2025-09-12 17:35:41] === Specific test for oss-sdp-only completed successfully (1 runs) ===
+[2025-09-12 17:43:23] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 17:43:23] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 17:43:24] Saved test metadata to /home/singhvipul/ws/perf-tests/dns/out/2025-09-12-oss-sdp-only-17-43-23/test_metadata.json
+[2025-09-12 17:43:24] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 17:43:24] Executing: python3 py/run_perf.py --params /home/singhvipul/ws/perf-tests/dns/params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 17:44:16] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 17:44:16] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 17:44:17] Saved test metadata to ./out/2025-09-12-oss-sdp-only-17-44-16/test_metadata.json
+[2025-09-12 17:44:17] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 17:44:17] Executing: python3 py/run_perf.py --params ./params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 17:46:13] DNS performance test run 1/1 completed successfully for oss-sdp-only
+[2025-09-12 17:46:13] Converting run 1 results to JSON format...
+[2025-09-12 17:51:02] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 17:51:02] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 17:51:03] Saved test metadata to ./out/2025-09-12-oss-sdp-only-17-51-02/test_metadata.json
+[2025-09-12 17:51:03] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 17:51:03] Executing: python3 py/run_perf.py --params ./params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 17:51:24] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 17:51:24] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 17:51:25] Saved test metadata to ./out/2025-09-12-oss-sdp-only-17-51-24/test_metadata.json
+[2025-09-12 17:51:25] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 17:51:25] Executing: python3 py/run_perf.py --params ./params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 17:52:35] DNS performance test run 1/1 completed successfully for oss-sdp-only
+[2025-09-12 17:52:35] Converting run 1 results to JSON format...
+[2025-09-12 18:24:51] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 18:24:51] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 18:24:52] Saved test metadata to /home/singhvipul/ws/perf-tests/dns/out/2025-09-12-oss-sdp-only-18-24-51/test_metadata.json
+[2025-09-12 18:24:52] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 18:24:52] Executing: python3 py/run_perf.py --params /home/singhvipul/ws/perf-tests/dns/params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 18:25:57] DNS performance test run 1/1 completed successfully for oss-sdp-only
+[2025-09-12 18:25:57] Converting run 1 results to JSON format...
+[2025-09-12 18:25:57] Created perfdash build 2 for 2025-09-12/oss-sdp-only
+[2025-09-12 18:25:57] JSON conversion completed successfully for oss-sdp-only run 1 (Build: [2025-09-12 18:25:57] Created perfdash build 2 for 2025-09-12/oss-sdp-only
+2)
+[2025-09-12 18:25:57] All 1 DNS performance tests for oss-sdp-only completed successfully
+[2025-09-12 18:25:57] Restarting perfdash with updated configuration...
+[2025-09-12 18:25:59] Perfdash restarted on port 8081
+[2025-09-12 18:25:59] === Specific test for oss-sdp-only completed successfully (1 runs) ===
+[2025-09-12 18:40:36] === Running specific DNS test for type: oss-sdp-only (1 runs) ===
+[2025-09-12 18:40:36] Starting DNS performance test for type: oss-sdp-only (runs: 1)
+[2025-09-12 18:40:37] Saved test metadata to /home/singhvipul/ws/perf-tests/dns/out/2025-09-12-oss-sdp-only-18-40-36/test_metadata.json
+[2025-09-12 18:40:37] Running DNS performance test 1/1 (duration: 10 minutes)...
+[2025-09-12 18:40:37] Executing: python3 py/run_perf.py --params /home/singhvipul/ws/perf-tests/dns/params/kubedns/automated.yaml --use-cluster-dns
+[2025-09-12 18:41:43] DNS performance test run 1/1 completed successfully for oss-sdp-only
+[2025-09-12 18:41:43] Converting run 1 results to JSON format...
+[2025-09-12 18:41:43] Created perfdash build 3 for 2025-09-12/oss-sdp-only
+[2025-09-12 18:41:43] JSON conversion completed successfully for oss-sdp-only run 1 (Build: [2025-09-12 18:41:43] Created perfdash build 3 for 2025-09-12/oss-sdp-only
+3)
+[2025-09-12 18:41:43] All 1 DNS performance tests for oss-sdp-only completed successfully
+[2025-09-12 18:41:43] Restarting perfdash with updated configuration...
+[2025-09-12 18:41:45] Perfdash restarted on port 8081 (root: /home/singhvipul/ws/perf-tests)
+[2025-09-12 18:41:45] === Specific test for oss-sdp-only completed successfully (1 runs) ===

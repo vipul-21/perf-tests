@@ -1,0 +1,9 @@
+{
+    "time": "19-19-26",
+    "dns_type": "cilium+acns+nld",
+    "num_runs": 5,
+    "cluster_info": {
+        "kubernetes_version": "",
+        "node_count": "2"
+    }
+}

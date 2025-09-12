@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "dataItems": [
+    {
+      "data": {
+        "perc50": 8.5,
+        "perc90": 34,
+        "perc99": 56.5
+      },
+      "unit": "ms",
+      "labels": {
+        "dnsmasq_cache": "",
+        "dnsmasq_cpu": "",
+        "kubedns_cpu": "",
+        "max_qps": "",
+        "query_file": "all-queries.txt",
+        "run_length_seconds": "600"
+      }
+    }
+  ]
+}

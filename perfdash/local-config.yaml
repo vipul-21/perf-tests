@@ -1,0 +1,43 @@
+# Local DNS Performance Dashboard Configuration  
+# Configuration with DNS types as separate job categories
+
+periodics:
+- name: cilium+kubedns
+  tags:
+  - "perfDashPrefix: cilium+kubedns"
+  - "perfDashJobType: dnsBenchmark"
+  interval: 24h
+
+- name: cilium+node-local
+  tags:
+  - "perfDashPrefix: cilium+node-local"
+  - "perfDashJobType: dnsBenchmark"
+  interval: 24h
+
+- name: cilium+dns+node-local
+  tags:
+  - "perfDashPrefix: cilium+dns+node-local"
+  - "perfDashJobType: dnsBenchmark"
+  interval: 24h
+
+- name: cilium+acns+nld
+  tags:
+  - "perfDashPrefix: cilium+acns+nld"
+  - "perfDashJobType: dnsBenchmark"
+  interval: 24h
+
+- name: cilium+acnsonly+nld
+  tags:
+  - "perfDashPrefix: cilium+acnsonly+nld"
+  - "perfDashJobType: dnsBenchmark"
+  interval: 24h
+- name: oss-sdp-only
+  tags:
+  - "perfDashPrefix: oss-sdp-only"
+  - "perfDashJobType: dnsBenchmark"
+  interval: 24h
+# - name: oss-sdp+dnsproxy
+#   tags:
+#   - "perfDashPrefix: oss-sdp+dnsproxy"
+#   - "perfDashJobType: dnsBenchmark"
+#   interval: 24h

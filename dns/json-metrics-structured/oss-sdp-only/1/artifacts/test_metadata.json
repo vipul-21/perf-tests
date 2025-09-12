@@ -1,0 +1,9 @@
+{
+    "time": "17-33-22",
+    "dns_type": "oss-sdp-only",
+    "num_runs": 1,
+    "cluster_info": {
+        "kubernetes_version": "",
+        "node_count": "2"
+    }
+}

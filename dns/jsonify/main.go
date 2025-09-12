@@ -101,30 +101,109 @@ func run() error {
 		return fmt.Errorf("listing files error: %v", err)
 	}
 
+	// Initialize aggregated data structures
+	var (
+		totalLatencyAvg, totalLatencyMin, totalLatencyMax         float64
+		totalLatency50, totalLatency95, totalLatency99            float64
+		totalQueriesSent, totalQueriesCompleted, totalQueriesLost float64
+		totalQPS                                                  float64
+		fileCount                                                 = 0
+		labels                                                    map[string]string
+	)
+
 	for _, file := range fileList {
 		glog.Infof("processing %s\n", file)
 		result, err := readBenchmarkResult(filepath.Join(benchmarkDirPath, file))
 		if err != nil {
 			return err
 		}
-		labels := createLabels(&result.Params)
-		latency.DataItems = appendLatency(latency.DataItems, labels, result)
-		latencyPerc.DataItems = appendLatencyPerc(latencyPerc.DataItems, labels, result)
-		queries.DataItems = appendQueries(queries.DataItems, labels, result)
-		qps.DataItems = appendQPS(qps.DataItems, labels, result)
+
+		if fileCount == 0 {
+			labels = createLabels(&result.Params) // Use labels from first file
+		}
+
+		// Aggregate data directly instead of creating multiple data items
+		totalLatencyAvg += result.Data.AvgLatency * secToMsec
+		totalLatencyMin += result.Data.MinLatency * secToMsec
+		totalLatencyMax += result.Data.MaxLatency * secToMsec
+
+		totalLatency50 += result.Data.Latency50Percentile
+		totalLatency95 += result.Data.Latency95Percentile
+		totalLatency99 += result.Data.Latency99Percentile
+
+		totalQueriesSent += result.Data.QueriesSent
+		totalQueriesCompleted += result.Data.QueriesCompleted
+		totalQueriesLost += result.Data.QueriesLost
+
+		totalQPS += result.Data.QPS
+
+		fileCount++
 	}
 
-	timeString := time.Now().Format(time.RFC3339)
-	if err = saveMetric(&latency, filepath.Join(jsonDirPath, "Latency_"+benchmarkName+"_"+timeString+".json")); err != nil {
+	// Create single data points for each metric type
+	if fileCount > 0 {
+		count := float64(fileCount)
+
+		latency.DataItems = []perftype.DataItem{{
+			Unit:   "ms",
+			Labels: labels,
+			Data: map[string]float64{
+				"avg_latency": totalLatencyAvg / count,
+				"min_latency": totalLatencyMin / count,
+				"max_latency": totalLatencyMax / count,
+			},
+		}}
+
+		latencyPerc.DataItems = []perftype.DataItem{{
+			Unit:   "ms",
+			Labels: labels,
+			Data: map[string]float64{
+				"perc50": totalLatency50 / count,
+				"perc90": totalLatency95 / count,
+				"perc99": totalLatency99 / count,
+			},
+		}}
+
+		queries.DataItems = []perftype.DataItem{{
+			Unit:   "",
+			Labels: labels,
+			Data: map[string]float64{
+				"queries_sent":      totalQueriesSent,
+				"queries_completed": totalQueriesCompleted,
+				"queries_lost":      totalQueriesLost,
+			},
+		}}
+
+		qps.DataItems = []perftype.DataItem{{
+			Unit:   "1/s",
+			Labels: labels,
+			Data: map[string]float64{
+				"qps": totalQPS / count,
+			},
+		}}
+	}
+
+	// Always use "dns" as the middle part for consistent naming
+	timeString := time.Now().Format("2006-01-02_15-04-05")
+
+	// Clean up any existing JSON files in the target directory to avoid duplicates
+	existingFiles, _ := filepath.Glob(filepath.Join(jsonDirPath, "*.json"))
+	for _, file := range existingFiles {
+		if filepath.Base(file) != "test_metadata.json" && filepath.Base(file) != "build_info.json" {
+			os.Remove(file)
+		}
+	}
+
+	if err = saveMetric(&latency, filepath.Join(jsonDirPath, "Latency_dns_"+timeString+".json")); err != nil {
 		return err
 	}
-	if err = saveMetric(&latencyPerc, filepath.Join(jsonDirPath, "LatencyPerc_"+benchmarkName+"_"+timeString+".json")); err != nil {
+	if err = saveMetric(&latencyPerc, filepath.Join(jsonDirPath, "LatencyPerc_dns_"+timeString+".json")); err != nil {
 		return err
 	}
-	if err = saveMetric(&queries, filepath.Join(jsonDirPath, "Queries_"+benchmarkName+"_"+timeString+".json")); err != nil {
+	if err = saveMetric(&queries, filepath.Join(jsonDirPath, "Queries_dns_"+timeString+".json")); err != nil {
 		return err
 	}
-	if err = saveMetric(&qps, filepath.Join(jsonDirPath, "QPS_"+benchmarkName+"_"+timeString+".json")); err != nil {
+	if err = saveMetric(&qps, filepath.Join(jsonDirPath, "Qps_dns_"+timeString+".json")); err != nil {
 		return err
 	}
 
