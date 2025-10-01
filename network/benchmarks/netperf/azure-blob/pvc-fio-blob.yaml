@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fio-blob-pvc
+  namespace: netperf
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azure-blob-fio
+  resources:
+    requests:
+      storage: 100Gi

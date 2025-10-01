@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fio-blob-runner
+  namespace: netperf
+spec:
+  restartPolicy: Never
+  containers:
+    - name: fio
+      image: docker.io/joshuarobinson/fio:3.26
+      command: ["sleep", "infinity"]
+      volumeMounts:
+        - name: blob
+          mountPath: /mnt/blob
+  volumes:
+    - name: blob
+      persistentVolumeClaim:
+        claimName: fio-blob-pvc

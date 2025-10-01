@@ -1,0 +1,16 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azure-blob-fio
+provisioner: blob.csi.azure.com
+parameters:
+  protocol: fuse
+  containerName: ${BLOB_CONTAINER}
+  resourceGroup: ${STORAGE_RG}
+  storageAccount: ${STORAGE_ACCOUNT}
+  skuName: Standard_LRS
+  AzureStorageAuthType: MSI
+  AzureStorageIdentityClientID: ${AZURE_STORAGE_IDENTITY_CLIENT_ID}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true

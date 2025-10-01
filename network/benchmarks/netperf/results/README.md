@@ -2,6 +2,25 @@
 
 This directory stores raw CSV output from recent netperf runs. The tables below reproduce each CSV in a Markdown-friendly format so the data can be viewed directly in GitHub or any Markdown renderer.
 
+## Performance Test
+``` bash
+./launch   --iterations=1   --namespace=netperf   --tag=bpf   --image=acnpublic.azurecr.io/vipul/netperf:latest -testTo 23 
+```
+
+## Plotting comparisons
+
+To visualize the difference between datasets, run `plotperf/plot_netperf_compare.py` from the parent directory. The example below overlays the eBPF and legacy exports and writes the images under `plots/compare`.
+
+```bash
+/home/singhvipul/ws/perf-tests/.venv/bin/python plotperf/plot_netperf_compare.py \
+	results/netperf-bpf_20250930201659.csv \
+	results/netperf-legacy_20250930220028.csv \
+	--names BPF Legacy \
+	--output plots/compare
+```
+
+After the command finishes, look in `plots/compare` for PNGs named after each scenario—for example `1_qperf_TCP_Same_VM_using_Pod_IP_bandwidth_compare.png` and the matching latency plot.
+
 ## netperf-bpf_20250925215846.csv (BPF host networking mode)
 
 | MSS | Maximum | 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384 | 32768 | 65536 |
