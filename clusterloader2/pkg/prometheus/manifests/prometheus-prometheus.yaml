@@ -22,24 +22,24 @@ spec:
   baseImage: gcr.io/k8s-testimages/quay.io/prometheus/prometheus
   nodeSelector:
     kubernetes.io/os: linux
-    {{StructuralData $PROMETHEUS_NODE_SELECTOR}}
+    prometheus: "true"
   replicas: 1
   resources:
     requests:
       cpu: {{AddInt 200 (MultiplyInt $PROMETHEUS_CPU_SCALE_FACTOR 500 (DivideInt .Nodes 1000))}}m
-      {{if $PROMETHEUS_SCRAPE_KUBELETS}}
-      memory: {{$PROMETHEUS_MEMORY_REQUEST}}
-      {{else}}
+        #{{if $PROMETHEUS_SCRAPE_KUBELETS}}
+        #memory: {{$PROMETHEUS_MEMORY_REQUEST}}
+        #{{else}}
       # Start with 2Gi and add 2Gi for each 1K nodes.
       memory: {{MultiplyInt $PROMETHEUS_MEMORY_SCALE_FACTOR (AddInt 1 (DivideInt .Nodes 1000))}}Gi
-      {{end}}
+        #{{end}}
     limits:
-      {{if $PROMETHEUS_SCRAPE_KUBELETS}}
-      memory: 10Gi
-      {{else}}
+      #{{if $PROMETHEUS_SCRAPE_KUBELETS}}
+      #memory: 10Gi
+      #{{else}}
       # Default: Start with 2Gi and add 2Gi for each 1K nodes.
       memory: {{MultiplyInt $PROMETHEUS_MEMORY_SCALE_FACTOR (AddInt 1 (DivideInt .Nodes 1000))}}Gi
-      {{end}}
+        #{{end}}
   ruleSelector:
     matchLabels:
       prometheus: k8s
@@ -50,6 +50,10 @@ spec:
   tolerations:
   - key: "monitoring"
     operator: "Exists"
+    effect: "NoSchedule"
+  - key: "prometheus"
+    operator: "Equal"
+    value: "yes"
     effect: "NoSchedule"
   {{if $PROMETHEUS_TOLERATE_MASTER}}
   - key: node-role.kubernetes.io/master

@@ -13,10 +13,14 @@ spec:
   endpoints:
   - port: https-metrics
     scheme: https
-    interval: 30s
+    interval: 60s
     tlsConfig:
       insecureSkipVerify: true
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    metricRelabelings:
+      - sourceLabels: [__name__]
+        regex: kubelet_pod_start_total_duration_seconds.*|kubelet_pod_start_sli_duration_seconds.*|kubelet_run_podsandbox.*|kubelet_pod_start_duration_seconds.*|kubelet_runtime_operations.*
+        action: keep
   - port: https-metrics
     scheme: https
     path: /metrics/cadvisor
@@ -25,10 +29,16 @@ spec:
     tlsConfig:
       insecureSkipVerify: true
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    metricRelabelings:
-      - sourceLabels: [ namespace ]
-        regex: 'test-.*'
-        action: drop
+      #metricRelabelings:
+      #- sourceLabels: [__name__]
+      # regex: kubelet.*
+      # action: drop
+          #- sourceLabels: [__name__]
+          #regex: 'kubelet_pod_start_total_duration_seconds.*|kubelet_pod_start_sli_duration_seconds.*|kubelet_run_podsandbox.*|kubelet_pod_start_duration_seconds.*'
+          #action: keep
+          #- sourceLabels: [ namespace ]
+          #regex: 'test-.*'
+          #action: drop
   selector:
     matchLabels:
       k8s-app: kubelet

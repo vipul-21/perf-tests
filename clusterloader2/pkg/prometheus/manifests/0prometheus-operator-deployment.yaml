@@ -41,11 +41,11 @@ spec:
           name: http
         resources:
           limits:
-            cpu: 200m
-            memory: {{IfThenElse (lt .Nodes 500) 200 400}}Mi
+            cpu: 500m
+            memory: {{IfThenElse (lt .Nodes 500) 200 1000}}Mi
           requests:
-            cpu: 200m
-            memory: {{IfThenElse (lt .Nodes 500) 200 400}}Mi
+            cpu: 500m
+            memory: {{IfThenElse (lt .Nodes 500) 200 1000}}Mi
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -60,7 +60,7 @@ spec:
       {{end}}
       nodeSelector:
         kubernetes.io/os: linux
-        {{StructuralData $PROMETHEUS_NODE_SELECTOR}}
+        prometheus: "true"
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534

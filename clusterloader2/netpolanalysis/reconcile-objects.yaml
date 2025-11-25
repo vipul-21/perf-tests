@@ -1,0 +1,109 @@
+## Input params
+# Valid actions: "create", "delete"
+{{$actionName := printf "%s objects" .actionName}}
+{{$namespaces := .namespaces}}
+{{$tuningSet := .tuningSet}}
+
+# Derivative variables
+{{$is_deleting := (eq .actionName "delete")}}
+{{$operationTimeout := .operationTimeout}}
+
+# Deployments
+#{{$deploymentSize := .deploymentSize}}
+#{{$deploymentsPerNamespace := .deploymentsPerNamespace}}
+{{$bigDeploymentSize := .bigDeploymentSize}}
+{{$bigDeploymentsPerNamespace := .bigDeploymentsPerNamespace}}
+{{$mediumDeploymentSize := .mediumDeploymentSize}}
+{{$mediumDeploymentsPerNamespace := .mediumDeploymentsPerNamespace}}
+{{$smallDeploymentSize := .smallDeploymentSize}}
+{{$smallDeploymentsPerNamespace := .smallDeploymentsPerNamespace}}
+
+# Network Policies
+# {{$ENABLE_NETWORKPOLICIES := DefaultParam .CL2_ENABLE_NETWORKPOLICIES false}}
+# {{$ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST := DefaultParam .CL2_ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST false}}
+# {{$NET_POLICY_ENFORCEMENT_LATENCY_TARGET_LABEL_KEY := DefaultParam .CL2_NET_POLICY_ENFORCEMENT_LATENCY_TARGET_LABEL_KEY "net-pol-test"}}
+# {{$NET_POLICY_ENFORCEMENT_LATENCY_TARGET_LABEL_VALUE := DefaultParam .CL2_NET_POLICY_ENFORCEMENT_LATENCY_TARGET_LABEL_VALUE "enforcement-latency"}}
+# {{$NET_POLICY_SERVER_EVERY_NTH_POD := DefaultParam .CL2_NET_POLICY_SERVER_EVERY_NTH_POD 3}}
+
+steps:
+- name: Starting measurement for '{{$actionName}}'
+  measurements:
+  - Method: WaitForControlledPodsRunning
+    Instances:
+    - Identifier: WaitForRunningDeployments
+      Params:
+        apiVersion: apps/v1
+        kind: Deployment
+    Params:
+      action: start
+      checkIfPodsAreUpdated: true
+      labelSelector: group = {{.Group}}
+      operationTimeout: {{$operationTimeout}}
+      apiVersion: apps/v1
+
+- name: {{$actionName}}
+  phases:
+  - namespaceRange:
+      min: 1
+      max: {{$namespaces}}
+    replicasPerNamespace: {{$bigDeploymentsPerNamespace}}
+    tuningSet: {{$tuningSet}}
+    objectBundle:
+{{if $ENABLE_NETWORKPOLICIES}}
+    - basename: big-deployment
+      objectTemplatePath: networkpolicy.yaml
+{{end}}
+    - basename: big-deployment
+      objectTemplatePath: deployment_template.yaml
+      templateFillMap:
+        Replicas: {{$bigDeploymentSize}}
+        SvcName: big-service
+        deploymentLabel: {{.deploymentLabel}}
+        Group: {{.Group}}
+  - namespaceRange:
+      min: 1
+      max: {{$namespaces}}
+    replicasPerNamespace: {{$mediumDeploymentsPerNamespace}}
+    tuningSet: {{$tuningSet}}
+    objectBundle:
+{{if $ENABLE_NETWORKPOLICIES}}
+    - basename: medium-deployment
+      objectTemplatePath: networkpolicy.yaml
+{{end}}
+    - basename: medium-deployment
+      objectTemplatePath: deployment_template.yaml
+      templateFillMap:
+        Replicas: {{$mediumDeploymentSize}}
+        SvcName: medium-service
+        deploymentLabel: {{.deploymentLabel}}
+        Group: {{.Group}}
+  - namespaceRange:
+      min: 1
+      max: {{$namespaces}}
+    replicasPerNamespace: {{$smallDeploymentsPerNamespace}}
+    tuningSet: {{$tuningSet}}
+    objectBundle:
+{{if $ENABLE_NETWORKPOLICIES}}
+    - basename: small-deployment
+      objectTemplatePath: networkpolicy.yaml
+{{end}}
+    - basename: small-deployment
+      objectTemplatePath: deployment_template.yaml
+      templateFillMap:
+        Replicas: {{$smallDeploymentSize}}
+        SvcName: small-service
+        deploymentLabel: {{.deploymentLabel}}
+        Group: {{.Group}}
+        EnableNetworkPolicyEnforcementLatencyTest: {{$ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST}}
+        TargetLabelKey: {{$NET_POLICY_ENFORCEMENT_LATENCY_TARGET_LABEL_KEY}}
+        TargetLabelValue: {{$NET_POLICY_ENFORCEMENT_LATENCY_TARGET_LABEL_VALUE}}
+        NetPolServerOnEveryNthPod: {{$NET_POLICY_SERVER_EVERY_NTH_POD}}
+
+- name: Waiting for '{{$actionName}}' to be completed
+  measurements:
+  - Method: WaitForControlledPodsRunning
+    Instances:
+    - Identifier: WaitForRunningDeployments
+    Params:
+      action: gather
+      refreshInterval: 15s

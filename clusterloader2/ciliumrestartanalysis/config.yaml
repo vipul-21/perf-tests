@@ -1,0 +1,132 @@
+name: load-config
+
+# Config options for test parameters
+{{$podsPerNode := DefaultParam .CL2_PODS_PER_NODE 50}} # 40
+{{$deploymentSize := DefaultParam .CL2_DEPLOYMENT_SIZE 100}} # 40 
+{{$repeats := DefaultParam .CL2_REPEATS 1}}
+{{$groupName := DefaultParam .CL2_GROUP_NAME "service-discovery"}}
+
+{{$namespaces := 100}}
+{{$nodes := DefaultParam .CL2_NODES 1000}} # 5000
+
+{{$operationTimeout := DefaultParam .CL2_OPERATION_TIMEOUT "15m"}}
+{{$totalPods := MultiplyInt $nodes $podsPerNode}} # 200,000
+{{$podsPerNamespace := DivideInt $totalPods $namespaces}} # 2,000
+{{$deploymentsPerNamespace := DivideInt $podsPerNamespace $deploymentSize}} # 50
+
+{{$latencyPodCpu := DefaultParam .CL2_LATENCY_POD_CPU 10}}
+{{$latencyPodMemory := DefaultParam .CL2_LATENCY_POD_MEMORY 50}}
+{{$podStartupLatencyThreshold := DefaultParam .CL2_POD_STARTUP_LATENCY_THRESHOLD "15s"}}
+
+{{$CILIUM_METRICS_ENABLED := DefaultParam .CL2_CILIUM_METRICS_ENABLED false}}
+{{$KUBELET_METRICS_ENABLED := DefaultParam .CL2_KUBELET_METRICS_ENABLED false}}
+
+{{$KUBECONFIG := DefaultParam .CL2_KUBECONFIG "~/.kube/config"}}
+
+# QPS
+# We use RandomizedTimeLimitedLoad for load QPS.
+# Specifically, we aim to create/delete LOAD_TEST_THROUGHPUT/DELETE_TEST_THROUGHPUT pods per second, on average.
+# Operations make an independent choice about the time to start uniformly at random from the associated time period.
+{{$LOAD_TEST_THROUGHPUT := DefaultParam .CL2_LOAD_TEST_THROUGHPUT 100}}
+{{$DELETE_TEST_THROUGHPUT := DefaultParam .CL2_DELETE_TEST_THROUGHPUT $LOAD_TEST_THROUGHPUT}}
+{{$saturationTime := DivideInt $totalPods $LOAD_TEST_THROUGHPUT}}
+{{$deletionTime := DivideInt $totalPods $DELETE_TEST_THROUGHPUT}}
+
+namespace:
+  number: {{$namespaces}}
+  prefix: slo
+  deleteStaleNamespaces: false
+  deleteAutomanagedNamespaces: false
+  enableExistingNamespaces: true
+
+tuningSets:
+  - name: Sequence
+    parallelismLimitedLoad:
+      parallelismLimit: 1
+  - name: RandomizedSaturationTimeLimited
+    RandomizedTimeLimitedLoad:
+      timeLimit: {{$saturationTime}}s
+  - name: RandomizedDeletionTimeLimited
+    RandomizedTimeLimitedLoad:
+      timeLimit: {{$deletionTime}}s
+
+steps:
+  - name: Log - namespaces={{$namespaces}}, podsPerNode={{$podsPerNode}}, totalPods={{$totalPods}}, podsPerNamespace={{$podsPerNamespace}}, deploymentSize={{$deploymentSize}}, deploymentsPerNamespace={{$deploymentsPerNamespace}}, repeats={{$repeats}}, $saturationTime={{$saturationTime}}, $deletionTime={{$deletionTime}}
+    measurements:
+    - Identifier: Dummy
+      Method: Sleep
+      Params:
+        action: start
+        duration: 1ms
+
+  - module:
+      path: /measurements.yaml
+      params:
+        action: start
+        group: {{$groupName}}
+
+{{if $CILIUM_METRICS_ENABLED}}
+  - module:
+      path: /cilium-measurements.yaml
+      params:
+        action: start
+{{end}}
+
+{{if $KUBELET_METRICS_ENABLED}}
+  - module:
+      path: /kubelet-measurements.yaml
+      params:
+        action: start
+{{end}}
+
+{{range $i := Loop $repeats}}
+  - name: Restart Cilium Agent
+    measurements:
+    - Identifier: ExecCommand
+      Method: Exec
+      Params:
+        timeout: 180m
+        command:
+        - kubectl
+        - rollout
+        - restart
+        - daemonset
+        - -n
+        - kube-system
+        - cilium
+
+  - name: Wait for Cilium Agent to be ready
+    measurements:
+    - Identifier: ExecCommand
+      Method: Exec
+      Params:
+        timeout: 180m
+        command:
+        - kubectl
+        - rollout
+        - status
+        - daemonset
+        - -n
+        - kube-system
+        - cilium 
+{{end}}
+
+{{if $KUBELET_METRICS_ENABLED}}
+  - module:
+      path: /kubelet-measurements.yaml
+      params:
+        action: gather
+{{end}}
+
+{{if $CILIUM_METRICS_ENABLED}}
+  - module:
+      path: /cilium-measurements.yaml
+      params:
+        action: gather
+{{end}}
+
+  - module:
+      path: /measurements.yaml
+      params:
+        action: gather
+        group: {{$groupName}}

@@ -1,0 +1,209 @@
+name: load-config
+
+# Config options for test parameters
+{{$podsPerNode := DefaultParam .CL2_PODS_PER_NODE 50}} # 40
+{{$repeats := DefaultParam .CL2_REPEATS 1}}
+{{$groupName := DefaultParam .CL2_GROUP_NAME "service-discovery"}}
+
+{{$namespaces := 100}}
+{{$nodes := DefaultParam .CL2_NODES 1000}} # 5000
+
+{{$operationTimeout := DefaultParam .CL2_OPERATION_TIMEOUT "15m"}}
+{{$totalPods := MultiplyInt $nodes $podsPerNode}} # 200,000
+{{$podsPerNamespace := DivideInt $totalPods $namespaces}} # 2,000
+
+{{$BIG_GROUP_SIZE := DefaultParam .BIG_GROUP_SIZE 250}}
+{{$MEDIUM_GROUP_SIZE := DefaultParam .MEDIUM_GROUP_SIZE 50}}
+{{$SMALL_GROUP_SIZE := DefaultParam .SMALL_GROUP_SIZE 5}}
+# bigDeployments - 1/4 of namespace pods should be in big Deployments.
+{{$bigDeploymentsPerNamespace := DivideInt $podsPerNamespace (MultiplyInt 4 $BIG_GROUP_SIZE)}}
+# mediumDeployments - 1/4 of namespace pods should be in medium Deployments.
+{{$mediumDeploymentsPerNamespace := DivideInt $podsPerNamespace (MultiplyInt 4 $MEDIUM_GROUP_SIZE)}}
+# smallDeployments - 1/2 of namespace pods should be in small Deployments.
+{{$smallDeploymentsPerNamespace := DivideInt $podsPerNamespace (MultiplyInt 2 $SMALL_GROUP_SIZE)}}
+
+{{$latencyPodCpu := DefaultParam .CL2_LATENCY_POD_CPU 10}}
+{{$latencyPodMemory := DefaultParam .CL2_LATENCY_POD_MEMORY 50}}
+{{$podStartupLatencyThreshold := DefaultParam .CL2_POD_STARTUP_LATENCY_THRESHOLD "15s"}}
+
+{{$CILIUM_METRICS_ENABLED := DefaultParam .CL2_CILIUM_METRICS_ENABLED false}}
+{{$KUBELET_METRICS_ENABLED := DefaultParam .CL2_KUBELET_METRICS_ENABLED false}}
+
+# QPS
+# We use RandomizedTimeLimitedLoad for load QPS.
+# Specifically, we aim to create/delete LOAD_TEST_THROUGHPUT/DELETE_TEST_THROUGHPUT pods per second, on average.
+# Operations make an independent choice about the time to start uniformly at random from the associated time period.
+{{$LOAD_TEST_THROUGHPUT := DefaultParam .CL2_LOAD_TEST_THROUGHPUT 100}}
+{{$DELETE_TEST_THROUGHPUT := DefaultParam .CL2_DELETE_TEST_THROUGHPUT $LOAD_TEST_THROUGHPUT}}
+{{$saturationTime := DivideInt $totalPods $LOAD_TEST_THROUGHPUT}}
+{{$deletionTime := DivideInt $totalPods $DELETE_TEST_THROUGHPUT}}
+{{$defaultQps := DefaultParam .CL2_DEFAULT_QPS (IfThenElse (le .Nodes 500) 10 100)}}
+
+# NetPol
+{{$ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST := DefaultParam .CL2_ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST false}}
+
+namespace:
+  number: {{$namespaces}}
+  prefix: slo
+  deleteStaleNamespaces: true
+  deleteAutomanagedNamespaces: true
+  enableExistingNamespaces: true
+
+tuningSets:
+  - name: Sequence
+    parallelismLimitedLoad:
+      parallelismLimit: 1
+  - name: RandomizedSaturationTimeLimited
+    RandomizedTimeLimitedLoad:
+      timeLimit: {{$saturationTime}}s
+  - name: RandomizedDeletionTimeLimited
+    RandomizedTimeLimitedLoad:
+      timeLimit: {{$deletionTime}}s
+  # Uniform5qps: for each running phase, use 5 qps.
+  - name: Uniform5qps
+    qpsLoad:
+      qps: 5
+  - name: default
+    globalQPSLoad:
+      qps: {{$defaultQps}}
+      burst: 1
+
+steps:
+  - name: Log - namespaces={{$namespaces}}, podsPerNode={{$podsPerNode}}, totalPods={{$totalPods}}, podsPerNamespace={{$podsPerNamespace}}, bigDeploymentsPerNamespace={{$bigDeploymentsPerNamespace}}, mediumDeploymentsPerNamespace={{$mediumDeploymentsPerNamespace}}, smallDeploymentsPerNamespace={{$smallDeploymentsPerNamespace}}, repeats={{$repeats}}, $saturationTime={{$saturationTime}}, $deletionTime={{$deletionTime}}
+    measurements:
+    - Identifier: Dummy
+      Method: Sleep
+      Params:
+        action: start
+        duration: 1ms
+
+  - module:
+      path: /measurements.yaml
+      params:
+        action: start
+        group: {{$groupName}}
+
+{{if $CILIUM_METRICS_ENABLED}}
+  - module:
+      path: /cilium-measurements.yaml
+      params:
+        action: start
+{{end}}
+
+{{if $KUBELET_METRICS_ENABLED}}
+  - module:
+      path: /kubelet-measurements.yaml
+      params:
+        action: start
+{{end}}
+
+{{if $ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST}}
+  - module:
+      path: /network-policy/net-policy-enforcement-latency.yaml
+      params:
+        setup: true
+        run: true
+        testType: "pod-creation"
+{{end}}
+
+  - module:
+      path: /services.yaml
+      params:
+        actionName: "Creating"
+        namespaces: {{$namespaces}}
+        smallServicesPerNamespace: {{DivideInt (AddInt $smallDeploymentsPerNamespace 1) 2}}
+        mediumServicesPerNamespace: {{DivideInt (AddInt $mediumDeploymentsPerNamespace 1) 2}}
+        bigServicesPerNamespace: {{DivideInt (AddInt $bigDeploymentsPerNamespace 1) 2}}
+
+  - module:
+      path: /reconcile-objects.yaml
+      params:
+        actionName: "create"
+        namespaces: {{$namespaces}}
+        tuningSet: RandomizedSaturationTimeLimited
+        operationTimeout: {{$operationTimeout}}
+        CpuRequest: {{$latencyPodCpu}}m
+        MemoryRequest: {{$latencyPodMemory}}M
+        Group: {{$groupName}}
+        deploymentLabel: start
+        bigDeploymentSize: {{$BIG_GROUP_SIZE}}
+        bigDeploymentsPerNamespace: {{$bigDeploymentsPerNamespace}}
+        mediumDeploymentSize: {{$MEDIUM_GROUP_SIZE}}
+        mediumDeploymentsPerNamespace: {{$mediumDeploymentsPerNamespace}}
+        smallDeploymentSize: {{$SMALL_GROUP_SIZE}}
+        smallDeploymentsPerNamespace: {{$smallDeploymentsPerNamespace}}
+
+{{if $ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST}}
+  - module:
+      path: /network-policy/net-policy-metrics.yaml
+      params:
+        action: gather
+        usePolicyCreationMetrics: false
+
+  - module:
+      path: /network-policy/net-policy-enforcement-latency.yaml
+      params:
+        complete: true
+        testType: "pod-creation"
+
+  - module:
+      path: /network-policy/net-policy-enforcement-latency.yaml
+      params:
+        run: true
+        testType: "policy-creation"
+{{end}}
+
+  - module:
+      path: /reconcile-objects.yaml
+      params:
+        actionName: "delete"
+        namespaces: {{$namespaces}}
+        tuningSet: RandomizedSaturationTimeLimited
+        operationTimeout: {{$operationTimeout}}
+        bigDeploymentSize: {{$BIG_GROUP_SIZE}}
+        bigDeploymentsPerNamespace: 0
+        mediumDeploymentSize: {{$MEDIUM_GROUP_SIZE}}
+        mediumDeploymentsPerNamespace: 0
+        smallDeploymentSize: {{$SMALL_GROUP_SIZE}}
+        smallDeploymentsPerNamespace: 0
+        CpuRequest: {{$latencyPodCpu}}m
+        MemoryRequest: {{$latencyPodMemory}}M
+        Group: {{$groupName}}
+        deploymentLabel: start
+
+  - module:
+      path: /services.yaml
+      params:
+        actionName: "Deleting"
+        namespaces: {{$namespaces}}
+        smallServicesPerNamespace: 0
+        mediumServicesPerNamespace: 0
+        bigServicesPerNamespace: 0
+
+{{if $ENABLE_NETWORK_POLICY_ENFORCEMENT_LATENCY_TEST}}
+  - module:
+      path: /network-policy/net-policy-enforcement-latency.yaml
+      params:
+        complete: true
+        testType: "policy-creation"
+{{end}}
+
+{{if $KUBELET_METRICS_ENABLED}}
+  - module:
+      path: /kubelet-measurements.yaml
+      params:
+        action: gather
+{{end}}
+
+{{if $CILIUM_METRICS_ENABLED}}
+  - module:
+      path: /cilium-measurements.yaml
+      params:
+        action: gather
+{{end}}
+
+  - module:
+      path: /measurements.yaml
+      params:
+        action: gather
+        group: {{$groupName}}

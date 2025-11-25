@@ -20,6 +20,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
+	"regexp"
+
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
@@ -27,8 +30,6 @@ import (
 	"k8s.io/client-go/kubernetes/scheme"
 	restclient "k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/remotecommand"
-	"os"
-	"regexp"
 
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
@@ -114,16 +115,27 @@ type snapshotData struct {
 }
 
 func makeSnapshot(k8sClient kubernetes.Interface, config *restclient.Config, filePath string) error {
-	raw, err := k8sClient.CoreV1().RESTClient().Post().
-		Namespace(namespace).
-		Resource("services").
-		SubResource("proxy").
-		Name(net.JoinSchemeNamePort("http", "prometheus-k8s", "9090")).
-		Suffix("api/v1/admin/tsdb/snapshot").
-		DoRaw(context.TODO())
+	tries := 0
+	var err error
+	var raw []byte
+	for tries < 10 {
+		raw, err = k8sClient.CoreV1().RESTClient().Post().
+			Namespace(namespace).
+			Resource("services").
+			SubResource("proxy").
+			Name(net.JoinSchemeNamePort("http", "prometheus-k8s", "9090")).
+			Suffix("api/v1/admin/tsdb/snapshot").
+			DoRaw(context.TODO())
+		if err == nil {
+			break
+		}
+		tries += 1
+		klog.V(2).Infof("Failed to get snapshot: %v, retrying...", err)
+	}
 	if err != nil {
 		return err
 	}
+
 	var response snapshotResponse
 
 	if err := json.Unmarshal(raw, &response); err != nil {
