@@ -1,0 +1,38 @@
+{{$PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER := DefaultParam .CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER false}}
+{{$PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER_PORT := DefaultParam .CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER_PORT "apiserv-metrics"}}
+{{$PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER_INTERVAL := DefaultParam .CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER_INTERVAL "30s"}}
+
+{{if $PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER }}
+
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    k8s-app: clustermesh-apiserver-pods
+  name: clustermesh-apiserver-pods
+  namespace: monitoring
+spec:
+  podMetricsEndpoints:
+    - interval: {{ $PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER_INTERVAL }}
+      port: {{ $PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER_PORT }}
+      path: /metrics
+      metricRelabelings:
+      # Rename process metrics to include cilium_clustermesh_apiserver prefix
+      # ClusterMesh API Server exports standard Go metrics without custom prefix
+      - sourceLabels: [__name__]
+        regex: 'process_cpu_seconds_total'
+        targetLabel: __name__
+        replacement: 'cilium_clustermesh_apiserver_process_cpu_seconds_total'
+      - sourceLabels: [__name__]
+        regex: 'process_resident_memory_bytes'
+        targetLabel: __name__
+        replacement: 'cilium_clustermesh_apiserver_process_resident_memory_bytes'
+  jobLabel: k8s-app
+  selector:
+    matchLabels:
+      k8s-app: clustermesh-apiserver
+  namespaceSelector:
+    matchNames:
+      - kube-system
+
+{{end}}

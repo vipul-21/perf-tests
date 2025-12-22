@@ -35,6 +35,7 @@ const (
 	s3Mode    = "s3"
 	gcsMode   = "gcs"
 	azureMode = "azure"
+	localMode = "local"
 )
 
 var options = &DownloaderOptions{}
@@ -73,7 +74,7 @@ var (
 )
 
 func initDownloaderOptions() {
-	pflag.StringVar(&options.Mode, "mode", gcsMode, "Storage provider from which to download metrics from. Options are 's3', 'gcs', or 'azure'. The default is 'gcs'.")
+	pflag.StringVar(&options.Mode, "mode", gcsMode, "Storage provider from which to download metrics from. Options are 's3', 'gcs', 'azure', or 'local'. The default is 'gcs'.")
 	pflag.BoolVar(&options.OverrideBuildCount, "force-builds", false, "Whether to enforce number of builds to process as passed via --builds flag. "+
 		"This would override values defined by \"perfDashBuildsCount\" label on prow job")
 	pflag.IntVar(&options.DefaultBuildsCount, "builds", maxBuilds, "Total builds number")
@@ -111,6 +112,8 @@ func run() error {
 		metricsBucket, err = NewS3MetricsBucket(*logsBucket, *logsPath, *awsRegion)
 	case azureMode:
 		metricsBucket, err = NewAzureMetricsBucket(*azureAccountName, *logsBucket, *logsPath, *azureConnectionString, *azureUseDefaultCred, *azureClientID, *azureClientSecret, *azureTenantID)
+	case localMode:
+		metricsBucket, err = NewLocalMetricsBucket(*logsBucket, *logsPath)
 	default:
 		return fmt.Errorf("unexpected mode: %s", options.Mode)
 	}

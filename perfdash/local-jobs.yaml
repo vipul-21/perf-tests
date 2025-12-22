@@ -1,0 +1,22 @@
+periodics:
+# Pod startup comparison: Default vs CES
+# Using different prefixes so they appear as separate series on the graph
+# The web UI will allow you to select multiple series to compare
+
+# Default configuration tests (without CES)
+- name: pod-startup-default
+  interval: 24h
+  tags:
+  - "perfDashPrefix: default"
+  - "perfDashJobType: performance"
+  - "perfDashBuildsCount: 100"
+  decorate: true
+
+# CES (CiliumEndpointSlice) enabled tests
+- name: pod-startup-ces
+  interval: 24h
+  tags:
+  - "perfDashPrefix: ces"
+  - "perfDashJobType: performance"
+  - "perfDashBuildsCount: 100"
+  decorate: true

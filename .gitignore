@@ -28,6 +28,7 @@ Session.vim
 
 clusterloader2/junit.xml
 clusterloader2/clusterloader
+clusterloader2/results
 
 # Python generated files
 *.pyc

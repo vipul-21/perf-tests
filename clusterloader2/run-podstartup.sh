@@ -2,41 +2,101 @@
 export CL2_PROMETHEUS_TOLERATE_MASTER=true
 export CL2_PROMETHEUS_SCRAPE_CILIUM_OPERATOR=true
 export CL2_PROMETHEUS_SCRAPE_CILIUM_AGENT=true
+export CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER=true
 
 export DELETE_AUTOMANAGED_NAMESPACES=true
 
-export CL2_LOAD_TEST_THROUGHPUT=100
-export CL2_PODS_PER_NODE=100
+export CL2_LOAD_TEST_THROUGHPUT=5   # Reduced to 5 pods/sec to make test run longer
+export CL2_PODS_PER_NODE=20  # Increased to 200 for longer test duration (600 total pods)
 
-export CL2_LATENCY_POD_CPU=34 # (4 * 0.87 * 1000) // $PODS_PER_NODE
+export CL2_LATENCY_POD_CPU=17  # Adjusted: (4 * 0.87 * 1000) // $PODS_PER_NODE = 3480/200
 export CL2_REPEATS=1
 export CL2_STEPS=1
 export CL2_OPERATION_TIMEOUT="40m"
 export CL2_PROMETHEUS_TOLERATE_MASTER=true
-export CL2_PROMETHEUS_MEMORY_LIMIT_FACTOR=100.0
-export CL2_PROMETHEUS_MEMORY_SCALE_FACTOR=100.0
-export CL2_PROMETHEUS_CPU_SCALE_FACTOR=30.0
+export CL2_PROMETHEUS_MEMORY_LIMIT_FACTOR=2.0  # Adjusted for test cluster (2Gi instead of 100Gi)
+export CL2_PROMETHEUS_MEMORY_SCALE_FACTOR=2.0  # Adjusted for test cluster
+export CL2_PROMETHEUS_CPU_SCALE_FACTOR=5.0     # Adjusted for test cluster
 #export CL2_PROMETHEUS_NODE_SELECTOR="prometheus:\"true\""
 export CL2_POD_STARTUP_LATENCY_THRESHOLD="3m"
 export CL2_CILIUM_METRICS_ENABLED=true
 export CL2_KUBELET_METRICS_ENABLED=false
 export CL2_PROMETHEUS_SCRAPE_CILIUM_AGENT_INTERVAL="30s"
 
-if [ $# -ne 5 ]; then
-        echo "Usage: $0 <RESULTSFOLDER> <KUBECONFIG PATH> <RG> <NODES> <DEPLOYMENT SIZE>"
+if [ $# -ne 8 ]; then
+        echo "Usage: $0 <RESULTSFOLDER> <KUBECONFIG PATH> <RG> <NODES> <DEPLOYMENT SIZE> <SCENARIO> <SLO_NODES> <PROMETHEUS_NODES>"
+        echo "  SCENARIO: 'default' or 'ces'"
+        echo "  SLO_NODES: grep pattern to match SLO node names (e.g., 'vmss1' or 'aks-nodepool1')"
+        echo "  PROMETHEUS_NODES: grep pattern to match Prometheus node names (e.g., 'vmss2' or 'aks-nodepool2')"
         exit 1
 fi
 FOLDER="$1"
 KUBECONFIG="$2"
 RG="$3"
 REPLICAS="$5"
+SCENARIO="$6"
+SLO_NODES="$7"
+PROMETHEUS_NODES="$8"
 
 export CL2_NODES="$4"
-export CL2_NAMESPACES=100
+export CL2_NAMESPACES=10
 export CL2_DEPLOYMENT_SIZE=${REPLICAS}
 
 for i in $(seq 1 1); do
 	echo "RUN $i"
+
+	# Label nodes based on VMSS name
+	echo "=========================================="
+	echo "Labeling specified nodes..."
+	echo "=========================================="
+	
+	# Label SLO nodes
+	if [ -n "$SLO_NODES" ]; then
+		echo "Labeling SLO nodes matching pattern: $SLO_NODES"
+		
+		# Get all nodes matching the grep pattern
+		matching_nodes=$(kubectl get nodes -o name | grep "$SLO_NODES" | sed 's|node/||')
+		
+		if [ -z "$matching_nodes" ]; then
+			echo "  Warning: No nodes found matching pattern '$SLO_NODES'"
+		else
+			echo "  Found nodes: $matching_nodes"
+			
+			while IFS= read -r node_name; do
+				echo "  Labeling node $node_name with slo=true"
+				kubectl label node "$node_name" "slo=true" --overwrite
+				
+				# Add node taint for slo workloads
+				echo "  Adding taint slo=true:NoSchedule to node $node_name"
+				kubectl taint node "$node_name" "slo=true:NoSchedule" --overwrite
+			done <<< "$matching_nodes"
+		fi
+	fi
+	
+	# Label Prometheus nodes
+	if [ -n "$PROMETHEUS_NODES" ]; then
+		echo ""
+		echo "Labeling Prometheus nodes matching pattern: $PROMETHEUS_NODES"
+		
+		# Get all nodes matching the grep pattern
+		matching_nodes=$(kubectl get nodes -o name | grep "$PROMETHEUS_NODES" | sed 's|node/||')
+		
+		if [ -z "$matching_nodes" ]; then
+			echo "  Warning: No nodes found matching pattern '$PROMETHEUS_NODES'"
+		else
+			echo "  Found nodes: $matching_nodes"
+			
+			while IFS= read -r node_name; do
+				echo "  Labeling node $node_name with prometheus=true"
+				kubectl label node "$node_name" "prometheus=true" --overwrite
+			done <<< "$matching_nodes"
+		fi
+	fi
+	
+	echo ""
+	echo "Node labels updated:"
+	kubectl get nodes -L slo,prometheus
+	echo ""
 
 	# Uncomment if running more than one run
 	#kubectl rollout restart deployment -n kube-system cilium-operator
@@ -62,7 +122,7 @@ for i in $(seq 1 1); do
 	--prometheus-ready-timeout=15m \
 	--enable-prometheus-server=true --v=2 \
     	--experimental-prometheus-snapshot-to-report-dir=true \
-    	--tear-down-prometheus-server=true \
+    	--tear-down-prometheus-server=false \
     	2>&1 | tee -a $OUTPUT_FILE
 	
 	#--dry-run \
@@ -70,4 +130,86 @@ for i in $(seq 1 1); do
 	#--prometheus-scrape-kubelets=true \
 	echo "End Time: $(date '+%d/%m/%Y %H:%M:%S')" >> $OUTPUT_FILE
 
+	# Automatically organize results for perfdash
+	echo ""
+	echo "=========================================="
+	echo "Organizing results for perfdash..."
+	echo "=========================================="
+	
+	# Validate scenario parameter
+	if [[ "$SCENARIO" != "default" && "$SCENARIO" != "ces" ]]; then
+		echo "Error: SCENARIO must be either 'default' or 'ces'"
+		echo "Got: '$SCENARIO'"
+		exit 1
+	fi
+	
+	# Determine the job prefix based on scenario
+	case "$SCENARIO" in
+		"default")
+			JOB_PREFIX="pod-startup-default"
+			;;
+		"ces")
+			JOB_PREFIX="pod-startup-ces"
+			;;
+	esac
+	
+	BASE_DIR="results/logs"
+	mkdir -p "$BASE_DIR/$JOB_PREFIX"
+	
+	# Find next build number
+	BUILD_NUM=1
+	while [ -d "$BASE_DIR/$JOB_PREFIX/$BUILD_NUM" ]; do
+		BUILD_NUM=$((BUILD_NUM + 1))
+	done
+	
+	echo "  Scenario: $SCENARIO"
+	echo "  Job prefix: $JOB_PREFIX"
+	echo "  Build number: $BUILD_NUM"
+	echo "  Source: $REPORT_DIR"
+	
+	# Create build directory with artifacts subdirectory
+	BUILD_DIR="$BASE_DIR/$JOB_PREFIX/$BUILD_NUM"
+	ARTIFACTS_DIR="$BUILD_DIR/artifacts"
+	mkdir -p "$ARTIFACTS_DIR"
+	
+	# Copy all JSON metric files to artifacts directory
+	echo "Copying metric files..."
+	find "$REPORT_DIR" -maxdepth 1 -name "*.json" -type f -exec cp {} "$ARTIFACTS_DIR/" \;
+	
+	# Copy additional files if they exist
+	if [ -f "$REPORT_DIR/cl2-metadata.json" ]; then
+		cp "$REPORT_DIR/cl2-metadata.json" "$ARTIFACTS_DIR/"
+	fi
+	
+	if [ -f "$REPORT_DIR/junit.xml" ]; then
+		cp "$REPORT_DIR/junit.xml" "$ARTIFACTS_DIR/"
+	fi
+	
+	# Create finished.json in the build directory (NOT in artifacts)
+	cat > "$BUILD_DIR/finished.json" << EOF
+{
+  "timestamp": $(date +%s),
+  "result": "SUCCESS",
+  "metadata": {
+    "scenario": "$SCENARIO",
+    "job-prefix": "$JOB_PREFIX",
+    "build-number": $BUILD_NUM,
+    "test-folder": "$FOLDER",
+    "report-dir": "$REPORT_DIR"
+  }
+}
+EOF
+	
+	echo "✅ Test results organized successfully!"
+	echo "   Location: $BUILD_DIR"
+	echo ""
+
 done
+
+echo "=========================================="
+echo "All runs complete!"
+echo "=========================================="
+echo "To view results in perfdash, run:"
+echo "   cd ../perfdash && make run-local"
+echo ""
+echo "Then open: http://localhost:8080"

@@ -19,6 +19,18 @@ run: perfdash
 		--force-builds \
 		--githubConfigDir=https://api.github.com/repos/kubernetes/perf-tests/contents/perfdash/test
 
+run-local: perfdash
+	./perfdash \
+		--www \
+		--address=0.0.0.0:8080 \
+		--builds=100 \
+		--force-builds \
+		--mode=local \
+		--logsBucket=../clusterloader2/results \
+		--logsPath=logs \
+		--configPath=local-jobs.yaml \
+		--storageURL=file://../clusterloader2/results
+
 # Use buildkit to have "COPY --chmod=" support (availability of it in "regular" docker build depends on docker version).
 container:
 	DOCKER_BUILDKIT=1 docker build --pull -t $(REPO)/perfdash:$(TAG) .
