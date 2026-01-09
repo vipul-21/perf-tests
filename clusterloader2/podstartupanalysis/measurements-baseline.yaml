@@ -70,7 +70,7 @@ steps:
         Method: GenericPrometheusQuery
         Params:
           action: {{$action}}
-          metricName: Apiserver Average CPU Usage
+          metricName: Apiserver Average CPU Usage (Baseline)
           metricVersion: v1
           unit: cpu
           enableViolations: true
@@ -86,7 +86,7 @@ steps:
         Method: GenericPrometheusQuery
         Params:
           action: {{$action}}
-          metricName: Apiserver Max CPU Usage
+          metricName: Apiserver Max CPU Usage (Baseline)
           metricVersion: v1
           unit: cpu
           enableViolations: true
@@ -102,7 +102,7 @@ steps:
         Method: GenericPrometheusQuery
         Params:
           action: {{$action}}
-          metricName: Apiserver Avg Memory Usage
+          metricName: Apiserver Avg Memory Usage (Baseline)
           metricVersion: v1
           unit: MB
           enableViolations: true
@@ -118,7 +118,7 @@ steps:
         Method: GenericPrometheusQuery
         Params:
           action: {{$action}}
-          metricName: Apiserver Max Memory Usage
+          metricName: Apiserver Max Memory Usage (Baseline)
           metricVersion: v1
           unit: MB
           enableViolations: true
