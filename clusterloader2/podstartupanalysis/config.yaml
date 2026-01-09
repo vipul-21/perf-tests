@@ -62,6 +62,11 @@ steps:
       params:
         action: start
         group: {{$groupName}}
+  - module:
+      path: /measurements-baseline.yaml
+      params:
+        action: start
+        group: {{$groupName}}
 
 {{if $CILIUM_METRICS_ENABLED}}
   - module:
@@ -76,7 +81,20 @@ steps:
       params:
         action: start
 {{end}}
+  - name: Log - Baseline measurements collected"
+    measurements:
+    - Identifier: Dummy-Sleep-Before-Load
+      Method: Sleep
+      Params:
+        action: start
+        duration: 10m
+  - module:
+      path: /measurements-baseline.yaml
+      params:
+        action: gather
+        group: {{$groupName}}
 
+## collect the mesurements for pod startup latency before starting the load
 {{range $i := Loop $repeats}}
   - module:
       path: /reconcile-objects.yaml
@@ -91,19 +109,20 @@ steps:
         MemoryRequest: {{$latencyPodMemory}}M
         Group: {{$groupName}}
         deploymentLabel: start
-  - module:
-      path: /reconcile-objects.yaml
-      params:
-        actionName: "delete"
-        namespaces: {{$namespaces}}
-        tuningSet: RandomizedSaturationTimeLimited
-        operationTimeout: {{$operationTimeout}}
-        deploymentSize: {{$deploymentSize}}
-        deploymentsPerNamespace: 0
-        CpuRequest: {{$latencyPodCpu}}m
-        MemoryRequest: {{$latencyPodMemory}}M
-        Group: {{$groupName}}
-        deploymentLabel: start
+  # - module:
+  # don't delete the pods after the test and continue collecting measurements.
+      # path: /reconcile-objects.yaml
+      # params:
+      #   actionName: "delete"
+      #   namespaces: {{$namespaces}}
+      #   tuningSet: RandomizedSaturationTimeLimited
+      #   operationTimeout: {{$operationTimeout}}
+      #   deploymentSize: {{$deploymentSize}}
+      #   deploymentsPerNamespace: 0
+      #   CpuRequest: {{$latencyPodCpu}}m
+      #   MemoryRequest: {{$latencyPodMemory}}M
+      #   Group: {{$groupName}}
+      #   deploymentLabel: start
 {{end}}
 
 {{if $KUBELET_METRICS_ENABLED}}
