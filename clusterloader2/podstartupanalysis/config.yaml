@@ -73,6 +73,10 @@ steps:
       path: /cilium-measurements.yaml
       params:
         action: start
+  - module:
+      path: /cilium-baseline-measurements.yaml
+      params:
+        action: start
 {{end}}
 
 {{if $KUBELET_METRICS_ENABLED}}
@@ -87,12 +91,18 @@ steps:
       Method: Sleep
       Params:
         action: start
-        duration: 10m
+        duration: 120s  # Wait 120 seconds for baseline metrics to accumulate
   - module:
       path: /measurements-baseline.yaml
       params:
         action: gather
         group: {{$groupName}}
+
+  # Gather Cilium baseline metrics before workload starts
+  - module:
+      path: /cilium-baseline-measurements.yaml
+      params:
+        action: gather
 
 ## collect the mesurements for pod startup latency before starting the load
 {{range $i := Loop $repeats}}

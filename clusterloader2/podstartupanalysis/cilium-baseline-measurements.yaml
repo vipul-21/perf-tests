@@ -1,0 +1,167 @@
+# Cilium Baseline Measurements
+# This module captures baseline metrics BEFORE workload starts
+# Supports both "start" and "gather" actions like other measurement modules
+
+{{$action := .action}} # start, gather
+
+steps:
+  - name: {{$action}} Baseline Cilium Metrics (Pre-Workload)
+    measurements:
+    # Cilium Agent CPU and Memory (Baseline)
+    - Identifier: CiliumBaselineAvgCPU
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Agent Avg CPU (Baseline)
+        metricVersion: v1
+        unit: cpu
+        queries:
+        - name: Perc99
+          query: quantile(0.99, avg_over_time(rate(cilium_process_cpu_seconds_total[1m])[%v:]))
+        - name: Perc90
+          query: quantile(0.90, avg_over_time(rate(cilium_process_cpu_seconds_total[1m])[%v:]))
+        - name: Perc50
+          query: quantile(0.50, avg_over_time(rate(cilium_process_cpu_seconds_total[1m])[%v:]))
+    
+    - Identifier: CiliumBaselineAvgMemory
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Agent Avg Memory (Baseline)
+        metricVersion: v1
+        unit: MB
+        queries:
+        - name: Perc99
+          query: quantile(0.99, avg_over_time(cilium_process_resident_memory_bytes[%v:])) / 1024 / 1024
+        - name: Perc90
+          query: quantile(0.90, avg_over_time(cilium_process_resident_memory_bytes[%v:])) / 1024 / 1024
+        - name: Perc50
+          query: quantile(0.50, avg_over_time(cilium_process_resident_memory_bytes[%v:])) / 1024 / 1024
+    
+    # Cilium Operator CPU and Memory (Baseline)
+    - Identifier: CiliumOperatorBaselineAvgCPU
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Operator Avg CPU (Baseline)
+        metricVersion: v1
+        unit: cpu
+        queries:
+        - name: Perc99
+          query: quantile(0.99, avg_over_time(rate(cilium_operator_process_cpu_seconds_total[1m])[%v:]))
+        - name: Perc90
+          query: quantile(0.90, avg_over_time(rate(cilium_operator_process_cpu_seconds_total[1m])[%v:]))
+        - name: Perc50
+          query: quantile(0.50, avg_over_time(rate(cilium_operator_process_cpu_seconds_total[1m])[%v:]))
+    
+    - Identifier: CiliumOperatorBaselineAvgMemory
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Operator Avg Memory (Baseline)
+        metricVersion: v1
+        unit: MB
+        queries:
+        - name: Perc99
+          query: quantile(0.99, avg_over_time(cilium_operator_process_resident_memory_bytes[%v:])) / 1024 / 1024
+        - name: Perc90
+          query: quantile(0.90, avg_over_time(cilium_operator_process_resident_memory_bytes[%v:])) / 1024 / 1024
+        - name: Perc50
+          query: quantile(0.50, avg_over_time(cilium_operator_process_resident_memory_bytes[%v:])) / 1024 / 1024
+    
+    # ClusterMesh API Server CPU and Memory (Baseline)
+    - Identifier: ClusterMeshAPIServerBaselineAvgCPU
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: ClusterMesh API Server Avg CPU (Baseline)
+        metricVersion: v1
+        unit: cpu
+        queries:
+        - name: Perc99
+          query: quantile(0.99, avg_over_time(rate(cilium_clustermesh_apiserver_process_cpu_seconds_total[1m])[%v:]))
+        - name: Perc90
+          query: quantile(0.90, avg_over_time(rate(cilium_clustermesh_apiserver_process_cpu_seconds_total[1m])[%v:]))
+        - name: Perc50
+          query: quantile(0.50, avg_over_time(rate(cilium_clustermesh_apiserver_process_cpu_seconds_total[1m])[%v:]))
+    
+    - Identifier: ClusterMeshAPIServerBaselineAvgMemory
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: ClusterMesh API Server Avg Memory (Baseline)
+        metricVersion: v1
+        unit: MB
+        queries:
+        - name: Perc99
+          query: quantile(0.99, avg_over_time(cilium_clustermesh_apiserver_process_resident_memory_bytes[%v:])) / 1024 / 1024
+        - name: Perc90
+          query: quantile(0.90, avg_over_time(cilium_clustermesh_apiserver_process_resident_memory_bytes[%v:])) / 1024 / 1024
+        - name: Perc50
+          query: quantile(0.50, avg_over_time(cilium_clustermesh_apiserver_process_resident_memory_bytes[%v:])) / 1024 / 1024
+    
+    # Cilium Resource Counts (Baseline)
+    - Identifier: CiliumEndpointsBaseline
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Endpoints (Baseline)
+        metricVersion: v1
+        unit: count
+        queries:
+        - name: Total
+          query: apiserver_storage_objects{resource="ciliumendpoints.cilium.io"}
+    
+    - Identifier: CiliumEndpointSlicesBaseline
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Endpoint Slices (Baseline)
+        metricVersion: v1
+        unit: count
+        queries:
+        - name: Total
+          query: apiserver_storage_objects{resource="ciliumendpointslices.cilium.io"}
+    
+    - Identifier: CiliumIdentitiesBaseline
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Identities (Baseline)
+        metricVersion: v1
+        unit: count
+        queries:
+        - name: Total
+          query: apiserver_storage_objects{resource="ciliumidentities.cilium.io"}
+    
+    # BPF Map Pressure (Baseline)
+    - Identifier: CiliumBPFMapPressureBaseline
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium BPF Map Pressure (Baseline)
+        metricVersion: v1
+        unit: "%"
+        dimensions:
+        - map_name
+        queries:
+        - name: Max Pressure by Map
+          query: max(cilium_bpf_map_pressure) by (map_name) * 100
+        - name: Overall Max Pressure
+          query: max(cilium_bpf_map_pressure) * 100
+    
+    # Agent Bootstrap Time (if available)
+    - Identifier: CiliumAgentBootstrapBaseline
+      Method: GenericPrometheusQuery
+      Params:
+        action: {{$action}}
+        metricName: Cilium Agent Bootstrap (Baseline)
+        metricVersion: v1
+        unit: s
+        queries:
+        - name: Median
+          query: quantile(0.50, cilium_agent_bootstrap_seconds{scope="overall"})
+        - name: P90
+          query: quantile(0.90, cilium_agent_bootstrap_seconds{scope="overall"})
+        - name: P99
+          query: quantile(0.99, cilium_agent_bootstrap_seconds{scope="overall"})
