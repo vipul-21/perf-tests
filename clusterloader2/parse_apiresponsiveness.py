@@ -2,6 +2,7 @@ import os
 import json
 import csv
 from collections import defaultdict
+from datetime import datetime
 
 # Thresholds
 LATENCY_THRESHOLD_MUTATING = 1000  # ms
@@ -16,13 +17,14 @@ MUTATING_VERBS = {"POST", "PUT", "DELETE", "PATCH"}
 READ_VERBS = {"GET", "LIST"}
 
 # Root results directory
-ROOT_DIR = "results"
+ROOT_DIR = "results/logs"
 
 def process_file(filepath, subdir_name, mutating_rows, read_rows,
-                 mutating_stats_by_subdir, read_stats_by_subdir):
+                 mutating_stats_by_subdir, read_stats_by_subdir, all_items):
     with open(filepath, "r") as f:
         content = json.load(f)
         for item in content.get("dataItems", []):
+            all_items.append(item)
             data = item.get("data", {})
             labels = item.get("labels", {})
 
@@ -56,6 +58,8 @@ def summarize_test(test_path):
     read_rows = []
     baseline_mutating_rows = []
     baseline_read_rows = []
+    all_workload_items = []
+    all_baseline_items = []
 
     mutating_stats_by_subdir = defaultdict(lambda: {"weighted_sum": 0.0, "total_count": 0})
     read_stats_by_subdir = defaultdict(lambda: {"weighted_sum": 0.0, "total_count": 0})
@@ -69,10 +73,10 @@ def summarize_test(test_path):
                 subdir_name = os.path.relpath(root, test_path)
                 if "Baseline" in file:
                     process_file(filepath, subdir_name, baseline_mutating_rows, baseline_read_rows,
-                                 baseline_mutating_stats_by_subdir, baseline_read_stats_by_subdir)
+                                 baseline_mutating_stats_by_subdir, baseline_read_stats_by_subdir, all_baseline_items)
                 else:
                     process_file(filepath, subdir_name, mutating_rows, read_rows,
-                                 mutating_stats_by_subdir, read_stats_by_subdir)
+                                 mutating_stats_by_subdir, read_stats_by_subdir, all_workload_items)
 
     summary_path = os.path.join(test_path, "APIResponsivenessTestSummary.log")
     with open(summary_path, "w", newline="") as csvfile:
@@ -110,6 +114,45 @@ def summarize_test(test_path):
                 avg = stats["weighted_sum"] / stats["total_count"]
                 writer.writerow([subdir, round(avg, 2)])
 
+    timestamp = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    artifacts_dir = os.path.join(test_path, "artifacts")
+    
+    if all_workload_items and mutating_stats_by_subdir:
+        workload_summary_items = []
+        for subdir, stats in mutating_stats_by_subdir.items():
+            if stats["total_count"] > 0:
+                avg = stats["weighted_sum"] / stats["total_count"]
+                workload_summary_items.append({
+                    "data": {
+                        "WeightedAvgPerc99": round(avg, 2)
+                    },
+                    "unit": "ms",
+                    "labels": {
+                        "Type": "Mutating",
+                        "Subdir": subdir
+                    }
+                })
+        
+        for subdir, stats in read_stats_by_subdir.items():
+            if stats["total_count"] > 0:
+                avg = stats["weighted_sum"] / stats["total_count"]
+                workload_summary_items.append({
+                    "data": {
+                        "WeightedAvgPerc99": round(avg, 2)
+                    },
+                    "unit": "ms",
+                    "labels": {
+                        "Type": "Read",
+                        "Subdir": subdir
+                    }
+                })
+        
+        if workload_summary_items:
+            workload_json_path = os.path.join(artifacts_dir, f"APIResponsivenessPrometheus_Summary_{timestamp}.json")
+            os.makedirs(artifacts_dir, exist_ok=True)
+            with open(workload_json_path, "w") as f:
+                json.dump({"version": "v1", "dataItems": workload_summary_items}, f, indent=2)
+
     baseline_summary_path = os.path.join(test_path, "APIResponsivenessBaselineTestSummary.log")
     with open(baseline_summary_path, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
@@ -146,11 +189,50 @@ def summarize_test(test_path):
                 avg = stats["weighted_sum"] / stats["total_count"]
                 writer.writerow([subdir, round(avg, 2)])
 
+    if all_baseline_items and baseline_mutating_stats_by_subdir:
+        baseline_summary_items = []
+        for subdir, stats in baseline_mutating_stats_by_subdir.items():
+            if stats["total_count"] > 0:
+                avg = stats["weighted_sum"] / stats["total_count"]
+                baseline_summary_items.append({
+                    "data": {
+                        "WeightedAvgPerc99": round(avg, 2)
+                    },
+                    "unit": "ms",
+                    "labels": {
+                        "Type": "Mutating",
+                        "Subdir": subdir
+                    }
+                })
+        
+        for subdir, stats in baseline_read_stats_by_subdir.items():
+            if stats["total_count"] > 0:
+                avg = stats["weighted_sum"] / stats["total_count"]
+                baseline_summary_items.append({
+                    "data": {
+                        "WeightedAvgPerc99": round(avg, 2)
+                    },
+                    "unit": "ms",
+                    "labels": {
+                        "Type": "Read",
+                        "Subdir": subdir
+                    }
+                })
+        
+        if baseline_summary_items:
+            baseline_json_path = os.path.join(artifacts_dir, f"APIResponsivenessPrometheus_Baseline_Summary_{timestamp}.json")
+            os.makedirs(artifacts_dir, exist_ok=True)
+            with open(baseline_json_path, "w") as f:
+                json.dump({"version": "v1", "dataItems": baseline_summary_items}, f, indent=2)
+
 def main():
-    for entry in os.listdir(ROOT_DIR):
-        test_path = os.path.join(ROOT_DIR, entry)
-        if os.path.isdir(test_path):
-            summarize_test(test_path)
+    for job_dir in os.listdir(ROOT_DIR):
+        job_path = os.path.join(ROOT_DIR, job_dir)
+        if os.path.isdir(job_path):
+            for build_dir in os.listdir(job_path):
+                build_path = os.path.join(job_path, build_dir)
+                if os.path.isdir(build_path) and build_dir.isdigit():
+                    summarize_test(build_path)
 
 if __name__ == "__main__":
     main()
