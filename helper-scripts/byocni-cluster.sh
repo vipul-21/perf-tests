@@ -9,6 +9,9 @@ CLUSTER_NAME="byocni-cluster"
 REGION="westus3"
 ENABLE_MESH=false
 ENABLE_MONITORING=false
+ENABLE_KVSTORE=false
+ETCD_ENDPOINT=""
+ETCD_CERTS_DIR=""
 CLUSTER_ID=1
 POOL_COUNT=1
 NODES_PER_POOL=2
@@ -22,7 +25,7 @@ MONITOR_WORKSPACE_ID="${MONITOR_WORKSPACE_ID:-}"
 KUBECONFIG_CLI=""
 
 # Use absolute path for chart directory
-CILIUM_CHART_DIR="${CILIUM_CHART_DIR:-$SCRIPT_DIR/../cilium/install/kubernetes/cilium}"
+CILIUM_CHART_DIR="${CILIUM_CHART_DIR:-/home/singhvipul/ws/cilium/install/kubernetes/cilium}"
 : "${CILIUM_IMAGE_REPO:=acnpublic.azurecr.io/vipul/cilium}" >/dev/null
 : "${CILIUM_IMAGE_TAG:=ces-1}" >/dev/null
 : "${CLUSTERMESH_IMAGE_REPO:=acnpublic.azurecr.io/vipul/clustermesh-apiserver}" >/dev/null
@@ -40,6 +43,9 @@ while [[ "$#" -gt 0 ]]; do
         --nodes-per-pool) NODES_PER_POOL="$2"; shift ;;
         -k|--kubeconfig) KUBECONFIG_CLI="$2"; shift ;;
         --enable-monitoring) ENABLE_MONITORING=true ;;
+        --enable-kvstore) ENABLE_KVSTORE=true ;;
+        --etcd-endpoint) ETCD_ENDPOINT="$2"; shift ;;
+        --etcd-certs-dir) ETCD_CERTS_DIR="$2"; shift ;;
         *) echo "Unknown parameter: $1"; exit 1 ;;
     esac
     shift
@@ -133,6 +139,125 @@ else
     popd > /dev/null
 fi
 
+# Deploy or discover etcd VM if kvstore mode is enabled
+if [ "$ENABLE_KVSTORE" = true ]; then
+    # If no etcd endpoint provided, deploy etcd VM or discover existing one
+    if [ -z "$ETCD_ENDPOINT" ]; then
+        echo "No etcd endpoint provided. Checking for existing etcd VM or deploying new one..."
+        
+        # Try to find existing etcd VM in the same resource group
+        ETCD_VM_NAME="etcd-server"
+        ETCD_NIC_NAME="${ETCD_VM_NAME}-nic"
+        
+        if az vm show -g "$GROUP" -n "$ETCD_VM_NAME" &>/dev/null; then
+            echo "Found existing etcd VM: $ETCD_VM_NAME in resource group $GROUP"
+            
+            # Get the private IP from the existing VM
+            ETCD_PRIVATE_IP=$(az network nic show \
+                --resource-group "$GROUP" \
+                --name "$ETCD_NIC_NAME" \
+                --query 'ipConfigurations[0].privateIPAddress' -o tsv)
+            
+            if [ -z "$ETCD_PRIVATE_IP" ]; then
+                echo "Error: Could not retrieve private IP from etcd VM" >&2
+                exit 1
+            fi
+            
+            ETCD_ENDPOINT="https://${ETCD_PRIVATE_IP}:2379"
+            echo "Using existing etcd at: $ETCD_ENDPOINT"
+            
+            # Download certificates if not already present
+            if [ -z "$ETCD_CERTS_DIR" ]; then
+                ETCD_CERTS_DIR="${SCRIPT_DIR}/etcd-certs-${ETCD_VM_NAME}"
+            fi
+            
+            if [ ! -d "$ETCD_CERTS_DIR" ] || [ ! -f "$ETCD_CERTS_DIR/ca.crt" ]; then
+                echo "Downloading etcd certificates from existing VM..."
+                mkdir -p "$ETCD_CERTS_DIR"
+                
+                ETCD_PUBLIC_IP=$(az vm show -d -g "$GROUP" -n "$ETCD_VM_NAME" --query publicIps -o tsv)
+                if [ -z "$ETCD_PUBLIC_IP" ]; then
+                    echo "Error: Could not retrieve public IP from etcd VM for certificate download" >&2
+                    exit 1
+                fi
+                
+                ssh -o StrictHostKeyChecking=no "azureuser@${ETCD_PUBLIC_IP}" "sudo cat /etc/etcd/pki/ca.crt" > "${ETCD_CERTS_DIR}/ca.crt"
+                ssh -o StrictHostKeyChecking=no "azureuser@${ETCD_PUBLIC_IP}" "sudo cat /etc/etcd/pki/client.crt" > "${ETCD_CERTS_DIR}/client.crt"
+                ssh -o StrictHostKeyChecking=no "azureuser@${ETCD_PUBLIC_IP}" "sudo cat /etc/etcd/pki/client.key" > "${ETCD_CERTS_DIR}/client.key"
+                
+                echo "Certificates downloaded to: $ETCD_CERTS_DIR"
+            fi
+        else
+            echo "No existing etcd VM found. Deploying new etcd server..."
+            
+            # Determine VNet name from cluster
+            # The VNet is created by the Makefile with pattern: ${CLUSTER}-vnet
+            VNET_NAME="${CLUSTER}-vnet"
+            
+            # Call kvstore-cluster.sh to deploy etcd in the same VNet
+            KVSTORE_SCRIPT="${SCRIPT_DIR}/kvstore-cluster.sh"
+            if [ ! -f "$KVSTORE_SCRIPT" ]; then
+                echo "Error: kvstore-cluster.sh not found at $KVSTORE_SCRIPT" >&2
+                exit 1
+            fi
+            
+            echo "Deploying etcd VM using kvstore-cluster.sh..."
+            "$KVSTORE_SCRIPT" \
+                --name "$ETCD_VM_NAME" \
+                --resource-group "$GROUP" \
+                --region "$REGION" \
+                --vnet-name "$VNET_NAME" \
+                --subnet-name "etcd-subnet" \
+                --subnet-prefix "10.254.0.0/24"
+            
+            # Get the IP from the newly created VM
+            ETCD_PRIVATE_IP=$(az network nic show \
+                --resource-group "$GROUP" \
+                --name "$ETCD_NIC_NAME" \
+                --query 'ipConfigurations[0].privateIPAddress' -o tsv)
+            
+            if [ -z "$ETCD_PRIVATE_IP" ]; then
+                echo "Error: Could not retrieve private IP from newly created etcd VM" >&2
+                exit 1
+            fi
+            
+            ETCD_ENDPOINT="https://${ETCD_PRIVATE_IP}:2379"
+            
+            # Set default certs directory if not provided
+            if [ -z "$ETCD_CERTS_DIR" ]; then
+                ETCD_CERTS_DIR="${SCRIPT_DIR}/etcd-certs-${ETCD_VM_NAME}"
+            fi
+            
+            echo "etcd deployed successfully at: $ETCD_ENDPOINT"
+        fi
+    fi
+    
+    # Validate etcd endpoint is set
+    if [ -z "$ETCD_ENDPOINT" ]; then
+        echo "Error: Failed to determine etcd endpoint" >&2
+        exit 1
+    fi
+    
+    # Validate certificates directory
+    if [ -z "$ETCD_CERTS_DIR" ]; then
+        echo "Error: --etcd-certs-dir is required when --enable-kvstore is set" >&2
+        echo "Example: --etcd-certs-dir ./etcd-certs-etcd-server" >&2
+        exit 1
+    fi
+    if [ ! -d "$ETCD_CERTS_DIR" ]; then
+        echo "Error: etcd certificates directory not found: $ETCD_CERTS_DIR" >&2
+        exit 1
+    fi
+    if [ ! -f "$ETCD_CERTS_DIR/ca.crt" ] || [ ! -f "$ETCD_CERTS_DIR/client.crt" ] || [ ! -f "$ETCD_CERTS_DIR/client.key" ]; then
+        echo "Error: Missing etcd certificates in $ETCD_CERTS_DIR" >&2
+        echo "Required files: ca.crt, client.crt, client.key" >&2
+        exit 1
+    fi
+    
+    echo "Using external etcd at: $ETCD_ENDPOINT"
+    echo "Using certificates from: $ETCD_CERTS_DIR"
+fi
+
 # Get Credentials
 echo "Getting credentials into ${KUBECONFIG}..."
 for attempt in {1..3}; do
@@ -147,6 +272,13 @@ for attempt in {1..3}; do
         exit 1
     fi
 done
+
+# Note: If etcd VM is deployed automatically, it will be created in the same VNet as AKS
+# If you provide --etcd-endpoint manually, ensure the etcd VM is accessible from the cluster
+if [ "$ENABLE_KVSTORE" = true ]; then
+    ETCD_IP=$(echo "$ETCD_ENDPOINT" | sed -E 's|https?://([^:]+):.*|\1|')
+    echo "etcd endpoint configured: $ETCD_ENDPOINT (IP: $ETCD_IP)"
+fi
 
 # Prepare Cilium Install Flags
 CILIUM_FLAGS=(
@@ -181,6 +313,32 @@ CILIUM_FLAGS=(
     --set enableIPv4Masquerade=true
     --set bpf.mapDynamicSizeRatio=0.01
 )
+
+# Add kvstore configuration if enabled
+if [ "$ENABLE_KVSTORE" = true ]; then
+    echo "Configuring Cilium with external etcd kvstore..."
+    
+    # Create etcd secrets before installing Cilium
+    if ! kubectl --kubeconfig "${KUBECONFIG}" -n kube-system get secret cilium-etcd-secrets >/dev/null 2>&1; then
+        echo "Creating Kubernetes secret for etcd certificates..."
+        kubectl --kubeconfig "${KUBECONFIG}" create secret generic cilium-etcd-secrets \
+            --from-file=etcd-client-ca.crt="${ETCD_CERTS_DIR}/ca.crt" \
+            --from-file=etcd-client.key="${ETCD_CERTS_DIR}/client.key" \
+            --from-file=etcd-client.crt="${ETCD_CERTS_DIR}/client.crt" \
+            -n kube-system
+    else
+        echo "etcd certificates secret already exists; skipping creation."
+    fi
+    
+    # Add kvstore flags to Cilium configuration
+    # In kvstore mode, identities are stored in etcd, not as CRDs
+    CILIUM_FLAGS+=(
+        --set etcd.enabled=true
+        --set etcd.ssl=true
+        --set "etcd.endpoints[0]=${ETCD_ENDPOINT}"
+        --set identityAllocationMode=kvstore
+    )
+fi
 
 if kubectl --kubeconfig "${KUBECONFIG}" -n kube-system get daemonset cilium >/dev/null 2>&1; then
     echo "Cilium daemonset already exists; skipping install."
