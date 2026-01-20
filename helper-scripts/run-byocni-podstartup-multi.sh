@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLUSTER_SCRIPT="${SCRIPT_DIR}/byocni-cluster.sh"
-PODSTART_DIR="$(cd "${SCRIPT_DIR}/../perf-tests/clusterloader2" && pwd)"
+PODSTART_DIR="$(cd "${SCRIPT_DIR}/../clusterloader2" && pwd)"
 PODSTART_SCRIPT="${PODSTART_DIR}/run-podstartup.sh"
 
 if [ ! -x "${CLUSTER_SCRIPT}" ]; then
@@ -19,7 +19,7 @@ fi
 RUNS=1
 LIFECYCLE="recreate"
 CLUSTER_NAME="byocni-cluster"
-REGION="westus3"
+REGION="canadacentral"
 POOL_COUNT=""
 NODES_PER_POOL=""
 SCENARIO="default"
@@ -29,6 +29,9 @@ PROM_PATTERN=""
 RESULT_PREFIX=""
 ENABLE_MESH=false
 ENABLE_MONITORING=false
+ENABLE_KVSTORE=false
+ETCD_ENDPOINT=""
+ETCD_CERTS_DIR=""
 PODS_PER_NODE=""
 NAMESPACE_COUNT=""
 LOAD_THROUGHPUT=""
@@ -59,6 +62,9 @@ Options:
   --prom-pattern <PAT>  Optional grep pattern to mark Prometheus nodes
   --results-prefix <P>  Custom results folder prefix (default auto-generated)
     --enable-monitoring   Forward monitoring flag to byocni-cluster.sh
+        --enable-kvstore      Enable etcd-backed kvstore in byocni-cluster.sh
+        --etcd-endpoint <URL> Specify external etcd endpoint (implies --enable-kvstore)
+        --etcd-certs-dir <DIR> Path to etcd cert bundle for kvstore mode
   -h, --help            Show this help and exit
 EOF
 }
@@ -128,6 +134,14 @@ while [[ $# -gt 0 ]]; do
             RESULT_PREFIX="$2"; shift 2 ;;
         --enable-monitoring)
             ENABLE_MONITORING=true; shift ;;
+        --enable-kvstore)
+            ENABLE_KVSTORE=true; shift ;;
+        --etcd-endpoint)
+            require_value "$1" "${2-}"
+            ETCD_ENDPOINT="$2"; ENABLE_KVSTORE=true; shift 2 ;;
+        --etcd-certs-dir)
+            require_value "$1" "${2-}"
+            ETCD_CERTS_DIR="$2"; ENABLE_KVSTORE=true; shift 2 ;;
         -h|--help)
             print_usage; exit 0 ;;
         *)
@@ -169,6 +183,16 @@ fi
 
 if [ -n "${DELETE_THROUGHPUT}" ] && ! [[ "${DELETE_THROUGHPUT}" =~ ^[0-9]+$ ]]; then
     echo "Error: --delete-throughput expects an integer" >&2
+    exit 1
+fi
+
+if [ -n "${ETCD_ENDPOINT}" ] && [ -z "${ETCD_CERTS_DIR}" ]; then
+    echo "Error: --etcd-endpoint requires --etcd-certs-dir" >&2
+    exit 1
+fi
+
+if [ -n "${ETCD_CERTS_DIR}" ] && [ ! -d "${ETCD_CERTS_DIR}" ]; then
+    echo "Error: etcd cert directory not found: ${ETCD_CERTS_DIR}" >&2
     exit 1
 fi
 
@@ -257,6 +281,15 @@ create_cluster() {
     fi
     if [ "${ENABLE_MONITORING}" = true ]; then
         args+=(--enable-monitoring)
+    fi
+    if [ "${ENABLE_KVSTORE}" = true ]; then
+        args+=(--enable-kvstore)
+        if [ -n "${ETCD_ENDPOINT}" ]; then
+            args+=(--etcd-endpoint "${ETCD_ENDPOINT}")
+        fi
+        if [ -n "${ETCD_CERTS_DIR}" ]; then
+            args+=(--etcd-certs-dir "${ETCD_CERTS_DIR}")
+        fi
     fi
     args+=(--kubeconfig "${KUBECONFIG_PATH}")
     local full_cmd=("${CLUSTER_SCRIPT}" "${args[@]}")

@@ -12,9 +12,14 @@ export CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER=true
 export DELETE_AUTOMANAGED_NAMESPACES=true
 
 # Number of pods to create per second during test (controls test duration)
-export CL2_LOAD_TEST_THROUGHPUT=100  
+: "${CL2_LOAD_TEST_THROUGHPUT:=100}"
+export CL2_LOAD_TEST_THROUGHPUT
+# Pods deleted per second defaults to creation rate unless explicitly set
+: "${CL2_DELETE_TEST_THROUGHPUT:=${CL2_LOAD_TEST_THROUGHPUT}}"
+export CL2_DELETE_TEST_THROUGHPUT
 # Total number of pods to create per node (total pods = NODES × PODS_PER_NODE)
-export CL2_PODS_PER_NODE=100
+: "${CL2_PODS_PER_NODE:=100}"
+export CL2_PODS_PER_NODE
 
 # CPU request for each latency measurement pod in millicores
 # Formula: (NODE_CPU_CORES × 0.87 × 1000) ÷ PODS_PER_NODE
@@ -75,8 +80,11 @@ PROMETHEUS_NODES="${8:-}"  # Optional: empty if not provided
 
 # Number of nodes in the test cluster
 export CL2_NODES="$4"
+# Pin kubectl to the provided kubeconfig for the entire run
+export KUBECONFIG
 # Number of namespaces to create for test objects
-export CL2_NAMESPACES=10
+: "${CL2_NAMESPACES:=10}"
+export CL2_NAMESPACES
 # Number of pod replicas per deployment (affects deploymentsPerNamespace calculation)
 export CL2_DEPLOYMENT_SIZE=${REPLICAS}
 

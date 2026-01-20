@@ -15,7 +15,7 @@ ETCD_CERTS_DIR=""
 CLUSTER_ID=1
 POOL_COUNT=1
 NODES_PER_POOL=2
-WORKER_VM_SIZE="Standard_D4s_v3"
+WORKER_VM_SIZE="Standard_D4s_v4"
 PROMETHEUS_NODEPOOL_NAME="prometheus"
 PROMETHEUS_NODE_COUNT=1
 PROMETHEUS_VM_SIZE="Standard_D64s_v3"
@@ -25,7 +25,7 @@ MONITOR_WORKSPACE_ID="${MONITOR_WORKSPACE_ID:-}"
 KUBECONFIG_CLI=""
 
 # Use absolute path for chart directory
-CILIUM_CHART_DIR="${CILIUM_CHART_DIR:-/home/singhvipul/ws/cilium/install/kubernetes/cilium}"
+CILIUM_CHART_DIR="${CILIUM_CHART_DIR:-$SCRIPT_DIR/../../cilium/install/kubernetes/cilium}"
 : "${CILIUM_IMAGE_REPO:=acnpublic.azurecr.io/vipul/cilium}" >/dev/null
 : "${CILIUM_IMAGE_TAG:=ces-1}" >/dev/null
 : "${CLUSTERMESH_IMAGE_REPO:=acnpublic.azurecr.io/vipul/clustermesh-apiserver}" >/dev/null
@@ -102,7 +102,7 @@ fi
 export AZURE_SUBSCRIPTION="${SUB_ID}"
 export SUB="${SUB_ID}"
 
-MAKEFILE_DIR="$SCRIPT_DIR/../cilium-private/clustermesh"
+MAKEFILE_DIR="$SCRIPT_DIR/../../cilium-private/clustermesh"
 
 echo "Deploying cluster ${CLUSTER} in ${REGION}..."
 echo "Resource Group: ${GROUP}"
