@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Defaults
 CLUSTER_NAME="byocni-cluster"
-REGION="westus3"
+REGION="canadacentral"
 ENABLE_MESH=false
 ENABLE_MONITORING=false
 ENABLE_KVSTORE=false
@@ -26,10 +26,10 @@ KUBECONFIG_CLI=""
 
 # Use absolute path for chart directory
 CILIUM_CHART_DIR="${CILIUM_CHART_DIR:-$SCRIPT_DIR/../../cilium/install/kubernetes/cilium}"
-: "${CILIUM_IMAGE_REPO:=acnpublic.azurecr.io/vipul/cilium}" >/dev/null
-: "${CILIUM_IMAGE_TAG:=ces-1}" >/dev/null
-: "${CLUSTERMESH_IMAGE_REPO:=acnpublic.azurecr.io/vipul/clustermesh-apiserver}" >/dev/null
-: "${CLUSTERMESH_IMAGE_TAG:=test-1}" >/dev/null
+: "${CILIUM_IMAGE_REPO:=acnpublic.azurecr.io/cilium/cilium}" >/dev/null
+: "${CILIUM_IMAGE_TAG:=ces-node-6}" >/dev/null
+: "${CLUSTERMESH_IMAGE_REPO:=acnpublic.azurecr.io/cilium/clustermesh-apiserver}" >/dev/null
+: "${CLUSTERMESH_IMAGE_TAG:=test2}" >/dev/null
 
 
 # Parse Arguments
@@ -489,6 +489,8 @@ if [ "$ENABLE_MESH" = true ]; then
 
     echo "Enabling clustermesh control plane..."
     cilium clustermesh enable --context "${CLUSTER}" --enable-kvstoremesh --service-type NodePort
+    echo "Waiting for clustermesh-apiserver to be ready..."
+    kubectl --context "${CLUSTER}" -n kube-system rollout status deployment/clustermesh-apiserver --timeout=600s
 
     echo "Updating clustermesh-apiserver image..."
     kubectl --context "${CLUSTER}" set image deployment/clustermesh-apiserver \
@@ -594,6 +596,16 @@ EOF
     echo "Restarting Cilium agents..."
     kubectl --context "${CLUSTER}" -n kube-system rollout restart daemonset/cilium
     kubectl --context "${CLUSTER}" -n kube-system rollout status daemonset/cilium --timeout=15m
+
+    echo "Converting clustermesh to hostNetwork deployment..."
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    "${SCRIPT_DIR}/setup-clustermesh.sh" \
+        --cluster "${CLUSTER}" \
+        --clustermesh-image "${CLUSTERMESH_IMAGE_REPO}" \
+        --clustermesh-tag "${CLUSTERMESH_IMAGE_TAG}" \
+        --cilium-image "${CILIUM_IMAGE_REPO}" \
+        --cilium-tag "${CILIUM_IMAGE_TAG}"
+    
 fi
 
 echo "Reconciling worker node pools ($POOL_COUNT requested)..."
@@ -653,3 +665,6 @@ else
 fi
 
 echo "Cluster deployment and Cilium installation complete."
+kubectl rollout restart daemonset cilium -n kube-system
+cilium status --context "${CLUSTER}" --wait
+sleep 1m
