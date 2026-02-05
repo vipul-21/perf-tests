@@ -1,0 +1,26 @@
+Performance Scale Plan
+-----------------------
+
+| Nodes | Total Pods | Pods per Node | Namespaces | Deployment Size | Deployments per Namespace | Load Throughput | Delete Throughput | Repeats | Notes |
+|-------|------------|---------------|------------|-----------------|---------------------------|-----------------|-------------------|---------|-------|
+| 10    | 500        | 50            | 10         | 50              | 1                         | 100             | 100               | 1       | Default footprint; confirms baseline wiring |
+| 100   | 5000       | 50            | 20         | 50              | 5                         | 100             | 100               | 1       | Mid-scale; maintains 250 pods per namespace |
+| 500   | 25000      | 50            | 50         | 50              | 10                        | 100             | 100               | 1       | Mid-large scale; maintains 500 pods per namespace |
+| 1000  | 40000      | 40            | 100        | 10              | 40                        | 100             | 100               | 1       | Large-scale with smaller deployments for faster churn |
+
+Baseline command targets (10-node scenario):
+- Mesh (CES scenario)
+	./run-byocni-podstartup-multi.sh --cluster-name ccp-mesh-baseline --mesh --enable-monitoring --reuse --runs 1 --pools 1 --nodes-per-pool 10 --deployment-size 100 --pods-per-node 100 --namespaces 10 --load-throughput 100 --scenario ces
+
+- No mesh (default scenario)
+	./run-byocni-podstartup-multi.sh --cluster-name ccp-nomesh-baseline --enable-monitoring --reuse --runs 1 --pools 1 --nodes-per-pool 10 --deployment-size 100 --pods-per-node 100 --namespaces 10 --load-throughput 100 --scenario default
+
+Pipeline
+--------
+- Orchestration lives in [helper-scripts/run-byocni-podstartup-multi.sh](helper-scripts/run-byocni-podstartup-multi.sh#L1); entry validates flags, assigns mesh/default scenarios, and drives per-run loops.
+- Cluster lifecycle flows through [helper-scripts/byocni-cluster.sh](helper-scripts/byocni-cluster.sh#L1) which handles AKS create/update, mesh toggles, monitoring add-ons, and temp kubeconfig wiring.
+- Each workload pass invokes [perf-tests/clusterloader2/run-podstartup.sh](perf-tests/clusterloader2/run-podstartup.sh#L1) to export the kubeconfig, stage CL2 variables, and call clusterloader2 with the desired config bundle.
+- Pod churn logic is defined in [perf-tests/clusterloader2/podstartupanalysis/config.yaml](perf-tests/clusterloader2/podstartupanalysis/config.yaml#L1-L73); tuning sets, namespace counts, and throughput settings originate here.
+- Optional overrides for pods-per-node, namespace count, and load/delete throughput flow via the new CLI flags and surface as CL2_* environment variables when the workload launches.
+- Metrics modules load from [perf-tests/clusterloader2/measurements.yaml](perf-tests/clusterloader2/measurements.yaml#L1) and peers; optional Cilium/Kubelet collectors guard their own start/gather steps.
+- Failures bubble back via non-zero exit codes: infra issues surface in the helper scripts, while workload regressions log under perf-tests/clusterloader2/logs within the podstartup run directory.
