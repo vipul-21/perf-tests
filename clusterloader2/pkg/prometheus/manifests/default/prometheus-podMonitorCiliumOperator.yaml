@@ -14,6 +14,10 @@ spec:
   podMetricsEndpoints:
     - interval: 10s
       port: {{ $PROMETHEUS_SCRAPE_CILIUM_OPERATOR_PORT }}
+      metricRelabelings:
+        - sourceLabels: [__name__]
+          regex: cilium_operator_ces_queueing_delay_seconds_bucket|cilium_operator_ces_sync_total|cilium_operator_identity_gc_entries|cilium_operator_identity_gc_latency|cilium_operator_cid_controller_work_queue_latency_bucket|cilium_operator_cid_controller_work_queue_event_count|cilium_k8s_workqueue_depth|cilium_operator_process_resident_memory_bytes|cilium_operator_process_cpu_seconds_total|cilium_operator_number_of_ceps_per_ces|cilium_operator_errors_warnings_total
+          action: keep
   jobLabel: k8s-app
   selector:
     matchLabels:

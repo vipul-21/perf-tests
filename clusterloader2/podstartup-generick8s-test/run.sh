@@ -125,7 +125,7 @@ go run cmd/clusterloader.go \
     --report-dir "$CL2_REPORT_DIR" \
     --testconfig podstartupanalysis/config.yaml \
     --provider "$CL2_PROVIDER" \
-    --prometheus-scrape-kubelets=false \
+    --prometheus-scrape-kubelets=true \
     --prometheus-scrape-master-kubelets=true \
     --prometheus-ready-timeout=15m \
     --enable-prometheus-server=true \

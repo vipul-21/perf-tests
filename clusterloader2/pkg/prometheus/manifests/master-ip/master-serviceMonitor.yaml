@@ -39,6 +39,10 @@ spec:
   {{else}}
     interval: 5s
   {{end}}
+    metricRelabelings:
+      - sourceLabels: [__name__]
+        regex: apiserver_request_total|apiserver_request_duration_seconds_bucket|apiserver_request_terminations_total|apiserver_storage_objects|apiserver_storage_list_fetched_objects_total|apiserver_storage_list_duration_seconds_bucket|apiserver_current_inflight_requests|apiserver_current_inqueue_requests|apiserver_longrunning_requests|apiserver_watch_events_total|workqueue_depth|workqueue_adds_total|workqueue_work_duration_seconds_bucket
+        action: keep
   {{if $PROMETHEUS_SCRAPE_MASTER_KUBELETS}}
   - interval: 5s
     port: kubelet
@@ -55,6 +59,13 @@ spec:
     tlsConfig:
       insecureSkipVerify: true
       caFile: "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+    metricRelabelings:
+      - sourceLabels: [__name__]
+        regex: container_cpu_usage_seconds_total|container_memory_working_set_bytes|container_memory_usage_bytes|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_periods_total
+        action: keep
+      - sourceLabels: [container]
+        regex: kube-apiserver|cilium-agent|cilium-operator|apiserver|etcd|kvstoremesh
+        action: keep
   {{end}}
   {{if not $PROMETHEUS_SCRAPE_APISERVER_ONLY}}
   # - interval: 5s

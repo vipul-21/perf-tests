@@ -15,6 +15,22 @@ spec:
   podMetricsEndpoints:
     - interval: {{ $PROMETHEUS_SCRAPE_CILIUM_AGENT_INTERVAL }}
       port: {{ $PROMETHEUS_SCRAPE_CILIUM_AGENT_PORT }}
+      relabelings:
+        # Sample ~10% of Cilium agent pods using hashmod.
+        # modulus=10, keep bucket 0 = ~10% of pods (~100 out of 1000).
+        # To scrape ~1%: change modulus to 100.
+        # To scrape ~20%: change modulus to 5.
+        - sourceLabels: [__address__]
+          modulus: 10
+          targetLabel: __tmp_hash
+          action: hashmod
+        - sourceLabels: [__tmp_hash]
+          regex: '^0$'
+          action: keep
+      metricRelabelings:
+        - sourceLabels: [__name__]
+          regex: cilium_k8s_client_api_calls_total|cilium_k8s_client_api_latency_time_seconds_bucket|cilium_k8s_client_rate_limiter_duration_seconds_bucket|cilium_identity|cilium_endpoint|cilium_endpoint_regenerations_total|cilium_errors_warnings_total
+          action: keep
   jobLabel: k8s-app
   selector:
     matchLabels:

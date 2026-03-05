@@ -17,9 +17,18 @@ spec:
     tlsConfig:
       insecureSkipVerify: true
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    relabelings:
+      # Sample ~10% of kubelets using hashmod (same deterministic set every scrape)
+      - sourceLabels: [__address__]
+        modulus: 10
+        targetLabel: __tmp_hash
+        action: hashmod
+      - sourceLabels: [__tmp_hash]
+        regex: '^0$'
+        action: keep
     metricRelabelings:
       - sourceLabels: [__name__]
-        regex: kubelet_pod_start_total_duration_seconds.*|kubelet_pod_start_sli_duration_seconds.*|kubelet_run_podsandbox.*|kubelet_pod_start_duration_seconds.*|kubelet_runtime_operations.*
+        regex: kubelet_pod_worker_duration_seconds_.*|kubelet_pod_start_duration_seconds_.*|kubelet_pleg_relist_duration_seconds_.*
         action: keep
   - port: https-metrics
     scheme: https
@@ -29,16 +38,22 @@ spec:
     tlsConfig:
       insecureSkipVerify: true
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-      #metricRelabelings:
-      #- sourceLabels: [__name__]
-      # regex: kubelet.*
-      # action: drop
-          #- sourceLabels: [__name__]
-          #regex: 'kubelet_pod_start_total_duration_seconds.*|kubelet_pod_start_sli_duration_seconds.*|kubelet_run_podsandbox.*|kubelet_pod_start_duration_seconds.*'
-          #action: keep
-          #- sourceLabels: [ namespace ]
-          #regex: 'test-.*'
-          #action: drop
+    relabelings:
+      # Sample ~10% of cAdvisor endpoints using hashmod (same set as kubelet above)
+      - sourceLabels: [__address__]
+        modulus: 10
+        targetLabel: __tmp_hash
+        action: hashmod
+      - sourceLabels: [__tmp_hash]
+        regex: '^0$'
+        action: keep
+    metricRelabelings:
+      - sourceLabels: [__name__]
+        regex: container_cpu_usage_seconds_total|container_memory_working_set_bytes|container_memory_usage_bytes|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_periods_total
+        action: keep
+      - sourceLabels: [container]
+        regex: kube-apiserver|cilium-agent|cilium-operator|apiserver|etcd|kvstoremesh
+        action: keep
   selector:
     matchLabels:
       k8s-app: kubelet

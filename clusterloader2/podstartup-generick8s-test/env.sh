@@ -80,7 +80,7 @@ export CL2_OPERATION_TIMEOUT="${CL2_OPERATION_TIMEOUT:-30m}"
 export CL2_POD_STARTUP_LATENCY_THRESHOLD="${CL2_POD_STARTUP_LATENCY_THRESHOLD:-120s}"
 
 # Number of create/delete cycles to run
-export CL2_REPEATS="${CL2_REPEATS:-5}"
+export CL2_REPEATS="${CL2_REPEATS:-3}"
 
 # Disable in-cluster network latency probes (ping client/server)
 export CL2_ENABLE_IN_CLUSTER_NETWORK_LATENCY=false
@@ -109,6 +109,9 @@ export CL2_PROMETHEUS_CPU_SCALE_FACTOR=12
 export PROMETHEUS_APISERVER_SCRAPE_PORT=6443
 export PROMETHEUS_SCRAPE_APISERVER_ONLY=true
 export PROMETHEUS_SCRAPE_MASTER_KUBELETS=true
+export PROMETHEUS_SCRAPE_KUBE_PROXY=false
+export PROMETHEUS_SCRAPE_KUBE_DNS=false
+export PROMETHEUS_SCRAPE_COREDNS=false
 
 # Disable Prometheus PVC (uses emptyDir instead)
 # Enable only if you have a working storage class (e.g., on GKE/AKS/EKS)
@@ -123,16 +126,17 @@ export CL2_TEAR_DOWN_PROMETHEUS=false
 # =============================================================================
 
 # Set to true to collect Cilium-specific metrics (CES delay, endpoint propagation, etc.)
-export CL2_CILIUM_METRICS_ENABLED=false
-export CL2_PROMETHEUS_SCRAPE_CILIUM_OPERATOR=false
-export CL2_PROMETHEUS_SCRAPE_CILIUM_AGENT=false
-export CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER=false
+export CL2_CILIUM_METRICS_ENABLED="${CL2_CILIUM_METRICS_ENABLED:-true}"
+export CL2_PROMETHEUS_SCRAPE_CILIUM_OPERATOR="${CL2_PROMETHEUS_SCRAPE_CILIUM_OPERATOR:-true}"
+export CL2_PROMETHEUS_SCRAPE_CILIUM_AGENT="${CL2_PROMETHEUS_SCRAPE_CILIUM_AGENT:-true}"
+export CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER="${CL2_PROMETHEUS_SCRAPE_CLUSTERMESH_APISERVER:-false}"
 
 # =============================================================================
 # KUBELET METRICS (Disabled - enable if kubelet SLI metrics needed)
 # =============================================================================
 
-export CL2_KUBELET_METRICS_ENABLED=false
+export CL2_KUBELET_METRICS_ENABLED=true
+export PROMETHEUS_SCRAPE_KUBELETS=true
 
 # =============================================================================
 # CLEANUP SETTINGS
