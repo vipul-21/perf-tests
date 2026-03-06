@@ -29,8 +29,19 @@ spec:
           action: keep
       metricRelabelings:
         - sourceLabels: [__name__]
-          regex: cilium_k8s_client_api_calls_total|cilium_k8s_client_api_latency_time_seconds_bucket|cilium_k8s_client_rate_limiter_duration_seconds_bucket|cilium_identity|cilium_endpoint|cilium_endpoint_regenerations_total|cilium_errors_warnings_total
+          regex: cilium_k8s_client_api_calls_total|cilium_k8s_client_api_latency_time_seconds_bucket|cilium_k8s_client_rate_limiter_duration_seconds_bucket|cilium_identity|cilium_endpoint|cilium_endpoint_regenerations_total|cilium_endpoint_regeneration_time_stats_seconds_.*|cilium_agent_api_process_time_seconds_.*|cilium_errors_warnings_total
           action: keep
+        # Drop unwanted scopes from endpoint regen stats to reduce cardinality
+        - sourceLabels: [scope]
+          regex: mapSync|policyCalculation|prepareBuild|proxyPolicyCalculation|proxyWaitForAck|waitingForCTClean|waitingForLock|waitingForPolicyRepository|bpfLoadProg
+          action: drop
+        # Keep only PUT /v1/endpoint for agent API process time (endpoint creation latency)
+        - sourceLabels: [__name__, method]
+          regex: cilium_agent_api_process_time_seconds_.+;(GET|POST|PATCH|DELETE)
+          action: drop
+        - sourceLabels: [__name__, path]
+          regex: cilium_agent_api_process_time_seconds_.+;/v1/(healthz|ipam|config)
+          action: drop
   jobLabel: k8s-app
   selector:
     matchLabels:

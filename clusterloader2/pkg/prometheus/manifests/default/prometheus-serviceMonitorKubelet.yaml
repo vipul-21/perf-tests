@@ -28,8 +28,12 @@ spec:
         action: keep
     metricRelabelings:
       - sourceLabels: [__name__]
-        regex: kubelet_pod_worker_duration_seconds_.*|kubelet_pod_start_duration_seconds_.*|kubelet_pleg_relist_duration_seconds_.*
+        regex: kubelet_pod_worker_duration_seconds_.*|kubelet_pod_start_duration_seconds_.*|kubelet_pleg_relist_duration_seconds_.*|kubelet_runtime_operations_duration_seconds_.*|kubelet_run_podsandbox_duration_seconds_.*
         action: keep
+      # Keep only pod-lifecycle operation types to reduce cardinality
+      - sourceLabels: [operation_type]
+        regex: list_containers|list_podsandbox|list_images|status|version|image_status|podsandbox_status|container_status|exec_sync|update_runtime_config
+        action: drop
   - port: https-metrics
     scheme: https
     path: /metrics/cadvisor
@@ -52,7 +56,7 @@ spec:
         regex: container_cpu_usage_seconds_total|container_memory_working_set_bytes|container_memory_usage_bytes|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_periods_total
         action: keep
       - sourceLabels: [container]
-        regex: kube-apiserver|cilium-agent|cilium-operator|apiserver|etcd|kvstoremesh
+        regex: kube-apiserver|cilium-agent|cilium-operator|apiserver|etcd|kvstoremesh|clustermesh-apiserver
         action: keep
   selector:
     matchLabels:

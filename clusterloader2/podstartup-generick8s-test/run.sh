@@ -110,6 +110,17 @@ echo ""
 echo "Press Enter to continue or Ctrl+C to abort..."
 read -r
 
+# Auto-detect prom node name if not set
+if [[ -z "${CL2_PROM_NODE_NAME:-}" ]]; then
+  CL2_PROM_NODE_NAME=$(kubectl --kubeconfig "$KUBECONFIG" get nodes -l prometheus=true --no-headers -o custom-columns=':metadata.name' 2>/dev/null | head -1)
+  if [[ -n "$CL2_PROM_NODE_NAME" ]]; then
+    echo "Auto-detected prom node: $CL2_PROM_NODE_NAME"
+  else
+    echo "WARNING: No prom node found (no node with label prometheus=true)"
+  fi
+fi
+export CL2_PROM_NODE_NAME="${CL2_PROM_NODE_NAME:-}"
+
 # Create report directory
 mkdir -p "$CL2_REPORT_DIR"
 
@@ -119,6 +130,58 @@ echo "Report directory: $CL2_REPORT_DIR"
 echo ""
 
 cd "$CL2_DIR"
+
+# Deploy prom-node cAdvisor ServiceMonitor in background once monitoring namespace is ready
+if [[ -n "${CL2_PROM_NODE_NAME:-}" ]]; then
+  (
+    echo "Waiting for monitoring namespace to be ready..."
+    for i in $(seq 1 120); do
+      if kubectl --kubeconfig "$KUBECONFIG" get namespace monitoring &>/dev/null; then
+        sleep 10  # wait for Prometheus Operator to be ready
+        kubectl --kubeconfig "$KUBECONFIG" apply -f - <<EOSM
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kubelet-prom
+  namespace: monitoring
+  labels:
+    k8s-app: kubelet-prom
+spec:
+  endpoints:
+  - port: https-metrics
+    scheme: https
+    path: /metrics/cadvisor
+    interval: 30s
+    honorLabels: true
+    tlsConfig:
+      insecureSkipVerify: true
+    bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    relabelings:
+      - sourceLabels: [__meta_kubernetes_endpoint_address_target_name]
+        regex: '${CL2_PROM_NODE_NAME}'
+        action: keep
+    metricRelabelings:
+      - sourceLabels: [__name__]
+        regex: container_cpu_usage_seconds_total|container_memory_working_set_bytes|container_memory_usage_bytes
+        action: keep
+      - sourceLabels: [container]
+        regex: cilium-operator|kvstoremesh|clustermesh-apiserver|apiserver|etcd
+        action: keep
+  selector:
+    matchLabels:
+      k8s-app: kubelet
+  namespaceSelector:
+    matchNames:
+    - kube-system
+EOSM
+        echo "kubelet-prom ServiceMonitor deployed for node: ${CL2_PROM_NODE_NAME}"
+        break
+      fi
+      sleep 5
+    done
+  ) &
+  PROM_SM_PID=$!
+fi
 
 go run cmd/clusterloader.go \
     --kubeconfig "$KUBECONFIG" \
