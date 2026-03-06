@@ -105,48 +105,48 @@ steps:
 #         action: gather
 
 # collect the mesurements for pod startup latency before starting the load
-# {{range $i := Loop $repeats}}
-#   - module:
-#       path: /reconcile-objects.yaml
-#       params:
-#         actionName: "create"
-#         namespaces: {{$namespaces}}
-#         tuningSet: RandomizedSaturationTimeLimited
-#         operationTimeout: {{$operationTimeout}}
-#         deploymentSize: {{$deploymentSize}}
-#         deploymentsPerNamespace: {{$deploymentsPerNamespace}}
-#         CpuRequest: {{$latencyPodCpu}}m
-#         MemoryRequest: {{$latencyPodMemory}}M
-#         Group: {{$groupName}}
-#         deploymentLabel: start
-#   - name: Sleep between create and delete
-#     measurements:
-#       - Identifier: Dummy-Sleep-Between-Create-Delete
-#         Method: Sleep
-#         Params:
-#           action: start
-#           duration: 10m
-#   - module:
-#       path: /reconcile-objects.yaml
-#       params:
-#         actionName: "delete"
-#         namespaces: {{$namespaces}}
-#         tuningSet: RandomizedSaturationTimeLimited
-#         operationTimeout: {{$operationTimeout}}
-#         deploymentSize: {{$deploymentSize}}
-#         deploymentsPerNamespace: 0
-#         CpuRequest: {{$latencyPodCpu}}m
-#         MemoryRequest: {{$latencyPodMemory}}M
-#         Group: {{$groupName}}
-#         deploymentLabel: start
-#   - name: Sleep between iterations
-#     measurements:
-#       - Identifier: Dummy-Sleep-Between-Iterations
-#         Method: Sleep
-#         Params:
-#           action: start
-#           duration: 20m
-# {{end}}
+{{range $i := Loop $repeats}}
+  - module:
+      path: /reconcile-objects.yaml
+      params:
+        actionName: "create"
+        namespaces: {{$namespaces}}
+        tuningSet: RandomizedSaturationTimeLimited
+        operationTimeout: {{$operationTimeout}}
+        deploymentSize: {{$deploymentSize}}
+        deploymentsPerNamespace: {{$deploymentsPerNamespace}}
+        CpuRequest: {{$latencyPodCpu}}m
+        MemoryRequest: {{$latencyPodMemory}}M
+        Group: {{$groupName}}
+        deploymentLabel: start
+  - name: Sleep between create and delete
+    measurements:
+      - Identifier: Dummy-Sleep-Between-Create-Delete
+        Method: Sleep
+        Params:
+          action: start
+          duration: 10m
+  - module:
+      path: /reconcile-objects.yaml
+      params:
+        actionName: "delete"
+        namespaces: {{$namespaces}}
+        tuningSet: RandomizedSaturationTimeLimited
+        operationTimeout: {{$operationTimeout}}
+        deploymentSize: {{$deploymentSize}}
+        deploymentsPerNamespace: 0
+        CpuRequest: {{$latencyPodCpu}}m
+        MemoryRequest: {{$latencyPodMemory}}M
+        Group: {{$groupName}}
+        deploymentLabel: start
+  - name: Sleep between iterations
+    measurements:
+      - Identifier: Dummy-Sleep-Between-Iterations
+        Method: Sleep
+        Params:
+          action: start
+          duration: 20m
+{{end}}
 
 # {{if $KUBELET_METRICS_ENABLED}}
 #   - module:
