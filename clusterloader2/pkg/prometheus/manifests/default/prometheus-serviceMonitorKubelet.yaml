@@ -28,7 +28,7 @@ spec:
         action: keep
     metricRelabelings:
       - sourceLabels: [__name__]
-        regex: kubelet_pod_worker_duration_seconds_.*|kubelet_pod_start_duration_seconds_.*|kubelet_pleg_relist_duration_seconds_.*|kubelet_runtime_operations_duration_seconds_.*|kubelet_run_podsandbox_duration_seconds_.*
+        regex: kubelet_pod_worker_duration_seconds_.*|kubelet_pod_start_sli_duration_seconds_.*|kubelet_runtime_operations_duration_seconds_.*|kubelet_run_podsandbox_duration_seconds_.*
         action: keep
       # Keep only pod-lifecycle operation types to reduce cardinality
       - sourceLabels: [operation_type]
