@@ -44,7 +44,7 @@ export CL2_DEPLOYMENTS_PER_NS="${CL2_DEPLOYMENTS_PER_NS:-10}"
 
 # Pods created per second (scale down for smaller clusters)
 # Recommended: 10 nodes=20, 100 nodes=50, 500 nodes=100, 1000 nodes=100
-export CL2_LOAD_TEST_THROUGHPUT="${CL2_LOAD_TEST_THROUGHPUT:-100}"
+export CL2_LOAD_TEST_THROUGHPUT="${CL2_LOAD_TEST_THROUGHPUT:-50}"
 
 # Pods deleted per second (defaults to creation rate)
 export CL2_DELETE_TEST_THROUGHPUT="${CL2_DELETE_TEST_THROUGHPUT:-$CL2_LOAD_TEST_THROUGHPUT}"
@@ -80,7 +80,7 @@ export CL2_OPERATION_TIMEOUT="${CL2_OPERATION_TIMEOUT:-30m}"
 export CL2_POD_STARTUP_LATENCY_THRESHOLD="${CL2_POD_STARTUP_LATENCY_THRESHOLD:-120s}"
 
 # Number of create/delete cycles to run
-export CL2_REPEATS="${CL2_REPEATS:-3}"
+export CL2_REPEATS="${CL2_REPEATS:-5}"
 
 # Disable in-cluster network latency probes (ping client/server)
 export CL2_ENABLE_IN_CLUSTER_NETWORK_LATENCY=false
