@@ -1,0 +1,134 @@
+nohup: ignoring input
+[18:41:11] ████ S1: v1.18 + SDP (3x 2-min) ████
+daemonset.apps "acns-security-agent" deleted from kube-system namespace
+configmap "fqdn-policy-config" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+configmap/fqdn-policy-config created
+configmap/cilium-config created
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+daemonset.apps/acns-security-agent created
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 2 of 3 updated pods are available...
+daemon set "acns-security-agent" successfully rolled out
+[18:41:45]   S1 run 1/3
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000000-xcvpc with container debugger on node aks-nodepool1-23040514-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000001-qzbmq with container debugger on node aks-nodepool1-23040514-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000002-dphvp with container debugger on node aks-nodepool1-23040514-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+[18:44:47]   Run 1 done
+[18:44:47]   S1 run 2/3
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000000-vt46w with container debugger on node aks-nodepool1-23040514-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000001-hftcn with container debugger on node aks-nodepool1-23040514-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000002-5cmkp with container debugger on node aks-nodepool1-23040514-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy unchanged
+[18:47:44]   Run 2 done
+[18:47:44]   S1 run 3/3
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000000-z6gr6 with container debugger on node aks-nodepool1-23040514-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000001-czxvs with container debugger on node aks-nodepool1-23040514-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000002-9xx27 with container debugger on node aks-nodepool1-23040514-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy unchanged
+[18:50:44]   Run 3 done
+[18:50:44] ████ S2: v1.19 + SDP (3x 2-min) ████
+configmap "fqdn-policy-config" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+configmap/fqdn-policy-config created
+configmap/cilium-config created
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+Warning: spec.template.metadata.annotations[container.apparmor.security.beta.kubernetes.io/fqdn-policy]: deprecated since v1.30; use the "appArmorProfile" field instead
+daemonset.apps/acns-security-agent created
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 2 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 2 of 3 updated pods are available...
+daemon set "acns-security-agent" successfully rolled out
+[18:51:52]   S2 run 1/3
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-pchzd with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-trtvl with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-tmf7r with container debugger on node aks-nodepool1-29514831-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+[18:54:56]   Run 1 done
+[18:54:56]   S2 run 2/3
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-gsnbr with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-wq8tp with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-5k6wf with container debugger on node aks-nodepool1-29514831-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy unchanged
+[18:57:59]   Run 2 done
+[18:57:59]   S2 run 3/3
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-wfk2l with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-rxkmv with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-v6m7w with container debugger on node aks-nodepool1-29514831-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy unchanged
+[19:01:01]   Run 3 done
+[19:01:01] ████ S3: v1.19 in-agent proxy (3x 2-min) ████
+daemonset.apps "acns-security-agent" deleted from kube-system namespace
+configmap "fqdn-policy-config" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+configmap/fqdn-policy-config created
+configmap/cilium-config created
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+[19:01:34]   S3 run 1/3
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-gfkc7 with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-srnlt with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-gxzcl with container debugger on node aks-nodepool1-29514831-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+[19:04:42]   Run 1 done
+[19:04:42]   S3 run 2/3
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-jp94w with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-947wg with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-67wbw with container debugger on node aks-nodepool1-29514831-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy unchanged
+[19:07:49]   Run 2 done
+[19:07:49]   S3 run 3/3
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-6f28z with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-vw7vv with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-sq6sg with container debugger on node aks-nodepool1-29514831-vmss000002.
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy unchanged
+[19:10:50]   Run 3 done
+[19:10:50] ████ ALL COMPLETE ████

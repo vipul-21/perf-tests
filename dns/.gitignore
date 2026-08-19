@@ -1,3 +1,6 @@
 out
 .kube
 jsonify/vendor
+# Cluster credentials from perf runs — never commit
+kubeconfig-*
+**/kubeconfig-*

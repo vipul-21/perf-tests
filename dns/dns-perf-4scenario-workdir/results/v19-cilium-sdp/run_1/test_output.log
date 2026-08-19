@@ -1,0 +1,152 @@
+INFO 05-01 03:19:51 runner.py:77] Using cluster DNS for tests
+INFO 05-01 03:19:52 runner.py:87] DNS service IP is 10.0.0.10
+INFO 05-01 03:19:52 runner.py:489] Created rundir /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-sdp/run_1/run-1777605592
+INFO 05-01 03:19:52 runner.py:495] Updated symlink /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-sdp/run_1/latest
+INFO 05-01 03:19:52 runner.py:416] Starting client teardown
+INFO 05-01 03:19:53 runner.py:479] got client pods "[]"
+INFO 05-01 03:19:53 runner.py:426] Client teardown complete
+INFO 05-01 03:19:54 runner.py:184] Create Deployment/dns-perf-client ok
+INFO 05-01 03:19:55 runner.py:479] got client pods "[]"
+INFO 05-01 03:19:57 runner.py:479] got client pods "[]"
+INFO 05-01 03:19:58 runner.py:479] got client pods "[]"
+INFO 05-01 03:19:59 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:00 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:02 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:02 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:03 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:04 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:05 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:06 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:07 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:08 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:09 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:10 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:11 runner.py:479] got client pods "[]"
+INFO 05-01 03:20:12 runner.py:479] got client pods "['dns-perf-client-858fb7568b-27bzz', 'dns-perf-client-858fb7568b-7l5vh', 'dns-perf-client-858fb7568b-hp9gq', 'dns-perf-client-858fb7568b-rxsw5']"
+INFO 05-01 03:20:15 runner.py:386] Client pod ready for execution
+INFO 05-01 03:20:15 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-27bzz
+INFO 05-01 03:20:15 runner.py:413] Query files copied
+INFO 05-01 03:20:16 runner.py:386] Client pod ready for execution
+INFO 05-01 03:20:16 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-7l5vh
+INFO 05-01 03:20:17 runner.py:413] Query files copied
+INFO 05-01 03:20:18 runner.py:386] Client pod ready for execution
+INFO 05-01 03:20:18 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-hp9gq
+INFO 05-01 03:20:19 runner.py:413] Query files copied
+INFO 05-01 03:20:20 runner.py:386] Client pod ready for execution
+INFO 05-01 03:20:20 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-rxsw5
+INFO 05-01 03:20:21 runner.py:413] Query files copied
+INFO 05-01 03:20:21 runner.py:103] Starting creation of test services
+INFO 05-01 03:20:22 runner.py:184] Create Service/test-svc1 ok
+INFO 05-01 03:20:23 runner.py:184] Create Service/test-svc2 ok
+INFO 05-01 03:20:23 runner.py:184] Create Service/test-svc3 ok
+INFO 05-01 03:20:24 runner.py:184] Create Service/test-svc4 ok
+INFO 05-01 03:20:24 runner.py:184] Create Service/test-svc5 ok
+INFO 05-01 03:20:25 runner.py:184] Create Service/test-svc6 ok
+INFO 05-01 03:20:26 runner.py:184] Create Service/test-svc7 ok
+INFO 05-01 03:20:26 runner.py:184] Create Service/test-svc8 ok
+INFO 05-01 03:20:27 runner.py:184] Create Service/test-svc9 ok
+INFO 05-01 03:20:28 runner.py:184] Create Service/test-svc10 ok
+INFO 05-01 03:20:28 runner.py:184] Create Service/test-svc11 ok
+INFO 05-01 03:20:29 runner.py:184] Create Service/test-svc12 ok
+INFO 05-01 03:20:29 runner.py:184] Create Service/test-svc13 ok
+INFO 05-01 03:20:30 runner.py:184] Create Service/test-svc14 ok
+INFO 05-01 03:20:31 runner.py:184] Create Service/test-svc15 ok
+INFO 05-01 03:20:32 runner.py:184] Create Service/test-svc16 ok
+INFO 05-01 03:20:32 runner.py:184] Create Service/test-svc17 ok
+INFO 05-01 03:20:33 runner.py:184] Create Service/test-svc18 ok
+INFO 05-01 03:20:33 runner.py:184] Create Service/test-svc19 ok
+INFO 05-01 03:20:34 runner.py:184] Create Service/test-svc20 ok
+INFO 05-01 03:20:34 runner.py:235] Running test case: {'run_id': 1777605592, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-27bzz', 'pv': [(<run_length_seconds>, 600), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 03:20:34 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-sdp/run_1/run-1777605592/result-0-dns-perf-client-858fb7568b-27bzz.out
+INFO 05-01 03:20:34 runner.py:235] Running test case: {'run_id': 1777605592, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-7l5vh', 'pv': [(<run_length_seconds>, 600), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 03:20:34 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-sdp/run_1/run-1777605592/result-0-dns-perf-client-858fb7568b-7l5vh.out
+INFO 05-01 03:20:34 runner.py:235] Running test case: {'run_id': 1777605592, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-hp9gq', 'pv': [(<run_length_seconds>, 600), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 03:20:34 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-sdp/run_1/run-1777605592/result-0-dns-perf-client-858fb7568b-hp9gq.out
+INFO 05-01 03:20:34 runner.py:235] Running test case: {'run_id': 1777605592, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-rxsw5', 'pv': [(<run_length_seconds>, 600), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 03:20:34 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-sdp/run_1/run-1777605592/result-0-dns-perf-client-858fb7568b-rxsw5.out
+ERROR 05-01 03:30:35 runner.py:289] Error parsing results.
+Traceback (most recent call last):
+  File "/home/singhvipul/ws/perf-tests/dns/py/runner.py", line 274, in _run_perf
+    parser.parse()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 80, in parse
+    self._compute_derived()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 114, in _compute_derived
+    self.results[name] = float(numpy.percentile(histogram, ptile)) # pylint: disable=no-member
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4273, in percentile
+    return _quantile_unchecked(
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4550, in _quantile_unchecked
+    return _ureduce(a,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 3894, in _ureduce
+    r = func(a, **kwargs)
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4727, in _quantile_ureduce_func
+    result = _quantile(arr,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4849, in _quantile
+    slices_having_nans = np.isnan(arr[-1, ...])
+IndexError: index -1 is out of bounds for axis 0 with size 0
+ERROR 05-01 03:30:35 runner.py:289] Error parsing results.
+Traceback (most recent call last):
+  File "/home/singhvipul/ws/perf-tests/dns/py/runner.py", line 274, in _run_perf
+    parser.parse()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 80, in parse
+    self._compute_derived()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 114, in _compute_derived
+    self.results[name] = float(numpy.percentile(histogram, ptile)) # pylint: disable=no-member
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4273, in percentile
+    return _quantile_unchecked(
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4550, in _quantile_unchecked
+    return _ureduce(a,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 3894, in _ureduce
+    r = func(a, **kwargs)
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4727, in _quantile_ureduce_func
+    result = _quantile(arr,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4849, in _quantile
+    slices_having_nans = np.isnan(arr[-1, ...])
+IndexError: index -1 is out of bounds for axis 0 with size 0
+ERROR 05-01 03:30:37 runner.py:289] Error parsing results.
+Traceback (most recent call last):
+  File "/home/singhvipul/ws/perf-tests/dns/py/runner.py", line 274, in _run_perf
+    parser.parse()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 80, in parse
+    self._compute_derived()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 114, in _compute_derived
+    self.results[name] = float(numpy.percentile(histogram, ptile)) # pylint: disable=no-member
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4273, in percentile
+    return _quantile_unchecked(
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4550, in _quantile_unchecked
+    return _ureduce(a,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 3894, in _ureduce
+    r = func(a, **kwargs)
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4727, in _quantile_ureduce_func
+    result = _quantile(arr,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4849, in _quantile
+    slices_having_nans = np.isnan(arr[-1, ...])
+IndexError: index -1 is out of bounds for axis 0 with size 0
+ERROR 05-01 03:30:37 runner.py:289] Error parsing results.
+Traceback (most recent call last):
+  File "/home/singhvipul/ws/perf-tests/dns/py/runner.py", line 274, in _run_perf
+    parser.parse()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 80, in parse
+    self._compute_derived()
+  File "/home/singhvipul/ws/perf-tests/dns/py/data.py", line 114, in _compute_derived
+    self.results[name] = float(numpy.percentile(histogram, ptile)) # pylint: disable=no-member
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4273, in percentile
+    return _quantile_unchecked(
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4550, in _quantile_unchecked
+    return _ureduce(a,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 3894, in _ureduce
+    r = func(a, **kwargs)
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4727, in _quantile_ureduce_func
+    result = _quantile(arr,
+  File "/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py", line 4849, in _quantile
+    slices_having_nans = np.isnan(arr[-1, ...])
+IndexError: index -1 is out of bounds for axis 0 with size 0
+INFO 05-01 03:30:37 runner.py:345] Starting server teardown
+INFO 05-01 03:30:39 runner.py:437] Waiting for server to be deleted (0 pods active)
+INFO 05-01 03:30:39 runner.py:353] Server teardown ok
+INFO 05-01 03:30:44 runner.py:416] Starting client teardown
+INFO 05-01 03:30:45 runner.py:479] got client pods "['dns-perf-client-858fb7568b-27bzz', 'dns-perf-client-858fb7568b-7l5vh', 'dns-perf-client-858fb7568b-hp9gq', 'dns-perf-client-858fb7568b-rxsw5']"
+INFO 05-01 03:30:46 runner.py:424] Waiting for client pod to terminate
+INFO 05-01 03:30:46 runner.py:479] got client pods "['dns-perf-client-858fb7568b-27bzz', 'dns-perf-client-858fb7568b-7l5vh', 'dns-perf-client-858fb7568b-hp9gq', 'dns-perf-client-858fb7568b-rxsw5']"
+INFO 05-01 03:30:47 runner.py:424] Waiting for client pod to terminate
+INFO 05-01 03:30:48 runner.py:479] got client pods "[]"
+INFO 05-01 03:30:48 runner.py:426] Client teardown complete

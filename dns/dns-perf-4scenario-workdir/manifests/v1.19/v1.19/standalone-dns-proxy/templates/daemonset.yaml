@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: acns-security-agent
+  labels:
+    k8s-app: acns-security-agent
+  namespace: kube-system
+spec:
+  minReadySeconds: 5
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      k8s-app: acns-security-agent
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/fqdn-policy: "unconfined"
+      labels:
+        k8s-app: acns-security-agent
+    spec:
+      hostNetwork: true
+      automountServiceAccountToken: false
+      tolerations:
+      - operator: Exists
+      containers:
+        - name: fqdn-policy
+          image: $CILIUM_IMAGE_REGISTRY/cilium/dns-proxy:$SDP_VERSION_TAG
+          args:
+          - --config-dir=/tmp/fqdn-policy/config-map
+          volumeMounts:
+          - mountPath: /tmp/fqdn-policy/config-map
+            name: fqdn-policy-config-path
+            readOnly: true
+          - mountPath: /var/run/standalone-dns-proxy
+            name: runtime-dir
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN", "NET_RAW"]
+              drop: ["ALL"]
+          livenessProbe:
+            exec:
+              command:
+              - /usr/bin/standalone-dns-proxy
+              - shell
+              - readiness-check
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+              - /usr/bin/standalone-dns-proxy
+              - shell
+              - readiness-check
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 5
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: fqdn-policy-config
+        name: fqdn-policy-config-path
+      - emptyDir: {}
+        name: runtime-dir

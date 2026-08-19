@@ -1,0 +1,102 @@
+nohup: ignoring input
+[05:47:27] ████ S1: v1.18 + SDP (10 min) ████
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000000-kg4vj with container debugger on node aks-nodepool1-23040514-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000001-5r9pq with container debugger on node aks-nodepool1-23040514-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000002-zl98q with container debugger on node aks-nodepool1-23040514-vmss000002.
+[05:47:35] CNI chaining fixed
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy unchanged
+[05:58:34] Test complete: v18-sdp
+[05:58:34] ████ S2: v1.19 + SDP (10 min) ████
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+[05:58:48] Teardown complete
+configmap/fqdn-policy-config created
+configmap/cilium-config created
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+[05:59:05] Cilium deployed (v1.19)
+Warning: spec.template.metadata.annotations[container.apparmor.security.beta.kubernetes.io/fqdn-policy]: deprecated since v1.30; use the "appArmorProfile" field instead
+daemonset.apps/acns-security-agent created
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+daemon set "acns-security-agent" successfully rolled out
+[05:59:12] SDP deployed
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-ggczm with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-7nl7s with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-mrqr7 with container debugger on node aks-nodepool1-29514831-vmss000002.
+[05:59:19] CNI chaining fixed
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+[06:10:24] Test complete: v19-sdp
+[06:10:24] ████ S3: v1.19 in-agent proxy (10 min) ████
+daemonset.apps "acns-security-agent" deleted from kube-system namespace
+configmap "fqdn-policy-config" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+[06:10:38] Teardown complete
+configmap/fqdn-policy-config created
+configmap/cilium-config created
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+[06:10:55] Cilium deployed (v1.19)
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-q9s6s with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-sztft with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-stqjv with container debugger on node aks-nodepool1-29514831-vmss000002.
+[06:11:02] CNI chaining fixed
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+[06:22:16] Test complete: v19-inagent
+[06:22:16] ████ S4: v1.19 no proxy (10 min) ████
+configmap "fqdn-policy-config" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+[06:22:30] Teardown complete
+configmap/fqdn-policy-config created
+configmap/cilium-config created
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+[06:22:45] Cilium deployed (v1.19)
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-hf2cq with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-rj4fg with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-9wdh6 with container debugger on node aks-nodepool1-29514831-vmss000002.
+[06:22:53] CNI chaining fixed
+[06:34:04] Test complete: v19-noproxy
+[06:34:04] ████ ALL 4 SCENARIOS COMPLETE (10-min) ████

@@ -1,0 +1,614 @@
+[2026-05-01 01:12:52] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:12:52] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:12:52] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:12:52] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:12:52] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:12:52] ║  Target: 1  Smoke: true  Runs: 5  Duration: 30s ║
+[2026-05-01 01:12:52] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:12:52] 
+[2026-05-01 01:12:52] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:12:52]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:12:52]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:12:52]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:12:52] 
+[2026-05-01 01:12:52] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:12:52] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:12:52] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:12:52] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:12:52] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:12:52] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:12:52] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:12:52] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:12:52] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:12:52] Creating resource group dns-perf-4scenario-rg in eastus2
+[2026-05-01 01:12:57] Creating AKS BYO CNI cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 01:20:13] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:20:13] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:20:13] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:20:13] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:20:13] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:20:13] ║  Target: 1  Smoke: true  Runs: 5  Duration: 30s ║
+[2026-05-01 01:20:13] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:20:13] 
+[2026-05-01 01:20:13] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:20:13]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:20:13]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:20:13]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:20:13] 
+[2026-05-01 01:20:13] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:20:13] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:20:13] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:20:13] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:20:13] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:20:13] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:20:13] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:20:13] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:20:13] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:20:13] Creating resource group dns-perf-4scenario-rg in eastus2
+[2026-05-01 01:20:15] Creating AKS BYO CNI cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 01:25:28] v1.18 cluster ready. Kubeconfig: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:25:28] 
+[2026-05-01 01:25:28] ████████████████████████████████████████████████████
+[2026-05-01 01:25:28] █  SCENARIO 1: BYO CNI + Cilium v1.18 + SDP      █
+[2026-05-01 01:25:28] ████████████████████████████████████████████████████
+[2026-05-01 01:25:28] Tearing down Cilium and SDP from cluster (v1.18)
+[2026-05-01 01:25:32] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 01:25:33] Teardown complete
+[2026-05-01 01:25:33] === Deploying Scenario 1: BYO + Cilium v1.18 + SDP ===
+[2026-05-01 01:25:33] Applying SDP ConfigMap (fqdn-policy-config) — v1.18
+[2026-05-01 01:25:34] Deploying SDP DaemonSet (acns-security-agent) — v1.18
+[2026-05-01 01:25:34] Waiting for SDP (acns-security-agent) pods to be ready (timeout: 180s)
+[2026-05-01 01:25:35] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:25:46] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:25:57] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:26:08] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:26:19] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:26:30] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:26:41] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:26:52] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:27:03] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:27:13] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:27:24] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:27:35] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:27:46] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:27:57] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:28:08] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:28:19] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:28:30] SDP pods: 0/0 ready, waiting...
+[2026-05-01 01:28:40] ERROR: SDP did not become ready within 180s
+[2026-05-01 01:29:49] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:29:49] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:29:49] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:29:49] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:29:49] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:29:49] ║  Target: 1  Smoke: true  Runs: 5  Duration: 30s ║
+[2026-05-01 01:29:49] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:29:49] 
+[2026-05-01 01:29:49] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:29:49]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:29:49]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:29:49]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:29:49] 
+[2026-05-01 01:29:49] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:29:49] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:29:49] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:29:49] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:29:49] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:29:49] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:29:49] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:29:49] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:29:49] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:29:49] Creating resource group dns-perf-4scenario-rg in eastus2
+[2026-05-01 01:29:51] Skipping v1.18 cluster creation (--skip-infra)
+[2026-05-01 01:29:51] 
+[2026-05-01 01:29:51] ████████████████████████████████████████████████████
+[2026-05-01 01:29:51] █  SCENARIO 1: BYO CNI + Cilium v1.18 + SDP      █
+[2026-05-01 01:29:51] ████████████████████████████████████████████████████
+[2026-05-01 01:29:51] Tearing down Cilium and SDP from cluster (v1.18)
+[2026-05-01 01:29:55] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 01:29:56] Teardown complete
+[2026-05-01 01:29:56] === Deploying Scenario 1: BYO + Cilium v1.18 + SDP ===
+[2026-05-01 01:29:56] Applying SDP ConfigMap (fqdn-policy-config) — v1.18
+[2026-05-01 01:29:56] Applying Cilium config (SDP variant) — v1.18
+[2026-05-01 01:29:57] Applying Cilium RBAC and operator files (v1.18)
+[2026-05-01 01:29:58] Deploying Cilium agent DaemonSet (v1.18, tag=amd64-dns-perf-v1.18)
+[2026-05-01 01:29:59] Deploying Cilium operator (v1.18, tag=amd64-dns-perf-v1.18)
+[2026-05-01 01:29:59] Waiting for Cilium pods to be ready (timeout: 300s)
+[2026-05-01 01:30:00] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:30:11] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:30:22] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:30:34] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:30:44] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:30:55] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:31:06] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:31:17] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:31:28] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:31:39] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:31:50] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:32:01] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:32:12] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:32:22] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:32:34] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:32:45] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:32:56] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:33:06] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:33:17] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:33:29] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:33:40] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:33:51] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:34:02] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:34:13] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:34:24] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:34:35] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:34:45] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:34:56] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 01:35:06] ERROR: Cilium did not become ready within 300s
+[2026-05-01 01:38:03] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:38:03] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:38:03] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:38:03] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:38:03] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:38:03] ║  Target: 1  Smoke: true  Runs: 1  Duration: 30s ║
+[2026-05-01 01:38:03] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:38:03] 
+[2026-05-01 01:38:03] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:38:03]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:38:03]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:38:03]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:38:03] 
+[2026-05-01 01:38:03] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:38:03] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:38:03] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:38:03] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:38:03] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:38:03] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:38:03] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:38:03] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:38:03] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:38:03] Creating resource group dns-perf-4scenario-rg in eastus
+[2026-05-01 01:38:10] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:38:10] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:38:10] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:38:10] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:38:10] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:38:10] ║  Target: 1  Smoke: true  Runs: 1  Duration: 30s ║
+[2026-05-01 01:38:10] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:38:10] 
+[2026-05-01 01:38:10] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:38:10]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:38:10]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:38:10]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:38:10] 
+[2026-05-01 01:38:10] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:38:10] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:38:10] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:38:10] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:38:10] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:38:10] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:38:10] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:38:10] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:38:10] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:38:10] Creating resource group dns-perf-4s-eastus-rg in eastus
+[2026-05-01 01:38:12] Creating AKS BYO CNI cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 01:42:57] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:42:57] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:42:57] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:42:57] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:42:57] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:42:57] ║  Target: 1  Smoke: true  Runs: 1  Duration: 30s ║
+[2026-05-01 01:42:57] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:42:57] 
+[2026-05-01 01:42:57] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:42:57]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:42:57]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:42:57]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:42:57] 
+[2026-05-01 01:42:57] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:42:57] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:42:57] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:42:57] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:42:57] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:42:57] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:42:57] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:42:57] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:42:57] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:42:57] Creating resource group dns-perf-smoke-rg in eastus
+[2026-05-01 01:42:59] Creating AKS BYO CNI cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 01:49:27] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:49:27] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:49:27] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:49:27] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:49:27] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:49:27] ║  Target: 1  Smoke: true  Runs: 1  Duration: 30s ║
+[2026-05-01 01:49:27] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:49:27] 
+[2026-05-01 01:49:27] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:49:27]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:49:27]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:49:27]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:49:27] 
+[2026-05-01 01:49:27] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:49:27] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:49:27] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:49:27] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:49:27] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:49:27] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:49:27] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:49:27] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:49:27] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:49:27] Creating resource group dns-perf-v18-rg in eastus
+[2026-05-01 01:49:28] Creating AKS BYO CNI cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 01:51:34] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:51:34] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:51:34] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:51:34] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:51:34] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:51:34] ║  Target: 1  Smoke: true  Runs: 1  Duration: 30s ║
+[2026-05-01 01:51:34] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:51:34] 
+[2026-05-01 01:51:34] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:51:34]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:51:34]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:51:34]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:51:34] 
+[2026-05-01 01:51:34] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:51:34] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:51:34] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:51:34] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:51:34] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:51:34] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:51:34] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:51:34] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:51:34] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:51:34] Creating resource group dns-perf-e2e-rg in eastus
+[2026-05-01 01:51:36] Creating AKS BYO CNI cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 01:55:17] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 01:55:17] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 01:55:17] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 01:55:17] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 01:55:17] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 01:55:17] ║  Target: 1  Smoke: true  Runs: 1  Duration: 30s ║
+[2026-05-01 01:55:17] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 01:55:17] 
+[2026-05-01 01:55:17] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 01:55:17]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 01:55:17]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 01:55:17]   Default ~/.kube/config will NOT be modified
+[2026-05-01 01:55:17] 
+[2026-05-01 01:55:17] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 01:55:17] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 01:55:17] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 01:55:17] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 01:55:17] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 01:55:17] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 01:55:17] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 01:55:17] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 01:55:17] Created CiliumNetworkPolicy YAML
+[2026-05-01 01:55:18] Creating resource group dns-perf-westus2-rg in westus2
+[2026-05-01 01:55:20] Creating AKS BYO CNI cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 02:02:06] v1.18 cluster ready. Kubeconfig: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 02:02:06] 
+[2026-05-01 02:02:06] ████████████████████████████████████████████████████
+[2026-05-01 02:02:06] █  SCENARIO 1: BYO CNI + Cilium v1.18 + SDP      █
+[2026-05-01 02:02:06] ████████████████████████████████████████████████████
+[2026-05-01 02:02:06] Tearing down Cilium and SDP from cluster (v1.18)
+[2026-05-01 02:02:13] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 02:02:14] Teardown complete
+[2026-05-01 02:02:14] === Deploying Scenario 1: BYO + Cilium v1.18 + SDP ===
+[2026-05-01 02:02:14] Applying SDP ConfigMap (fqdn-policy-config) — v1.18
+[2026-05-01 02:02:15] Applying Cilium config (SDP variant) — v1.18
+[2026-05-01 02:02:16] Applying Cilium RBAC and operator files (v1.18)
+[2026-05-01 02:02:19] Deploying Cilium agent DaemonSet (v1.18, tag=amd64-dns-perf-v1.18)
+[2026-05-01 02:02:21] Deploying Cilium operator (v1.18, tag=amd64-dns-perf-v1.18)
+[2026-05-01 02:02:22] Waiting for Cilium pods to be ready (timeout: 300s)
+[2026-05-01 02:02:23] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 02:02:35] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 02:02:46] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 02:02:58] Cilium ready: 3/3 pods
+[2026-05-01 02:02:58] Deploying SDP DaemonSet (acns-security-agent) — v1.18
+[2026-05-01 02:02:59] Waiting for SDP (acns-security-agent) pods to be ready (timeout: 180s)
+[2026-05-01 02:03:00] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:03:11] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:03:22] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:03:34] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:03:45] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:03:56] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:04:07] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:04:18] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:04:30] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:04:41] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:04:52] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:05:03] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:05:15] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:05:26] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:05:37] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:05:48] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:06:00] SDP pods: 0/0 ready, waiting...
+[2026-05-01 02:06:10] ERROR: SDP did not become ready within 180s
+[2026-05-01 02:21:59] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 02:21:59] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 02:21:59] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 02:21:59] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 02:21:59] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 02:21:59] ║  Target: 1  Smoke: true  Runs: 1  Duration: 30s ║
+[2026-05-01 02:21:59] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 02:21:59] 
+[2026-05-01 02:21:59] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 02:21:59]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 02:21:59]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 02:21:59]   Default ~/.kube/config will NOT be modified
+[2026-05-01 02:21:59] 
+[2026-05-01 02:21:59] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 02:21:59] Created stress test params (run_length=30s, max_qps=unlimited)
+[2026-05-01 02:21:59] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 02:21:59] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 02:21:59] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 02:21:59] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 02:21:59] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 02:21:59] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 02:21:59] Created CiliumNetworkPolicy YAML
+[2026-05-01 02:21:59] Creating resource group dns-perf-cni-rg in westus2
+[2026-05-01 02:22:01] Creating AKS Azure CNI overlay cluster for v1.18: dns-perf-byo-v18
+[2026-05-01 02:26:14] v1.18 cluster ready. Kubeconfig: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 02:26:14] 
+[2026-05-01 02:26:14] ████████████████████████████████████████████████████
+[2026-05-01 02:26:14] █  SCENARIO 1: BYO CNI + Cilium v1.18 + SDP      █
+[2026-05-01 02:26:14] ████████████████████████████████████████████████████
+[2026-05-01 02:26:14] Tearing down Cilium and SDP from cluster (v1.18)
+[2026-05-01 02:26:21] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 02:26:22] Teardown complete
+[2026-05-01 02:26:22] === Deploying Scenario 1: BYO + Cilium v1.18 + SDP ===
+[2026-05-01 02:26:22] Applying SDP ConfigMap (fqdn-policy-config) — v1.18
+[2026-05-01 02:26:23] Applying Cilium config (SDP variant) — v1.18
+[2026-05-01 02:26:24] Applying Cilium RBAC and operator files (v1.18)
+[2026-05-01 02:26:27] Deploying Cilium agent DaemonSet (v1.18, tag=amd64-dns-perf-v1.18)
+[2026-05-01 02:26:28] Deploying Cilium operator (v1.18, tag=amd64-dns-perf-v1.18)
+[2026-05-01 02:26:29] Waiting for Cilium pods to be ready (timeout: 300s)
+[2026-05-01 02:26:31] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 02:26:42] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 02:26:54] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 02:27:05] Cilium pods: 2/3 ready, waiting...
+[2026-05-01 02:27:17] Cilium ready: 3/3 pods
+[2026-05-01 02:27:17] Deploying SDP DaemonSet (acns-security-agent) — v1.18
+[2026-05-01 02:27:18] Waiting for SDP (acns-security-agent) pods to be ready (timeout: 180s)
+[2026-05-01 02:27:19] SDP pods: 0/3 ready, waiting...
+[2026-05-01 02:27:30] SDP ready: 3/3 pods
+[2026-05-01 02:27:30] === Scenario 1 deployment complete ===
+[2026-05-01 02:27:30] Running preflight checks for scenario 1
+[2026-05-01 02:27:31]   Nodes ready: 3
+[2026-05-01 02:27:32]   CoreDNS pods running: 2
+[2026-05-01 02:27:33]   Cilium pods (v1.18): 3, SDP pods: 3
+[2026-05-01 02:27:33]   DNS smoke test...
+[2026-05-01 02:27:39]   DNS smoke test: FAILED (may be expected for scenario 4)
+[2026-05-01 02:27:39]   Verifying FQDN policy enforcement...
+[2026-05-01 02:27:40]   FQDN policy: not yet applied (will apply before test)
+[2026-05-01 02:27:40] Preflight checks passed for scenario 1
+[2026-05-01 02:27:40] === Running DNS perf test: Scenario 1 (v18-cilium-sdp) ===
+[2026-05-01 02:27:40]   Runs: 1, Duration: 30s each, QPS: unlimited
+[2026-05-01 02:27:44] Recorded metadata to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v18-cilium-sdp/scenario_metadata.json
+[2026-05-01 02:27:44] Applying CiliumNetworkPolicy
+[2026-05-01 02:27:50] --- Run 1/1 for scenario v18-cilium-sdp ---
+[2026-05-01 02:29:19]   Run 1 PASSED
+[2026-05-01 02:29:20]   Jsonify: FAILED (non-critical)
+[2026-05-01 02:29:20] === Scenario 1 (v18-cilium-sdp) complete: 1 runs ===
+[2026-05-01 02:29:20] Tearing down Cilium and SDP from cluster (v1.18)
+[2026-05-01 02:29:28] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 02:29:29] Teardown complete
+[2026-05-01 02:29:29] === Generating comparison report ===
+[2026-05-01 02:29:30] Comparison report generated: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt
+[2026-05-01 02:29:30] 
+[2026-05-01 02:29:30] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 02:29:30] ║  All scenarios complete!                                ║
+[2026-05-01 02:29:30] ║  Results: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/                            
+[2026-05-01 02:29:30] ║  Report:  /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt       
+[2026-05-01 02:29:30] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 03:13:47] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 03:13:47] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 03:13:47] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 03:13:47] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 03:13:47] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 03:13:47] ║  Target: 2  Smoke: false  Runs: 1  Duration: 600s ║
+[2026-05-01 03:13:47] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 03:13:47] 
+[2026-05-01 03:13:47] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 03:13:47]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 03:13:47]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 03:13:47]   Default ~/.kube/config will NOT be modified
+[2026-05-01 03:13:47] 
+[2026-05-01 03:13:47] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 03:13:47] Created stress test params (run_length=600s, max_qps=unlimited)
+[2026-05-01 03:13:47] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 03:13:47] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 03:13:47] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 03:13:47] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 03:13:47] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 03:13:47] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 03:13:47] Created CiliumNetworkPolicy YAML
+[2026-05-01 03:13:47] Creating resource group dns-perf-4scenario-rg in westus2
+[2026-05-01 03:13:48] Creating AKS Azure CNI overlay cluster for v1.19: dns-perf-byo-v19
+[2026-05-01 03:18:32] v1.19 cluster ready. Kubeconfig: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 03:18:32] 
+[2026-05-01 03:18:32] ████████████████████████████████████████████████████
+[2026-05-01 03:18:32] █  SCENARIO 2: BYO CNI + Cilium v1.19 + SDP      █
+[2026-05-01 03:18:32] ████████████████████████████████████████████████████
+[2026-05-01 03:18:32] Tearing down Cilium and SDP from cluster (v1.19)
+[2026-05-01 03:18:38] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 03:18:38] Teardown complete
+[2026-05-01 03:18:38] === Deploying Scenario 2: BYO + Cilium v1.19 + SDP ===
+[2026-05-01 03:18:38] Applying SDP ConfigMap (fqdn-policy-config) — v1.19
+[2026-05-01 03:18:39] Applying Cilium config (SDP variant) — v1.19
+[2026-05-01 03:18:40] Applying Cilium RBAC and operator files (v1.19)
+[2026-05-01 03:18:43] Deploying Cilium agent DaemonSet (v1.19, tag=amd64-dns-perf-v1.19)
+[2026-05-01 03:18:44] Deploying Cilium operator (v1.19, tag=amd64-dns-perf-v1.19)
+[2026-05-01 03:18:45] Waiting for Cilium pods to be ready (timeout: 300s)
+[2026-05-01 03:18:46] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 03:18:58] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 03:19:09] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 03:19:20] Cilium ready: 3/3 pods
+[2026-05-01 03:19:20] Deploying SDP DaemonSet (acns-security-agent) — v1.19
+[2026-05-01 03:19:21] Waiting for SDP (acns-security-agent) pods to be ready (timeout: 180s)
+[2026-05-01 03:19:22] SDP pods: 0/3 ready, waiting...
+[2026-05-01 03:19:33] SDP ready: 3/3 pods
+[2026-05-01 03:19:33] === Scenario 2 deployment complete ===
+[2026-05-01 03:19:33] Running preflight checks for scenario 2
+[2026-05-01 03:19:34]   Nodes ready: 3
+[2026-05-01 03:19:34]   CoreDNS pods running: 2
+[2026-05-01 03:19:35]   Cilium pods (v1.19): 3, SDP pods: 3
+[2026-05-01 03:19:35]   DNS smoke test...
+[2026-05-01 03:19:41]   DNS smoke test: FAILED (may be expected for scenario 4)
+[2026-05-01 03:19:41]   Verifying FQDN policy enforcement...
+[2026-05-01 03:19:42]   FQDN policy: not yet applied (will apply before test)
+[2026-05-01 03:19:42] Preflight checks passed for scenario 2
+[2026-05-01 03:19:42] === Running DNS perf test: Scenario 2 (v19-cilium-sdp) ===
+[2026-05-01 03:19:42]   Runs: 1, Duration: 600s each, QPS: unlimited
+[2026-05-01 03:19:45] Recorded metadata to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-sdp/scenario_metadata.json
+[2026-05-01 03:19:45] Applying CiliumNetworkPolicy
+[2026-05-01 03:19:51] --- Run 1/1 for scenario v19-cilium-sdp ---
+[2026-05-01 03:30:48]   Run 1 PASSED
+[2026-05-01 03:30:48]   Jsonify: FAILED (non-critical)
+[2026-05-01 03:30:49] === Scenario 2 (v19-cilium-sdp) complete: 1 runs ===
+[2026-05-01 03:30:49] Tearing down Cilium and SDP from cluster (v1.19)
+[2026-05-01 03:30:55] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 03:30:55] Teardown complete
+[2026-05-01 03:30:55] === Generating comparison report ===
+[2026-05-01 03:30:56] Comparison report generated: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt
+[2026-05-01 03:30:56] 
+[2026-05-01 03:30:56] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 03:30:56] ║  All scenarios complete!                                ║
+[2026-05-01 03:30:56] ║  Results: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/                            
+[2026-05-01 03:30:56] ║  Report:  /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt       
+[2026-05-01 03:30:56] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 03:30:56] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 03:30:56] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 03:30:56] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 03:30:56] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 03:30:56] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 03:30:56] ║  Target: 3  Smoke: false  Runs: 1  Duration: 600s ║
+[2026-05-01 03:30:56] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 03:30:56] 
+[2026-05-01 03:30:56] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 03:30:56]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 03:30:56]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 03:30:56]   Default ~/.kube/config will NOT be modified
+[2026-05-01 03:30:56] 
+[2026-05-01 03:30:56] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 03:30:56] Created stress test params (run_length=600s, max_qps=unlimited)
+[2026-05-01 03:30:56] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 03:30:56] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 03:30:56] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 03:30:56] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 03:30:56] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 03:30:56] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 03:30:56] Created CiliumNetworkPolicy YAML
+[2026-05-01 03:30:56] Creating resource group dns-perf-4scenario-rg in westus2
+[2026-05-01 03:30:58] Skipping v1.19 cluster creation (--skip-infra)
+[2026-05-01 03:30:58] 
+[2026-05-01 03:30:58] ████████████████████████████████████████████████████
+[2026-05-01 03:30:58] █  SCENARIO 3: BYO CNI + Cilium v1.19 (in-agent) █
+[2026-05-01 03:30:58] ████████████████████████████████████████████████████
+[2026-05-01 03:30:58] Tearing down Cilium and SDP from cluster (v1.19)
+[2026-05-01 03:31:04] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 03:31:04] Teardown complete
+[2026-05-01 03:31:04] === Deploying Scenario 3: BYO + Cilium v1.19 (in-agent proxy only) ===
+[2026-05-01 03:31:04] Applying Cilium config (l7-proxy enabled, SDP disabled)
+[2026-05-01 03:31:05] Applying Cilium RBAC and operator files (v1.19)
+[2026-05-01 03:31:08] Deploying Cilium agent DaemonSet (v1.19, tag=amd64-dns-perf-v1.19)
+[2026-05-01 03:31:09] Deploying Cilium operator (v1.19, tag=amd64-dns-perf-v1.19)
+[2026-05-01 03:31:10] Waiting for Cilium pods to be ready (timeout: 300s)
+[2026-05-01 03:31:11] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 03:31:23] Cilium ready: 3/3 pods
+[2026-05-01 03:31:23] === Scenario 3 deployment complete ===
+[2026-05-01 03:31:23] Running preflight checks for scenario 3
+[2026-05-01 03:31:23]   Nodes ready: 3
+[2026-05-01 03:31:24]   CoreDNS pods running: 2
+[2026-05-01 03:31:24]   Cilium pods: 3 (in-agent proxy mode)
+[2026-05-01 03:31:25]   DNS smoke test...
+[2026-05-01 03:31:39]   DNS smoke test: FAILED (may be expected for scenario 4)
+[2026-05-01 03:31:39]   Verifying FQDN policy enforcement...
+[2026-05-01 03:31:40]   FQDN policy: not yet applied (will apply before test)
+[2026-05-01 03:31:40] Preflight checks passed for scenario 3
+[2026-05-01 03:31:40] === Running DNS perf test: Scenario 3 (v19-cilium-inagent-proxy) ===
+[2026-05-01 03:31:40]   Runs: 1, Duration: 600s each, QPS: unlimited
+[2026-05-01 03:31:45] Recorded metadata to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-inagent-proxy/scenario_metadata.json
+[2026-05-01 03:31:45] Applying CiliumNetworkPolicy
+[2026-05-01 03:31:51] --- Run 1/1 for scenario v19-cilium-inagent-proxy ---
+[2026-05-01 03:43:02]   Run 1 PASSED
+[2026-05-01 03:43:02]   Jsonify: FAILED (non-critical)
+[2026-05-01 03:43:03] === Scenario 3 (v19-cilium-inagent-proxy) complete: 1 runs ===
+[2026-05-01 03:43:03] Tearing down Cilium and SDP from cluster (v1.19)
+[2026-05-01 03:43:09] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 03:43:09] Teardown complete
+[2026-05-01 03:43:09] === Generating comparison report ===
+[2026-05-01 03:43:10] Comparison report generated: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt
+[2026-05-01 03:43:10] 
+[2026-05-01 03:43:10] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 03:43:10] ║  All scenarios complete!                                ║
+[2026-05-01 03:43:10] ║  Results: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/                            
+[2026-05-01 03:43:10] ║  Report:  /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt       
+[2026-05-01 03:43:10] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 03:43:10] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 03:43:10] ║  DNS Performance Test — 4-Scenario Comparison           ║
+[2026-05-01 03:43:10] ║  Cluster 1: BYO CNI + Cilium v1.18                     ║
+[2026-05-01 03:43:10] ║  Cluster 2: BYO CNI + Cilium v1.19                     ║
+[2026-05-01 03:43:10] ╠══════════════════════════════════════════════════════════╣
+[2026-05-01 03:43:10] ║  Target: 4  Smoke: false  Runs: 1  Duration: 600s ║
+[2026-05-01 03:43:10] ╚══════════════════════════════════════════════════════════╝
+[2026-05-01 03:43:10] 
+[2026-05-01 03:43:10] KUBECONFIG SAFETY: Using isolated kubeconfig files
+[2026-05-01 03:43:10]   v1.18 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v18
+[2026-05-01 03:43:10]   v1.19 cluster: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/kubeconfig-v19
+[2026-05-01 03:43:10]   Default ~/.kube/config will NOT be modified
+[2026-05-01 03:43:10] 
+[2026-05-01 03:43:10] Work directory: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir
+[2026-05-01 03:43:10] Created stress test params (run_length=600s, max_qps=unlimited)
+[2026-05-01 03:43:10] Copying v1.18 manifests from /home/singhvipul/ws/cilium-private (main branch)
+[2026-05-01 03:43:10] v1.18 manifests copied to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.18
+[2026-05-01 03:43:10] Extracting v1.19 manifests from upstream/camrynl/v1.19-manifests
+[2026-05-01 03:43:10] v1.19 manifests extracted to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/manifests/v1.19
+[2026-05-01 03:43:10] Generated scenario 3 config (l7-proxy=true, SDP=false)
+[2026-05-01 03:43:10] Generated scenario 4 config (l7-proxy=false, SDP=false)
+[2026-05-01 03:43:10] Created CiliumNetworkPolicy YAML
+[2026-05-01 03:43:10] Creating resource group dns-perf-4scenario-rg in westus2
+[2026-05-01 03:43:13] Skipping v1.19 cluster creation (--skip-infra)
+[2026-05-01 03:43:13] 
+[2026-05-01 03:43:13] ████████████████████████████████████████████████████
+[2026-05-01 03:43:13] █  SCENARIO 4: BYO CNI + Cilium v1.19 (no proxy) █
+[2026-05-01 03:43:13] ████████████████████████████████████████████████████
+[2026-05-01 03:43:13] Tearing down Cilium and SDP from cluster (v1.19)
+[2026-05-01 03:43:18] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 03:43:19] Teardown complete
+[2026-05-01 03:43:19] === Deploying Scenario 4: BYO + Cilium v1.19 (no DNS proxy) ===
+[2026-05-01 03:43:19] Applying Cilium config (no proxy)
+[2026-05-01 03:43:20] Applying Cilium RBAC and operator files (v1.19)
+[2026-05-01 03:43:22] Deploying Cilium agent DaemonSet (v1.19, tag=amd64-dns-perf-v1.19)
+[2026-05-01 03:43:23] Deploying Cilium operator (v1.19, tag=amd64-dns-perf-v1.19)
+[2026-05-01 03:43:24] Waiting for Cilium pods to be ready (timeout: 300s)
+[2026-05-01 03:43:25] Cilium pods: 0/3 ready, waiting...
+[2026-05-01 03:43:37] Cilium ready: 3/3 pods
+[2026-05-01 03:43:37] === Scenario 4 deployment complete ===
+[2026-05-01 03:43:37] Running preflight checks for scenario 4
+[2026-05-01 03:43:37]   Nodes ready: 3
+[2026-05-01 03:43:38]   CoreDNS pods running: 2
+[2026-05-01 03:43:38]   Cilium pods: 3 (no-proxy mode)
+[2026-05-01 03:43:38]   DNS smoke test...
+[2026-05-01 03:43:51]   DNS smoke test: FAILED (may be expected for scenario 4)
+[2026-05-01 03:43:51] Preflight checks passed for scenario 4
+[2026-05-01 03:43:51] === Running DNS perf test: Scenario 4 (v19-cilium-no-proxy) ===
+[2026-05-01 03:43:51]   Runs: 1, Duration: 600s each, QPS: unlimited
+[2026-05-01 03:43:54] Recorded metadata to /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-cilium-no-proxy/scenario_metadata.json
+[2026-05-01 03:43:54] Skipping CNP for scenario 4 (no proxy — raw baseline)
+[2026-05-01 03:43:54] --- Run 1/1 for scenario v19-cilium-no-proxy ---
+[2026-05-01 03:54:54]   Run 1 PASSED
+[2026-05-01 03:54:54]   Jsonify: FAILED (non-critical)
+[2026-05-01 03:54:55] === Scenario 4 (v19-cilium-no-proxy) complete: 1 runs ===
+[2026-05-01 03:54:55] Tearing down Cilium and SDP from cluster (v1.19)
+[2026-05-01 03:55:01] Waiting for Cilium/SDP pods to terminate...
+[2026-05-01 03:55:01] Teardown complete
+[2026-05-01 03:55:01] === Generating comparison report ===
+[2026-05-01 03:55:03] Comparison report generated: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt
+[2026-05-01 03:55:03] 
+[2026-05-01 03:55:03] ╔══════════════════════════════════════════════════════════╗
+[2026-05-01 03:55:03] ║  All scenarios complete!                                ║
+[2026-05-01 03:55:03] ║  Results: /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/                            
+[2026-05-01 03:55:03] ║  Report:  /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/comparison_report.txt       
+[2026-05-01 03:55:03] ╚══════════════════════════════════════════════════════════╝

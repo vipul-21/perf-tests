@@ -1,0 +1,5 @@
+### run_id 1777677741:0
+### date Fri May  1 23:22:52 2026
+### settings {"run_id": 1777677741, "run_subid": 0, "pod_name": "dns-perf-client-858fb7568b-vfrm4", "run_length_seconds": 300, "max_qps": null, "query_file": "all-queries.txt"}
+
+

@@ -1,0 +1,4 @@
+# DNS stress test — no QPS limit, find the ceiling
+run_length_seconds: [600]
+max_qps: [null]
+query_file: ["all-queries.txt"]

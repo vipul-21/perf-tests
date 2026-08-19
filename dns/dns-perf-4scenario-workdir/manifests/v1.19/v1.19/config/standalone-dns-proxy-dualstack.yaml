@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  enable-l7-proxy: "true"
+  debug: "false"
+  enable-standalone-dns-proxy: "true"
+  enable-ipv4: "true"
+  enable-ipv6: "true"
+  standalone-dns-proxy-server-port: "10095"
+  tofqdns-proxy-port: "10094"
+  tofqdns-enable-dns-compression: "true"
+  tofqdns-endpoint-max-ip-per-hostname: "1000"
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: fqdn-policy
+    meta.helm.sh/release-namespace: kube-system
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: fqdn-policy-config
+  namespace: kube-system

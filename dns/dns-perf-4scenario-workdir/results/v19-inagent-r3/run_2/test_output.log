@@ -1,0 +1,65 @@
+INFO 05-01 19:51:39 runner.py:77] Using cluster DNS for tests
+INFO 05-01 19:51:39 runner.py:87] DNS service IP is 10.0.0.10
+INFO 05-01 19:51:40 runner.py:489] Created rundir /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-r3/run_2/run-1777665100
+INFO 05-01 19:51:40 runner.py:495] Updated symlink /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-r3/run_2/latest
+INFO 05-01 19:51:40 runner.py:416] Starting client teardown
+INFO 05-01 19:51:41 runner.py:479] got client pods "[]"
+INFO 05-01 19:51:41 runner.py:426] Client teardown complete
+INFO 05-01 19:51:42 runner.py:184] Create Deployment/dns-perf-client ok
+INFO 05-01 19:51:42 runner.py:371] pending replicas in client deployment - '4'
+INFO 05-01 19:51:48 runner.py:479] got client pods "['dns-perf-client-858fb7568b-4mljb', 'dns-perf-client-858fb7568b-6p85h', 'dns-perf-client-858fb7568b-wcpnj', 'dns-perf-client-858fb7568b-whmg4']"
+INFO 05-01 19:51:49 runner.py:386] Client pod ready for execution
+INFO 05-01 19:51:49 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-4mljb
+INFO 05-01 19:51:50 runner.py:413] Query files copied
+INFO 05-01 19:51:51 runner.py:386] Client pod ready for execution
+INFO 05-01 19:51:51 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-6p85h
+INFO 05-01 19:51:52 runner.py:413] Query files copied
+INFO 05-01 19:51:53 runner.py:386] Client pod ready for execution
+INFO 05-01 19:51:53 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-wcpnj
+INFO 05-01 19:51:54 runner.py:413] Query files copied
+INFO 05-01 19:51:55 runner.py:386] Client pod ready for execution
+INFO 05-01 19:51:55 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-whmg4
+INFO 05-01 19:51:56 runner.py:413] Query files copied
+INFO 05-01 19:51:56 runner.py:103] Starting creation of test services
+INFO 05-01 19:51:57 runner.py:184] Create Service/test-svc1 ok
+INFO 05-01 19:51:58 runner.py:184] Create Service/test-svc2 ok
+INFO 05-01 19:51:58 runner.py:184] Create Service/test-svc3 ok
+INFO 05-01 19:51:59 runner.py:184] Create Service/test-svc4 ok
+INFO 05-01 19:52:00 runner.py:184] Create Service/test-svc5 ok
+INFO 05-01 19:52:00 runner.py:184] Create Service/test-svc6 ok
+INFO 05-01 19:52:01 runner.py:184] Create Service/test-svc7 ok
+INFO 05-01 19:52:02 runner.py:184] Create Service/test-svc8 ok
+INFO 05-01 19:52:03 runner.py:184] Create Service/test-svc9 ok
+INFO 05-01 19:52:03 runner.py:184] Create Service/test-svc10 ok
+INFO 05-01 19:52:04 runner.py:184] Create Service/test-svc11 ok
+INFO 05-01 19:52:05 runner.py:184] Create Service/test-svc12 ok
+INFO 05-01 19:52:05 runner.py:184] Create Service/test-svc13 ok
+INFO 05-01 19:52:06 runner.py:184] Create Service/test-svc14 ok
+INFO 05-01 19:52:07 runner.py:184] Create Service/test-svc15 ok
+INFO 05-01 19:52:08 runner.py:184] Create Service/test-svc16 ok
+INFO 05-01 19:52:08 runner.py:184] Create Service/test-svc17 ok
+INFO 05-01 19:52:09 runner.py:184] Create Service/test-svc18 ok
+INFO 05-01 19:52:10 runner.py:184] Create Service/test-svc19 ok
+INFO 05-01 19:52:10 runner.py:184] Create Service/test-svc20 ok
+INFO 05-01 19:52:10 runner.py:235] Running test case: {'run_id': 1777665100, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-4mljb', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 19:52:10 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-r3/run_2/run-1777665100/result-0-dns-perf-client-858fb7568b-4mljb.out
+INFO 05-01 19:52:10 runner.py:235] Running test case: {'run_id': 1777665100, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-6p85h', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 19:52:10 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-r3/run_2/run-1777665100/result-0-dns-perf-client-858fb7568b-6p85h.out
+INFO 05-01 19:52:10 runner.py:235] Running test case: {'run_id': 1777665100, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-wcpnj', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 19:52:10 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-r3/run_2/run-1777665100/result-0-dns-perf-client-858fb7568b-wcpnj.out
+INFO 05-01 19:52:10 runner.py:235] Running test case: {'run_id': 1777665100, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-whmg4', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 19:52:10 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-r3/run_2/run-1777665100/result-0-dns-perf-client-858fb7568b-whmg4.out
+INFO 05-01 19:54:13 runner.py:276] Test results parsed
+INFO 05-01 19:54:13 runner.py:276] Test results parsed
+INFO 05-01 19:54:13 runner.py:276] Test results parsed
+INFO 05-01 19:54:14 runner.py:276] Test results parsed
+INFO 05-01 19:54:14 runner.py:345] Starting server teardown
+INFO 05-01 19:54:17 runner.py:437] Waiting for server to be deleted (0 pods active)
+INFO 05-01 19:54:17 runner.py:353] Server teardown ok
+INFO 05-01 19:54:21 runner.py:416] Starting client teardown
+INFO 05-01 19:54:22 runner.py:479] got client pods "['dns-perf-client-858fb7568b-4mljb', 'dns-perf-client-858fb7568b-6p85h', 'dns-perf-client-858fb7568b-wcpnj', 'dns-perf-client-858fb7568b-whmg4']"
+INFO 05-01 19:54:23 runner.py:424] Waiting for client pod to terminate
+INFO 05-01 19:54:24 runner.py:479] got client pods "['dns-perf-client-858fb7568b-4mljb', 'dns-perf-client-858fb7568b-6p85h', 'dns-perf-client-858fb7568b-wcpnj', 'dns-perf-client-858fb7568b-whmg4']"
+INFO 05-01 19:54:25 runner.py:424] Waiting for client pod to terminate
+INFO 05-01 19:54:25 runner.py:479] got client pods "[]"
+INFO 05-01 19:54:25 runner.py:426] Client teardown complete

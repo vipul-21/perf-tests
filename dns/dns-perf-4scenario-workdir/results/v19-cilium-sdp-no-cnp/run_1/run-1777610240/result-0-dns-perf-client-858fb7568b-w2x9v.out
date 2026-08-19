@@ -1,0 +1,663 @@
+code: 0
+data:
+  avg_latency: 0.023479
+  histogram:
+  - - 0
+    - 241685
+  - - 1
+    - 89051
+  - - 2
+    - 51162
+  - - 3
+    - 30824
+  - - 4
+    - 18865
+  - - 5
+    - 13077
+  - - 6
+    - 9115
+  - - 7
+    - 7234
+  - - 8
+    - 5728
+  - - 9
+    - 5205
+  - - 10
+    - 5164
+  - - 11
+    - 4954
+  - - 12
+    - 5593
+  - - 13
+    - 7440
+  - - 14
+    - 13077
+  - - 15
+    - 26167
+  - - 16
+    - 49287
+  - - 17
+    - 79278
+  - - 18
+    - 105717
+  - - 19
+    - 126020
+  - - 20
+    - 138743
+  - - 21
+    - 147136
+  - - 22
+    - 148166
+  - - 23
+    - 136985
+  - - 24
+    - 121820
+  - - 25
+    - 104254
+  - - 26
+    - 87445
+  - - 27
+    - 73510
+  - - 28
+    - 59043
+  - - 29
+    - 46724
+  - - 30
+    - 39724
+  - - 31
+    - 32647
+  - - 32
+    - 27499
+  - - 33
+    - 25096
+  - - 34
+    - 23183
+  - - 35
+    - 23230
+  - - 36
+    - 22861
+  - - 37
+    - 21920
+  - - 38
+    - 21739
+  - - 39
+    - 21054
+  - - 40
+    - 20759
+  - - 41
+    - 21265
+  - - 42
+    - 20712
+  - - 43
+    - 19960
+  - - 44
+    - 18910
+  - - 45
+    - 17964
+  - - 46
+    - 16803
+  - - 47
+    - 15522
+  - - 48
+    - 14268
+  - - 49
+    - 13121
+  - - 50
+    - 11516
+  - - 51
+    - 10395
+  - - 52
+    - 9310
+  - - 53
+    - 7865
+  - - 54
+    - 6917
+  - - 55
+    - 5908
+  - - 56
+    - 5329
+  - - 57
+    - 5034
+  - - 58
+    - 4629
+  - - 59
+    - 4348
+  - - 60
+    - 4004
+  - - 61
+    - 3933
+  - - 62
+    - 3763
+  - - 63
+    - 3556
+  - - 64
+    - 3348
+  - - 65
+    - 3133
+  - - 66
+    - 3130
+  - - 67
+    - 2826
+  - - 68
+    - 2876
+  - - 69
+    - 2805
+  - - 70
+    - 2623
+  - - 71
+    - 2392
+  - - 72
+    - 2109
+  - - 73
+    - 1965
+  - - 74
+    - 1733
+  - - 75
+    - 1590
+  - - 76
+    - 1428
+  - - 77
+    - 1321
+  - - 78
+    - 1111
+  - - 79
+    - 950
+  - - 80
+    - 897
+  - - 81
+    - 938
+  - - 82
+    - 786
+  - - 83
+    - 725
+  - - 84
+    - 735
+  - - 85
+    - 686
+  - - 86
+    - 617
+  - - 87
+    - 631
+  - - 88
+    - 560
+  - - 89
+    - 539
+  - - 90
+    - 518
+  - - 91
+    - 481
+  - - 92
+    - 448
+  - - 93
+    - 439
+  - - 94
+    - 388
+  - - 95
+    - 351
+  - - 96
+    - 317
+  - - 97
+    - 308
+  - - 98
+    - 272
+  - - 99
+    - 239
+  - - 100
+    - 219
+  - - 101
+    - 199
+  - - 102
+    - 207
+  - - 103
+    - 150
+  - - 104
+    - 151
+  - - 105
+    - 133
+  - - 106
+    - 141
+  - - 107
+    - 120
+  - - 108
+    - 111
+  - - 109
+    - 107
+  - - 110
+    - 122
+  - - 111
+    - 107
+  - - 112
+    - 80
+  - - 113
+    - 96
+  - - 114
+    - 79
+  - - 115
+    - 84
+  - - 116
+    - 85
+  - - 117
+    - 72
+  - - 118
+    - 53
+  - - 119
+    - 45
+  - - 120
+    - 48
+  - - 121
+    - 49
+  - - 122
+    - 45
+  - - 123
+    - 35
+  - - 124
+    - 43
+  - - 125
+    - 34
+  - - 126
+    - 27
+  - - 127
+    - 27
+  - - 128
+    - 23
+  - - 129
+    - 33
+  - - 130
+    - 28
+  - - 131
+    - 23
+  - - 132
+    - 22
+  - - 133
+    - 20
+  - - 134
+    - 20
+  - - 135
+    - 24
+  - - 136
+    - 11
+  - - 137
+    - 12
+  - - 138
+    - 13
+  - - 139
+    - 19
+  - - 140
+    - 10
+  - - 141
+    - 9
+  - - 142
+    - 17
+  - - 143
+    - 8
+  - - 144
+    - 9
+  - - 145
+    - 16
+  - - 146
+    - 6
+  - - 147
+    - 6
+  - - 148
+    - 6
+  - - 149
+    - 3
+  - - 150
+    - 3
+  - - 151
+    - 1
+  - - 152
+    - 4
+  - - 153
+    - 8
+  - - 154
+    - 3
+  - - 155
+    - 2
+  - - 156
+    - 4
+  - - 157
+    - 2
+  - - 158
+    - 1
+  - - 159
+    - 4
+  - - 160
+    - 7
+  - - 161
+    - 1
+  - - 163
+    - 3
+  - - 165
+    - 1
+  - - 166
+    - 1
+  - - 167
+    - 1
+  - - 169
+    - 1
+  - - 170
+    - 2
+  - - 171
+    - 1
+  - - 172
+    - 3
+  - - 173
+    - 2
+  - - 174
+    - 1
+  - - 177
+    - 1
+  - - 180
+    - 1
+  - - 181
+    - 2
+  - - 182
+    - 1
+  - - 183
+    - 2
+  - - 184
+    - 1
+  - - 185
+    - 2
+  - - 187
+    - 1
+  - - 189
+    - 1
+  - - 203
+    - 1
+  - - 207
+    - 1
+  - - 209
+    - 2
+  - - 4999
+    - 51
+  latency_50_percentile: 22.0
+  latency_95_percentile: 50.0
+  latency_99_5_percentile: 81.0
+  latency_99_percentile: 72.0
+  max_kubedns_cpu: 0
+  max_kubedns_memory: 0
+  max_latency: 0.209305
+  max_perfserver_cpu: 0
+  max_perfserver_memory: 0
+  min_latency: 6.0e-05
+  msg: null
+  ok: true
+  qps: 4220.713433
+  queries_completed: 2532507
+  queries_lost: 51
+  queries_sent: 2532558
+  run_time: 600.018703
+  stddev_latency: 0.015397
+params:
+  max_qps: null
+  pod_name: dns-perf-client-858fb7568b-w2x9v
+  query_file: all-queries.txt
+  run_id: 1777610240
+  run_length_seconds: 600
+  run_subid: 0
+stderr:
+- ''
+stdout:
+- DNS Performance Testing Tool
+- Nominum Version 2.1.0.0
+- ''
+- '[Status] Command line: dnsperf -s 10.0.0.10 -l 600 -d /queries/all-queries.txt'
+- '[Status] Sending queries (to 10.0.0.10)'
+- '[Status] Started at: Fri May  1 04:37:53 2026'
+- '[Status] Stopping after 600.000000 seconds'
+- '[Timeout] Query timed out: msg id 39884'
+- '[Timeout] Query timed out: msg id 41289'
+- '[Timeout] Query timed out: msg id 41451'
+- '[Timeout] Query timed out: msg id 41748'
+- '[Timeout] Query timed out: msg id 55279'
+- '[Timeout] Query timed out: msg id 64870'
+- '[Timeout] Query timed out: msg id 64799'
+- '[Timeout] Query timed out: msg id 65232'
+- '[Timeout] Query timed out: msg id 64852'
+- '[Timeout] Query timed out: msg id 64958'
+- '[Timeout] Query timed out: msg id 64889'
+- '[Timeout] Query timed out: msg id 60'
+- '[Timeout] Query timed out: msg id 64935'
+- '[Timeout] Query timed out: msg id 991'
+- '[Timeout] Query timed out: msg id 21021'
+- '[Timeout] Query timed out: msg id 22547'
+- '[Timeout] Query timed out: msg id 48095'
+- '[Timeout] Query timed out: msg id 48472'
+- '[Timeout] Query timed out: msg id 48605'
+- '[Timeout] Query timed out: msg id 57598'
+- '[Timeout] Query timed out: msg id 59608'
+- '[Timeout] Query timed out: msg id 16316'
+- '[Timeout] Query timed out: msg id 17650'
+- '[Timeout] Query timed out: msg id 17876'
+- '[Timeout] Query timed out: msg id 18413'
+- '[Timeout] Query timed out: msg id 18240'
+- '[Timeout] Query timed out: msg id 37988'
+- '[Timeout] Query timed out: msg id 39834'
+- '[Timeout] Query timed out: msg id 51403'
+- '[Timeout] Query timed out: msg id 51579'
+- '[Timeout] Query timed out: msg id 59814'
+- '[Timeout] Query timed out: msg id 61684'
+- '[Timeout] Query timed out: msg id 62424'
+- '[Timeout] Query timed out: msg id 1299'
+- '[Timeout] Query timed out: msg id 2080'
+- '[Timeout] Query timed out: msg id 7319'
+- '[Timeout] Query timed out: msg id 7047'
+- '[Timeout] Query timed out: msg id 52433'
+- '[Timeout] Query timed out: msg id 1235'
+- '[Timeout] Query timed out: msg id 863'
+- '[Timeout] Query timed out: msg id 597'
+- '[Timeout] Query timed out: msg id 12738'
+- '[Timeout] Query timed out: msg id 22117'
+- '[Timeout] Query timed out: msg id 26094'
+- '[Timeout] Query timed out: msg id 60174'
+- '[Timeout] Query timed out: msg id 59857'
+- '[Timeout] Query timed out: msg id 2679'
+- '[Timeout] Query timed out: msg id 2292'
+- '[Timeout] Query timed out: msg id 2084'
+- '[Timeout] Query timed out: msg id 11698'
+- '[Timeout] Query timed out: msg id 12430'
+- '[Status] Testing complete (time limit)'
+- ''
+- 'Statistics:'
+- ''
+- '  Queries sent:         2532558'
+- '  Queries completed:    2532507 (100.00%)'
+- '  Queries lost:         51 (0.00%)'
+- ''
+- '  Response codes:       NOERROR 303899 (12.00%), NXDOMAIN 2228608 (88.00%)'
+- '  Average packet size:  request 38, response 122'
+- '  Run time (s):         600.018703'
+- '  Queries per second:   4220.713433'
+- ''
+- '  Average Latency (s):  0.023479 (min 0.000060, max 0.209305)'
+- '  Latency StdDev (s):   0.015397'
+- ''
+- '  Latency histogram'
+- '#histogram 0 241685'
+- '#histogram 1 89051'
+- '#histogram 2 51162'
+- '#histogram 3 30824'
+- '#histogram 4 18865'
+- '#histogram 5 13077'
+- '#histogram 6 9115'
+- '#histogram 7 7234'
+- '#histogram 8 5728'
+- '#histogram 9 5205'
+- '#histogram 10 5164'
+- '#histogram 11 4954'
+- '#histogram 12 5593'
+- '#histogram 13 7440'
+- '#histogram 14 13077'
+- '#histogram 15 26167'
+- '#histogram 16 49287'
+- '#histogram 17 79278'
+- '#histogram 18 105717'
+- '#histogram 19 126020'
+- '#histogram 20 138743'
+- '#histogram 21 147136'
+- '#histogram 22 148166'
+- '#histogram 23 136985'
+- '#histogram 24 121820'
+- '#histogram 25 104254'
+- '#histogram 26 87445'
+- '#histogram 27 73510'
+- '#histogram 28 59043'
+- '#histogram 29 46724'
+- '#histogram 30 39724'
+- '#histogram 31 32647'
+- '#histogram 32 27499'
+- '#histogram 33 25096'
+- '#histogram 34 23183'
+- '#histogram 35 23230'
+- '#histogram 36 22861'
+- '#histogram 37 21920'
+- '#histogram 38 21739'
+- '#histogram 39 21054'
+- '#histogram 40 20759'
+- '#histogram 41 21265'
+- '#histogram 42 20712'
+- '#histogram 43 19960'
+- '#histogram 44 18910'
+- '#histogram 45 17964'
+- '#histogram 46 16803'
+- '#histogram 47 15522'
+- '#histogram 48 14268'
+- '#histogram 49 13121'
+- '#histogram 50 11516'
+- '#histogram 51 10395'
+- '#histogram 52 9310'
+- '#histogram 53 7865'
+- '#histogram 54 6917'
+- '#histogram 55 5908'
+- '#histogram 56 5329'
+- '#histogram 57 5034'
+- '#histogram 58 4629'
+- '#histogram 59 4348'
+- '#histogram 60 4004'
+- '#histogram 61 3933'
+- '#histogram 62 3763'
+- '#histogram 63 3556'
+- '#histogram 64 3348'
+- '#histogram 65 3133'
+- '#histogram 66 3130'
+- '#histogram 67 2826'
+- '#histogram 68 2876'
+- '#histogram 69 2805'
+- '#histogram 70 2623'
+- '#histogram 71 2392'
+- '#histogram 72 2109'
+- '#histogram 73 1965'
+- '#histogram 74 1733'
+- '#histogram 75 1590'
+- '#histogram 76 1428'
+- '#histogram 77 1321'
+- '#histogram 78 1111'
+- '#histogram 79 950'
+- '#histogram 80 897'
+- '#histogram 81 938'
+- '#histogram 82 786'
+- '#histogram 83 725'
+- '#histogram 84 735'
+- '#histogram 85 686'
+- '#histogram 86 617'
+- '#histogram 87 631'
+- '#histogram 88 560'
+- '#histogram 89 539'
+- '#histogram 90 518'
+- '#histogram 91 481'
+- '#histogram 92 448'
+- '#histogram 93 439'
+- '#histogram 94 388'
+- '#histogram 95 351'
+- '#histogram 96 317'
+- '#histogram 97 308'
+- '#histogram 98 272'
+- '#histogram 99 239'
+- '#histogram 100 219'
+- '#histogram 101 199'
+- '#histogram 102 207'
+- '#histogram 103 150'
+- '#histogram 104 151'
+- '#histogram 105 133'
+- '#histogram 106 141'
+- '#histogram 107 120'
+- '#histogram 108 111'
+- '#histogram 109 107'
+- '#histogram 110 122'
+- '#histogram 111 107'
+- '#histogram 112 80'
+- '#histogram 113 96'
+- '#histogram 114 79'
+- '#histogram 115 84'
+- '#histogram 116 85'
+- '#histogram 117 72'
+- '#histogram 118 53'
+- '#histogram 119 45'
+- '#histogram 120 48'
+- '#histogram 121 49'
+- '#histogram 122 45'
+- '#histogram 123 35'
+- '#histogram 124 43'
+- '#histogram 125 34'
+- '#histogram 126 27'
+- '#histogram 127 27'
+- '#histogram 128 23'
+- '#histogram 129 33'
+- '#histogram 130 28'
+- '#histogram 131 23'
+- '#histogram 132 22'
+- '#histogram 133 20'
+- '#histogram 134 20'
+- '#histogram 135 24'
+- '#histogram 136 11'
+- '#histogram 137 12'
+- '#histogram 138 13'
+- '#histogram 139 19'
+- '#histogram 140 10'
+- '#histogram 141 9'
+- '#histogram 142 17'
+- '#histogram 143 8'
+- '#histogram 144 9'
+- '#histogram 145 16'
+- '#histogram 146 6'
+- '#histogram 147 6'
+- '#histogram 148 6'
+- '#histogram 149 3'
+- '#histogram 150 3'
+- '#histogram 151 1'
+- '#histogram 152 4'
+- '#histogram 153 8'
+- '#histogram 154 3'
+- '#histogram 155 2'
+- '#histogram 156 4'
+- '#histogram 157 2'
+- '#histogram 158 1'
+- '#histogram 159 4'
+- '#histogram 160 7'
+- '#histogram 161 1'
+- '#histogram 163 3'
+- '#histogram 165 1'
+- '#histogram 166 1'
+- '#histogram 167 1'
+- '#histogram 169 1'
+- '#histogram 170 2'
+- '#histogram 171 1'
+- '#histogram 172 3'
+- '#histogram 173 2'
+- '#histogram 174 1'
+- '#histogram 177 1'
+- '#histogram 180 1'
+- '#histogram 181 2'
+- '#histogram 182 1'
+- '#histogram 183 2'
+- '#histogram 184 1'
+- '#histogram 185 2'
+- '#histogram 187 1'
+- '#histogram 189 1'
+- '#histogram 203 1'
+- '#histogram 207 1'
+- '#histogram 209 2'
+- '#histogram 4999 51'
+- ''

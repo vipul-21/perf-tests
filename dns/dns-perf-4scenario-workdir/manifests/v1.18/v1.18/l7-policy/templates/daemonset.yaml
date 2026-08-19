@@ -1,0 +1,146 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: acns-security-agent
+  labels:
+    k8s-app: acns-security-agent
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      k8s-app: acns-security-agent
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "9961"
+        prometheus.io/scrape: "true"
+      labels:
+        k8s-app: acns-security-agent
+    spec:
+      automountServiceAccountToken: false
+      priorityClassName: system-node-critical
+      containers:
+        - name: fqdn-policy
+          image: $CILIUM_IMAGE_REGISTRY/cilium/dns-proxy:$SDP_VERSION_TAG
+          args:
+          - --config-dir=/tmp/fqdn-policy/config-map
+          livenessProbe:
+            tcpSocket:
+              host: "127.0.0.1"
+              port: 40046
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              host: "127.0.0.1"
+              port: 40046
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 5
+          volumeMounts:
+          - mountPath: /tmp/fqdn-policy/config-map
+            name: fqdn-policy-config-path
+            readOnly: true
+          - mountPath: /var/run/cilium
+            name: cilium-run
+          - name: bpf-maps
+            mountPath: /sys/fs/bpf
+          securityContext:
+            capabilities:
+              drop: ["ALL"]
+              add: ["BPF", "NET_ADMIN", "NET_RAW"]
+        - name: cilium-envoy
+          # Update the image once we have the cilium-envoy image
+          image: mcr.microsoft.com/containernetworking/cilium/cilium-envoy:$ENVOY_VERSION
+          command:
+          - /usr/bin/cilium-envoy-starter
+          args:
+          - -c /var/run/cilium/envoy/bootstrap-config.json
+          - --use-dynamic-base-id
+          - --log-level info
+          - --log-format [%Y-%m-%d %T.%e][%t][%l][%n] [%g:%#] %v
+          imagePullPolicy: IfNotPresent
+          startupProbe:
+            httpGet:
+              host: "127.0.0.1"
+              path: /healthz
+              port: 9878
+              scheme: HTTP
+            failureThreshold: 105
+            periodSeconds: 2
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              host: "127.0.0.1"
+              path: /healthz
+              port: 9878
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              host: "127.0.0.1"
+              path: /healthz
+              port: 9878
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 5
+          env:
+          - name: K8S_NODE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: CILIUM_K8S_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          volumeMounts:
+          - name: envoy-sockets
+            mountPath: /var/run/cilium/envoy/sockets
+            readOnly: false
+          - name: envoy-config
+            mountPath: /var/run/cilium/envoy/
+            readOnly: true
+          - name: bpf-maps
+            mountPath: /sys/fs/bpf
+            mountPropagation: HostToContainer
+          securityContext:
+            capabilities:
+              add: ["BPF", "NET_ADMIN"]
+              drop: ["ALL"]
+      volumes:
+      - name: cilium-run
+        hostPath:
+          path: /var/run/cilium
+      - name: bpf-maps
+        hostPath:
+          path: /sys/fs/bpf
+      - configMap:
+          defaultMode: 420
+          name: fqdn-policy-config
+        name: fqdn-policy-config-path
+      - name: envoy-sockets
+        hostPath:
+            path: /var/run/cilium/envoy/sockets
+            type: DirectoryOrCreate
+      - name: envoy-config
+        configMap:
+            name: cilium-envoy-config
+            defaultMode: 0400
+            items:
+            - key: bootstrap-config.json
+              path: bootstrap-config.json
+      hostNetwork: true

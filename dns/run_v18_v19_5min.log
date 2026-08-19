@@ -1,0 +1,79 @@
+nohup: ignoring input
+[22:32:34] ████ Deploying v1.18 SDP + v1.19 SDP in parallel ████
+daemonset.apps "acns-security-agent" deleted from kube-system namespace
+configmap "fqdn-policy-config" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+configmap/fqdn-policy-config created
+configmap/fqdn-policy-config created
+configmap/cilium-config created
+configmap/cilium-config created
+configmap/cilium-config configured
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000000-znwvl with container debugger on node aks-nodepool1-23040514-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-g72rl with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000001-tnvpk with container debugger on node aks-nodepool1-23040514-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-tn6v7 with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000002-vpvs2 with container debugger on node aks-nodepool1-23040514-vmss000002.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-nr2vc with container debugger on node aks-nodepool1-29514831-vmss000002.
+daemonset.apps/acns-security-agent created
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 1 of 3 updated pods are available...
+Warning: spec.template.metadata.annotations[container.apparmor.security.beta.kubernetes.io/fqdn-policy]: deprecated since v1.30; use the "appArmorProfile" field instead
+daemonset.apps/acns-security-agent created
+Waiting for daemon set "acns-security-agent" rollout to finish: 2 of 3 updated pods are available...
+daemon set "acns-security-agent" successfully rolled out
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "acns-security-agent" rollout to finish: 0 of 3 updated pods are available...
+daemon set "acns-security-agent" successfully rolled out
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000000-85nnb with container debugger on node aks-nodepool1-23040514-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000001-g976b with container debugger on node aks-nodepool1-23040514-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-23040514-vmss000002-5b8mv with container debugger on node aks-nodepool1-23040514-vmss000002.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-pqkt2 with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-zq7t9 with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-wb7tb with container debugger on node aks-nodepool1-29514831-vmss000002.
+[22:33:40] ████ Running 5-min tests in parallel ████
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+[22:33:56]   v18 FQDN before: 0
+[22:33:56]   v19 FQDN before: 0
+[22:33:56]   v18 PID=849286, v19 PID=849287
+[22:39:47]   v18 done
+[22:39:51]   v19 done
+[22:39:59]   v18 FQDN delta: 2031860
+[22:39:59]   v19 FQDN delta: 2362525
+[22:40:00]   ✅ v18 SDP intercepting
+[22:40:00]   ✅ v19 SDP intercepting
+[22:40:00] ████ COMPLETE ████

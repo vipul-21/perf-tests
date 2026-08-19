@@ -1,0 +1,35 @@
+nohup: ignoring input
+[22:46:01] ████ Teardown current v19 deployment ████
+daemonset.apps "acns-security-agent" deleted from kube-system namespace
+configmap "fqdn-policy-config" deleted from kube-system namespace
+daemonset.apps "cilium" deleted from kube-system namespace
+deployment.apps "cilium-operator" deleted from kube-system namespace
+configmap "cilium-config" deleted from kube-system namespace
+ciliumnetworkpolicy.cilium.io "dns-perf-fqdn-policy" deleted from default namespace
+[22:46:15] ████ Deploy v1.19 in-agent proxy ████
+configmap/cilium-config created
+configmap/cilium-config configured
+clusterrole.rbac.authorization.k8s.io/cilium unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium unchanged
+serviceaccount/cilium unchanged
+clusterrole.rbac.authorization.k8s.io/cilium-operator unchanged
+clusterrolebinding.rbac.authorization.k8s.io/cilium-operator unchanged
+serviceaccount/cilium-operator unchanged
+daemonset.apps/cilium created
+deployment.apps/cilium-operator created
+Waiting for daemon set "cilium" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "cilium" rollout to finish: 2 of 3 updated pods are available...
+daemon set "cilium" successfully rolled out
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-vhfj8 with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-72lgk with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-l9gbs with container debugger on node aks-nodepool1-29514831-vmss000002.
+[22:46:45] ████ Run 5-min test ████
+ciliumnetworkpolicy.cilium.io/dns-perf-fqdn-policy created
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000000-gwb44 with container debugger on node aks-nodepool1-29514831-vmss000000.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000001-l48h7 with container debugger on node aks-nodepool1-29514831-vmss000001.
+Creating debugging pod node-debugger-aks-nodepool1-29514831-vmss000002-kc97f with container debugger on node aks-nodepool1-29514831-vmss000002.
+[22:47:02]   FQDN before: 0
+[22:53:10]   FQDN after: 2046562  delta: 2046562
+[22:53:10]   ✅ In-agent proxy intercepting: 2046562
+[22:53:10] ████ COMPLETE ████

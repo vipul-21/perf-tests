@@ -1,0 +1,28 @@
+code: 0
+data:
+  msg: "parsing error:\nTraceback (most recent call last):\n  File \"/home/singhvipul/ws/perf-tests/dns/py/runner.py\"\
+    , line 274, in _run_perf\n    parser.parse()\n  File \"/home/singhvipul/ws/perf-tests/dns/py/data.py\"\
+    , line 80, in parse\n    self._compute_derived()\n  File \"/home/singhvipul/ws/perf-tests/dns/py/data.py\"\
+    , line 114, in _compute_derived\n    self.results[name] = float(numpy.percentile(histogram,\
+    \ ptile)) # pylint: disable=no-member\n  File \"/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py\"\
+    , line 4273, in percentile\n    return _quantile_unchecked(\n  File \"/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py\"\
+    , line 4550, in _quantile_unchecked\n    return _ureduce(a,\n  File \"/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py\"\
+    , line 3894, in _ureduce\n    r = func(a, **kwargs)\n  File \"/home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py\"\
+    , line 4727, in _quantile_ureduce_func\n    result = _quantile(arr,\n  File \"\
+    /home/singhvipul/.local/lib/python3.10/site-packages/numpy/lib/_function_base_impl.py\"\
+    , line 4849, in _quantile\n    slices_having_nans = np.isnan(arr[-1, ...])\nIndexError:\
+    \ index -1 is out of bounds for axis 0 with size 0\n"
+  ok: false
+params:
+  max_qps: null
+  pod_name: dns-perf-client-858fb7568b-hp9gq
+  query_file: all-queries.txt
+  run_id: 1777605592
+  run_length_seconds: 600
+  run_subid: 0
+stderr:
+- ''
+stdout:
+- DNS Performance Testing Tool
+- Nominum Version 2.1.0.0
+- ''

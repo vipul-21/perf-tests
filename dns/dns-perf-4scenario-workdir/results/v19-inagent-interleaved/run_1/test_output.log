@@ -1,0 +1,68 @@
+INFO 05-01 21:24:11 runner.py:77] Using cluster DNS for tests
+INFO 05-01 21:24:12 runner.py:87] DNS service IP is 10.0.0.10
+INFO 05-01 21:24:12 runner.py:489] Created rundir /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-interleaved/run_1/run-1777670652
+INFO 05-01 21:24:12 runner.py:495] Updated symlink /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-interleaved/run_1/latest
+INFO 05-01 21:24:12 runner.py:416] Starting client teardown
+INFO 05-01 21:24:13 runner.py:479] got client pods "[]"
+INFO 05-01 21:24:13 runner.py:426] Client teardown complete
+INFO 05-01 21:24:14 runner.py:184] Create Deployment/dns-perf-client ok
+INFO 05-01 21:24:15 runner.py:371] pending replicas in client deployment - '4'
+INFO 05-01 21:24:20 runner.py:371] pending replicas in client deployment - '2'
+INFO 05-01 21:24:26 runner.py:479] got client pods "['dns-perf-client-858fb7568b-6vvpt', 'dns-perf-client-858fb7568b-bnzv9', 'dns-perf-client-858fb7568b-bzchk', 'dns-perf-client-858fb7568b-j8ztq']"
+INFO 05-01 21:24:27 runner.py:386] Client pod ready for execution
+INFO 05-01 21:24:27 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-6vvpt
+INFO 05-01 21:24:28 runner.py:413] Query files copied
+INFO 05-01 21:24:29 runner.py:386] Client pod ready for execution
+INFO 05-01 21:24:29 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-bnzv9
+INFO 05-01 21:24:30 runner.py:413] Query files copied
+INFO 05-01 21:24:31 runner.py:386] Client pod ready for execution
+INFO 05-01 21:24:31 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-bzchk
+INFO 05-01 21:24:32 runner.py:413] Query files copied
+INFO 05-01 21:24:32 runner.py:386] Client pod ready for execution
+INFO 05-01 21:24:32 runner.py:405] Copying query files to client dns-perf-client-858fb7568b-j8ztq
+INFO 05-01 21:24:33 runner.py:413] Query files copied
+INFO 05-01 21:24:33 runner.py:103] Starting creation of test services
+INFO 05-01 21:24:35 runner.py:184] Create Service/test-svc1 ok
+INFO 05-01 21:24:35 runner.py:184] Create Service/test-svc2 ok
+INFO 05-01 21:24:36 runner.py:184] Create Service/test-svc3 ok
+INFO 05-01 21:24:37 runner.py:184] Create Service/test-svc4 ok
+INFO 05-01 21:24:37 runner.py:184] Create Service/test-svc5 ok
+INFO 05-01 21:24:38 runner.py:184] Create Service/test-svc6 ok
+INFO 05-01 21:24:39 runner.py:184] Create Service/test-svc7 ok
+INFO 05-01 21:24:40 runner.py:184] Create Service/test-svc8 ok
+INFO 05-01 21:24:40 runner.py:184] Create Service/test-svc9 ok
+INFO 05-01 21:24:41 runner.py:184] Create Service/test-svc10 ok
+INFO 05-01 21:24:42 runner.py:184] Create Service/test-svc11 ok
+INFO 05-01 21:24:43 runner.py:184] Create Service/test-svc12 ok
+INFO 05-01 21:24:43 runner.py:184] Create Service/test-svc13 ok
+INFO 05-01 21:24:44 runner.py:184] Create Service/test-svc14 ok
+INFO 05-01 21:24:45 runner.py:184] Create Service/test-svc15 ok
+INFO 05-01 21:24:45 runner.py:184] Create Service/test-svc16 ok
+INFO 05-01 21:24:46 runner.py:184] Create Service/test-svc17 ok
+INFO 05-01 21:24:47 runner.py:184] Create Service/test-svc18 ok
+INFO 05-01 21:24:48 runner.py:184] Create Service/test-svc19 ok
+INFO 05-01 21:24:48 runner.py:184] Create Service/test-svc20 ok
+INFO 05-01 21:24:48 runner.py:235] Running test case: {'run_id': 1777670652, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-6vvpt', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 21:24:48 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-interleaved/run_1/run-1777670652/result-0-dns-perf-client-858fb7568b-6vvpt.out
+INFO 05-01 21:24:48 runner.py:235] Running test case: {'run_id': 1777670652, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-bnzv9', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 21:24:48 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-interleaved/run_1/run-1777670652/result-0-dns-perf-client-858fb7568b-bnzv9.out
+INFO 05-01 21:24:48 runner.py:235] Running test case: {'run_id': 1777670652, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-bzchk', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 21:24:48 runner.py:235] Running test case: {'run_id': 1777670652, 'run_subid': 0, 'pod_name': 'dns-perf-client-858fb7568b-j8ztq', 'pv': [(<run_length_seconds>, 120), (<max_qps>, None), (<query_file>, 'all-queries.txt')]}
+INFO 05-01 21:24:48 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-interleaved/run_1/run-1777670652/result-0-dns-perf-client-858fb7568b-bzchk.out
+INFO 05-01 21:24:48 runner.py:239] Writing to output file /home/singhvipul/ws/perf-tests/dns/dns-perf-4scenario-workdir/results/v19-inagent-interleaved/run_1/run-1777670652/result-0-dns-perf-client-858fb7568b-j8ztq.out
+INFO 05-01 21:26:50 runner.py:276] Test results parsed
+INFO 05-01 21:26:52 runner.py:276] Test results parsed
+INFO 05-01 21:26:52 runner.py:276] Test results parsed
+INFO 05-01 21:26:52 runner.py:276] Test results parsed
+INFO 05-01 21:26:52 runner.py:345] Starting server teardown
+INFO 05-01 21:26:54 runner.py:437] Waiting for server to be deleted (0 pods active)
+INFO 05-01 21:26:54 runner.py:353] Server teardown ok
+INFO 05-01 21:26:59 runner.py:416] Starting client teardown
+INFO 05-01 21:27:00 runner.py:479] got client pods "['dns-perf-client-858fb7568b-6vvpt', 'dns-perf-client-858fb7568b-bnzv9', 'dns-perf-client-858fb7568b-bzchk', 'dns-perf-client-858fb7568b-j8ztq']"
+INFO 05-01 21:27:01 runner.py:424] Waiting for client pod to terminate
+INFO 05-01 21:27:01 runner.py:479] got client pods "['dns-perf-client-858fb7568b-6vvpt', 'dns-perf-client-858fb7568b-bnzv9', 'dns-perf-client-858fb7568b-bzchk', 'dns-perf-client-858fb7568b-j8ztq']"
+INFO 05-01 21:27:02 runner.py:424] Waiting for client pod to terminate
+INFO 05-01 21:27:03 runner.py:479] got client pods "['dns-perf-client-858fb7568b-bzchk']"
+INFO 05-01 21:27:04 runner.py:424] Waiting for client pod to terminate
+INFO 05-01 21:27:04 runner.py:479] got client pods "[]"
+INFO 05-01 21:27:04 runner.py:426] Client teardown complete

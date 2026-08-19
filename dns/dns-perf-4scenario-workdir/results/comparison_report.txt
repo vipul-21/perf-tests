@@ -1,0 +1,52 @@
+╔══════════════════════════════════════════════════════════════╗
+║            DNS Performance — 4-Scenario Comparison          ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━ Scenario 1: v18-cilium-sdp ━━━
+  Cluster: byo-cni
+  K8s: unknown
+  Nodes: 3 x Standard_D4s_v3
+  CoreDNS replicas: 1
+  Run duration: 30s
+  Results:
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=109628, Done=109528
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=107536, Done=107436
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=107822, Done=107722
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=108672, Done=108572
+
+━━━ Scenario 2: v19-cilium-sdp ━━━
+  Cluster: byo-cni
+  K8s: unknown
+  Nodes: 3 x Standard_D4s_v3
+  CoreDNS replicas: 2
+  Run duration: 600s
+  Results:
+    Run 1: PARSE ERROR or FAILED
+    Run 1: PARSE ERROR or FAILED
+    Run 1: PARSE ERROR or FAILED
+    Run 1: PARSE ERROR or FAILED
+
+━━━ Scenario 3: v19-cilium-inagent-proxy ━━━
+  Cluster: byo-cni
+  K8s: unknown
+  Nodes: 3 x Standard_D4s_v3
+  CoreDNS replicas: 2
+  Run duration: 600s
+  Results:
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=2900599, Done=2900592
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=2966568, Done=2966556
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=2943504, Done=2943454
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=9114509, Done=9114477
+
+━━━ Scenario 4: v19-cilium-no-proxy ━━━
+  Cluster: byo-cni
+  K8s: unknown
+  Nodes: 3 x Standard_D4s_v3
+  CoreDNS replicas: 2
+  Run duration: 600s
+  Results:
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=2567040, Done=2567000
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=2525348, Done=2525344
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=2530957, Done=2530955
+    Run 1: QPS=N/A, Lat_avg=N/A, Lat_p99=N/A, Sent=2535023, Done=2535009
+

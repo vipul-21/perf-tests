@@ -1,0 +1,722 @@
+nohup: ignoring input
+[03:06:46] ╔══════════════════════════════════════════════════════╗
+[03:06:46] ║  Build Cilium + SDP Images for DNS Perf Testing     ║
+[03:06:46] ╠══════════════════════════════════════════════════════╣
+[03:06:46] ║  Registry: acnpublic.azurecr.io
+[03:06:46] ║  Arch:     amd64
+[03:06:46] ║  Tag:      dns-perf
+[03:06:46] ║  Version:  v1.19
+[03:06:46] ╚══════════════════════════════════════════════════════╝
+[03:06:46] 
+[03:06:46] Logging into ACR: acnpublic
+Login Succeeded
+[03:06:50] ═══════════════════════════════════════════════
+[03:06:50] Building v1.19 images from upstream/dev/v1.19
+[03:06:50]   Tag: dns-perf-v1.19
+[03:06:50] ═══════════════════════════════════════════════
+[03:06:50] Creating worktree at /home/singhvipul/ws/cilium-private/.worktree-v1.19
+Preparing worktree (detached HEAD 21d89141b3)
+Updating files:  22% (4985/22396)Updating files:  23% (5152/22396)Updating files:  24% (5376/22396)Updating files:  25% (5599/22396)Updating files:  26% (5823/22396)Updating files:  27% (6047/22396)Updating files:  28% (6271/22396)Updating files:  29% (6495/22396)Updating files:  30% (6719/22396)Updating files:  31% (6943/22396)Updating files:  32% (7167/22396)Updating files:  33% (7391/22396)Updating files:  34% (7615/22396)Updating files:  35% (7839/22396)Updating files:  36% (8063/22396)Updating files:  37% (8287/22396)Updating files:  38% (8511/22396)Updating files:  39% (8735/22396)Updating files:  40% (8959/22396)Updating files:  41% (9183/22396)Updating files:  42% (9407/22396)Updating files:  43% (9631/22396)Updating files:  44% (9855/22396)Updating files:  45% (10079/22396)Updating files:  46% (10303/22396)Updating files:  47% (10527/22396)Updating files:  48% (10751/22396)Updating files:  49% (10975/22396)Updating files:  50% (11198/22396)Updating files:  50% (11383/22396)Updating files:  51% (11422/22396)Updating files:  52% (11646/22396)Updating files:  53% (11870/22396)Updating files:  54% (12094/22396)Updating files:  55% (12318/22396)Updating files:  56% (12542/22396)Updating files:  57% (12766/22396)Updating files:  58% (12990/22396)Updating files:  59% (13214/22396)Updating files:  60% (13438/22396)Updating files:  61% (13662/22396)Updating files:  62% (13886/22396)Updating files:  63% (14110/22396)Updating files:  64% (14334/22396)Updating files:  65% (14558/22396)Updating files:  66% (14782/22396)Updating files:  67% (15006/22396)Updating files:  68% (15230/22396)Updating files:  69% (15454/22396)Updating files:  70% (15678/22396)Updating files:  71% (15902/22396)Updating files:  71% (15998/22396)Updating files:  72% (16126/22396)Updating files:  73% (16350/22396)Updating files:  74% (16574/22396)Updating files:  75% (16797/22396)Updating files:  76% (17021/22396)Updating files:  77% (17245/22396)Updating files:  78% (17469/22396)Updating files:  79% (17693/22396)Updating files:  80% (17917/22396)Updating files:  81% (18141/22396)Updating files:  82% (18365/22396)Updating files:  83% (18589/22396)Updating files:  84% (18813/22396)Updating files:  85% (19037/22396)Updating files:  86% (19261/22396)Updating files:  87% (19485/22396)Updating files:  88% (19709/22396)Updating files:  89% (19933/22396)Updating files:  90% (20157/22396)Updating files:  91% (20381/22396)Updating files:  92% (20605/22396)Updating files:  93% (20829/22396)Updating files:  94% (21053/22396)Updating files:  95% (21277/22396)Updating files:  96% (21501/22396)Updating files:  96% (21693/22396)Updating files:  97% (21725/22396)Updating files:  98% (21949/22396)Updating files:  99% (22173/22396)Updating files: 100% (22396/22396)Updating files: 100% (22396/22396), done.
+HEAD is now at 21d89141b3 Prepare for release v1.19.3
+[03:06:54] Building cilium agent...
+Using Docker Buildx builder "lucid_ganguly" with build flags "--platform linux/amd64 --load".
+: images/cilium/Dockerfile acnpublic.azurecr.io/cilium/:amd64-dns-perf-v1.19
+docker buildx build -f images/cilium/Dockerfile  --platform linux/amd64 --load  --build-arg MODIFIERS="NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN= " --build-arg CILIUM_SHA= --build-arg OPERATOR_VARIANT=cilium --build-arg DEBUG_HOLD= --target release -t acnpublic.azurecr.io/cilium/cilium:amd64-dns-perf-v1.19 .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 10.73kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for mcr.microsoft.com/azurelinux/distroless/base:3.0
+#2 ...
+
+#3 [internal] load metadata for quay.io/cilium/cilium-runtime:5c1c061d92e9acfdfb12972db099c203850ad326@sha256:c3a6925887fd8d1e87f716986ba0376a31690842b9155d085e3593624af1e0dc
+#3 DONE 0.3s
+
+#4 [internal] load metadata for quay.io/cilium/cilium-builder:12d704cc695d5f38782aec98b04b33d87b90fa07@sha256:05c9bc978f58d9c593ee3e63bf8affc1b8d2e56b212e84d317a35cb2f6846003
+#4 DONE 0.4s
+
+#2 [internal] load metadata for mcr.microsoft.com/azurelinux/distroless/base:3.0
+#2 DONE 0.5s
+
+#5 [internal] load metadata for quay.io/cilium/cilium-envoy:v1.36.6-1776000132-2437d2edeaf4d9b56ef279bd0d71127440c067aa@sha256:ba0ab8adac082d50d525fd2c5ba096c8facea3a471561b7c61c7a5b9c2e0de0d
+#5 DONE 0.8s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [builder 1/7] FROM quay.io/cilium/cilium-builder:12d704cc695d5f38782aec98b04b33d87b90fa07@sha256:05c9bc978f58d9c593ee3e63bf8affc1b8d2e56b212e84d317a35cb2f6846003
+#7 resolve quay.io/cilium/cilium-builder:12d704cc695d5f38782aec98b04b33d87b90fa07@sha256:05c9bc978f58d9c593ee3e63bf8affc1b8d2e56b212e84d317a35cb2f6846003 0.2s done
+#7 DONE 0.2s
+
+#8 [release  1/10] FROM quay.io/cilium/cilium-runtime:5c1c061d92e9acfdfb12972db099c203850ad326@sha256:c3a6925887fd8d1e87f716986ba0376a31690842b9155d085e3593624af1e0dc
+#8 resolve quay.io/cilium/cilium-runtime:5c1c061d92e9acfdfb12972db099c203850ad326@sha256:c3a6925887fd8d1e87f716986ba0376a31690842b9155d085e3593624af1e0dc
+#8 resolve quay.io/cilium/cilium-runtime:5c1c061d92e9acfdfb12972db099c203850ad326@sha256:c3a6925887fd8d1e87f716986ba0376a31690842b9155d085e3593624af1e0dc 0.2s done
+#8 DONE 0.2s
+
+#9 [fips 1/1] FROM mcr.microsoft.com/azurelinux/distroless/base:3.0@sha256:32820d2cf20e896aa9111742dd683dd0ccff370f742e256889bb3bb50320c0d4
+#9 resolve mcr.microsoft.com/azurelinux/distroless/base:3.0@sha256:32820d2cf20e896aa9111742dd683dd0ccff370f742e256889bb3bb50320c0d4 0.2s done
+#9 DONE 0.2s
+
+#10 [release  2/10] RUN echo ". /etc/profile.d/bash_completion.sh" >> /etc/bash.bashrc
+#10 CACHED
+
+#11 [release  3/10] COPY --from=cilium-envoy /usr/lib/libcilium.so /usr/lib/libcilium.so
+#11 CACHED
+
+#12 [cilium-envoy 1/1] FROM quay.io/cilium/cilium-envoy:v1.36.6-1776000132-2437d2edeaf4d9b56ef279bd0d71127440c067aa@sha256:ba0ab8adac082d50d525fd2c5ba096c8facea3a471561b7c61c7a5b9c2e0de0d
+#12 resolve quay.io/cilium/cilium-envoy:v1.36.6-1776000132-2437d2edeaf4d9b56ef279bd0d71127440c067aa@sha256:ba0ab8adac082d50d525fd2c5ba096c8facea3a471561b7c61c7a5b9c2e0de0d 0.2s done
+#12 DONE 0.3s
+
+#6 [internal] load build context
+#6 transferring context: 32B
+#6 ...
+
+#12 [cilium-envoy 1/1] FROM quay.io/cilium/cilium-envoy:v1.36.6-1776000132-2437d2edeaf4d9b56ef279bd0d71127440c067aa@sha256:ba0ab8adac082d50d525fd2c5ba096c8facea3a471561b7c61c7a5b9c2e0de0d
+#12 sha256:f93286fb472679549cffca28ecf805eeaa83f033ac22704f826778a92dcc519c 38.20MB / 38.20MB 3.6s done
+#12 extracting sha256:f93286fb472679549cffca28ecf805eeaa83f033ac22704f826778a92dcc519c 1.2s done
+#12 DONE 5.2s
+
+#6 [internal] load build context
+#6 transferring context: 97.62MB 5.1s
+#6 ...
+
+#13 [release  4/10] COPY --from=cilium-envoy /usr/bin/cilium-envoy /usr/bin/cilium-envoy-starter /usr/bin/
+#13 DONE 3.0s
+
+#6 [internal] load build context
+#6 transferring context: 210.87MB 10.1s
+#6 transferring context: 222.41MB 10.7s done
+#6 DONE 10.9s
+
+#9 [fips 1/1] FROM mcr.microsoft.com/azurelinux/distroless/base:3.0@sha256:32820d2cf20e896aa9111742dd683dd0ccff370f742e256889bb3bb50320c0d4
+#9 sha256:28a530a744711e846df4c1ad6a6fe74e172e54f4236b356470bf5951182ac633 14.05MB / 14.05MB 1.5s done
+#9 extracting sha256:28a530a744711e846df4c1ad6a6fe74e172e54f4236b356470bf5951182ac633
+#9 ...
+
+#14 [builder 2/7] WORKDIR /go/src/github.com/cilium/cilium
+#14 CACHED
+
+#15 [builder 3/7] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=amd64 DESTDIR=/tmp/install/linux/amd64 PKG_BUILD=1 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"') NOSTRIP=1     build-container install-container-binary
+#15 CACHED
+
+#9 [fips 1/1] FROM mcr.microsoft.com/azurelinux/distroless/base:3.0@sha256:32820d2cf20e896aa9111742dd683dd0ccff370f742e256889bb3bb50320c0d4
+#9 extracting sha256:28a530a744711e846df4c1ad6a6fe74e172e54f4236b356470bf5951182ac633 1.0s done
+#9 DONE 2.9s
+
+#16 [builder 4/7] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=${BUILDARCH} DESTDIR=/tmp/install/linux/amd64 PKG_BUILD=1 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"')     install-bash-completion licenses-all &&     mv LICENSE.all /tmp/install/linux/amd64/LICENSE.all
+#16 1.008 install -m 0755 -d /tmp/install/linux/amd64/usr/bin
+#16 1.025 for i in cilium-dbg daemon cilium-health bugtool hubble tools/mount tools/sysctlfix plugins/cilium-cni; do make  -C $i install-bash-completion; done
+#16 1.031 make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+#16 1.122 CGO_ENABLED=0 go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.19.3 " -s -w -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=2437d2edeaf4d9b56ef279bd0d71127440c067aa" ' -tags=osusergo  -o cilium-dbg
+#16 12.99 install -m 0755 -d /tmp/install/linux/amd64/etc/bash_completion.d
+#16 13.00 ./cilium-dbg completion bash > cilium-dbg_bash_completion
+#16 13.07 install -m 0644 -T cilium-dbg_bash_completion /tmp/install/linux/amd64/etc/bash_completion.d/cilium-dbg
+#16 13.08 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+#16 13.08 make[1]: Entering directory '/go/src/github.com/cilium/cilium/daemon'
+#16 13.15 make[1]: Nothing to be done for 'install-bash-completion'.
+#16 13.15 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/daemon'
+#16 13.16 make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-health'
+#16 13.22 make[1]: Nothing to be done for 'install-bash-completion'.
+#16 13.22 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-health'
+#16 13.22 make[1]: Entering directory '/go/src/github.com/cilium/cilium/bugtool'
+#16 13.29 make[1]: Nothing to be done for 'install-bash-completion'.
+#16 13.29 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/bugtool'
+#16 13.30 make[1]: Entering directory '/go/src/github.com/cilium/cilium/hubble'
+#16 13.40 CGO_ENABLED=0 go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.19.3 " -s -w -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=2437d2edeaf4d9b56ef279bd0d71127440c067aa" -X "github.com/cilium/cilium/hubble/pkg.GitBranch=" -X "github.com/cilium/cilium/hubble/pkg.GitHash=" -X "github.com/cilium/cilium/hubble/pkg.Version=v1.19.3" ' -tags=osusergo  -o ./hubble .
+#16 17.89 install -m 0755 -d /tmp/install/linux/amd64/etc/bash_completion.d
+#16 17.89 ./hubble completion bash > hubble_bash_completion
+#16 17.94 install -m 0644 -T hubble_bash_completion /tmp/install/linux/amd64/etc/bash_completion.d/hubble
+#16 17.94 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/hubble'
+#16 17.95 make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/mount'
+#16 18.05 make[1]: Nothing to be done for 'install-bash-completion'.
+#16 18.05 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/mount'
+#16 18.05 make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+#16 18.13 make[1]: Nothing to be done for 'install-bash-completion'.
+#16 18.13 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+#16 18.14 make[1]: Entering directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+#16 18.25 make[1]: Nothing to be done for 'install-bash-completion'.
+#16 18.25 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+#16 DONE 18.9s
+
+#17 [builder 5/7] RUN set -xe &&     export D=/tmp/debug/linux/amd64 &&     cd /tmp/install/linux/amd64 &&     find . -type f       -executable       -exec sh -c         'OBJCOPY_CMD=objcopy;          if [ "${TARGETARCH}" = "amd64" ]; then OBJCOPY_CMD=x86_64-linux-gnu-objcopy;          elif [ "${TARGETARCH}" = "arm64" ]; then OBJCOPY_CMD=aarch64-linux-gnu-objcopy;          fi;          filename=$(basename ${0}) &&          ${OBJCOPY_CMD} --only-keep-debug ${0} ${0}.debug &&          if ! echo "$MODIFIERS" | grep "NOSTRIP=1" ; then ${OBJCOPY_CMD} --strip-all ${0} && (cd $(dirname ${0}) && ${OBJCOPY_CMD} --add-gnu-debuglink=${filename}.debug ${filename}) ; fi &&          mkdir -p $(dirname ${D}/${0}) &&          mv -v ${0}.debug ${D}/${0}.debug'       {} ;
+#17 0.402 + export D=/tmp/debug/linux/amd64
+#17 0.402 + cd /tmp/install/linux/amd64
+#17 0.402 + find . -type f -executable -exec sh -c OBJCOPY_CMD=objcopy;          if [ "${TARGETARCH}" = "amd64" ]; then OBJCOPY_CMD=x86_64-linux-gnu-objcopy;          elif [ "${TARGETARCH}" = "arm64" ]; then OBJCOPY_CMD=aarch64-linux-gnu-objcopy;          fi;          filename=$(basename ${0}) &&          ${OBJCOPY_CMD} --only-keep-debug ${0} ${0}.debug &&          if ! echo "$MODIFIERS" | grep "NOSTRIP=1" ; then ${OBJCOPY_CMD} --strip-all ${0} && (cd $(dirname ${0}) && ${OBJCOPY_CMD} --add-gnu-debuglink=${filename}.debug ${filename}) ; fi &&          mkdir -p $(dirname ${D}/${0}) &&          mv -v ${0}.debug ${D}/${0}.debug {} ;
+#17 1.627 renamed './opt/cni/bin/cilium-cni.debug' -> '/tmp/debug/linux/amd64/./opt/cni/bin/cilium-cni.debug'
+#17 1.823 renamed './usr/bin/cilium-bugtool.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-bugtool.debug'
+#17 2.998 renamed './usr/bin/hubble.debug' -> '/tmp/debug/linux/amd64/./usr/bin/hubble.debug'
+#17 4.841 renamed './usr/bin/cilium-dbg.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-dbg.debug'
+#17 5.725 renamed './usr/bin/cilium-health.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-health.debug'
+#17 8.276 renamed './usr/bin/cilium-agent.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-agent.debug'
+#17 8.375 renamed './usr/bin/cilium-sysctlfix.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-sysctlfix.debug'
+#17 8.473 renamed './usr/bin/cilium-health-responder.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-health-responder.debug'
+#17 8.598 renamed './usr/bin/cilium-mount.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-mount.debug'
+#17 DONE 8.7s
+
+#18 [builder 6/7] RUN for f in $(find /tmp/debug -type f -name '*.debug') ; do readelf -S ${f} | grep -q \.symtab ||     (echo Debug symbols are missing in ${f} - possibly due to incorrect build parameters && false); done
+#18 DONE 0.5s
+
+#19 [builder 7/7] COPY images/cilium/init-container.sh      plugins/cilium-cni/install-plugin.sh      plugins/cilium-cni/cni-uninstall.sh        /tmp/install/linux/amd64
+#19 DONE 0.3s
+
+#20 [release  5/10] COPY --from=builder /tmp/install/linux/amd64 /
+#20 DONE 2.0s
+
+#21 [release  6/10] COPY --from=fips /etc /tmp/fips/etc
+#21 DONE 0.2s
+
+#22 [release  7/10] COPY --from=fips /usr/lib /tmp/fips/usr/lib
+#22 DONE 0.3s
+
+#23 [release  8/10] COPY --from=fips /usr/include /tmp/fips/usr/include
+#23 DONE 0.1s
+
+#24 [release  9/10] RUN cp -r --update=none /tmp/fips/etc/. /etc/ &&     cp -r --update=none /tmp/fips/usr/lib/. /usr/lib/ &&     cp -r --update=none /tmp/fips/usr/include/. /usr/include/ &&     rm -rf /tmp/fips
+#24 DONE 0.7s
+
+#25 [release 10/10] WORKDIR /home/cilium
+#25 DONE 0.1s
+
+#26 exporting to image
+#26 exporting layers
+#26 exporting layers 16.7s done
+#26 exporting manifest sha256:f3a72d9f1a4f12726044902da6544f04132bad3a53c686f1d7013659906df94a 0.0s done
+#26 exporting config sha256:157f3bb85e97075929fbb34bb500cb2fda3924c0006013926332f7ca342ea139 0.0s done
+#26 exporting attestation manifest sha256:fd4af4624743a4c613cb525d480efc0331b4dc942334013ab62d31ab0d26bfb6
+#26 exporting attestation manifest sha256:fd4af4624743a4c613cb525d480efc0331b4dc942334013ab62d31ab0d26bfb6 0.1s done
+#26 exporting manifest list sha256:81270eee182293cbaa8fd78f15e5decff08e7e5a1df51205bfd3fe50905335b0 0.0s done
+#26 naming to acnpublic.azurecr.io/cilium/cilium:amd64-dns-perf-v1.19
+#26 naming to acnpublic.azurecr.io/cilium/cilium:amd64-dns-perf-v1.19 done
+#26 unpacking to acnpublic.azurecr.io/cilium/cilium:amd64-dns-perf-v1.19
+#26 unpacking to acnpublic.azurecr.io/cilium/cilium:amd64-dns-perf-v1.19 4.3s done
+#26 DONE 21.3s
+Define "DOCKER_FLAGS=--push" to push the build results.
+[03:08:07] Pushing acnpublic.azurecr.io/cilium/cilium:amd64-dns-perf-v1.19
+The push refers to repository [acnpublic.azurecr.io/cilium/cilium]
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+0e38bcec4a18: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+e480638d1f5e: Waiting
+80178c695e18: Waiting
+47662c00d4cb: Waiting
+4639e22ad21d: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+47662c00d4cb: Waiting
+be7c62911e2e: Waiting
+e8e28b7714a5: Waiting
+549a7fced590: Waiting
+0e38bcec4a18: Waiting
+c2f80bb3df68: Waiting
+632929b81f6b: Waiting
+3beb502616a0: Waiting
+e480638d1f5e: Waiting
+be7c62911e2e: Waiting
+0e38bcec4a18: Waiting
+80178c695e18: Pushed
+c2f80bb3df68: Pushed
+0e38bcec4a18: Pushed
+3beb502616a0: Pushed
+632929b81f6b: Pushed
+47662c00d4cb: Pushed
+e8e28b7714a5: Pushed
+e480638d1f5e: Pushed
+549a7fced590: Pushed
+4639e22ad21d: Pushed
+be7c62911e2e: Pushed
+amd64-dns-perf-v1.19: digest: sha256:81270eee182293cbaa8fd78f15e5decff08e7e5a1df51205bfd3fe50905335b0 size: 856
+[03:08:32] Building cilium operator-generic...
+Using Docker Buildx builder "lucid_ganguly" with build flags "--platform linux/amd64 --load".
+: images/operator/Dockerfile acnpublic.azurecr.io/cilium/cilium-distroless-init:amd64-dns-perf-v1.19
+docker buildx build -f images/operator/Dockerfile  --platform linux/amd64 --load  --build-arg MODIFIERS="NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN= " --build-arg CILIUM_SHA= --build-arg OPERATOR_VARIANT=operator-generic --build-arg DEBUG_HOLD= --target release -t acnpublic.azurecr.io/cilium/operator-generic:amd64-dns-perf-v1.19 .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 9.39kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for quay.io/cilium/cilium-builder:12d704cc695d5f38782aec98b04b33d87b90fa07@sha256:05c9bc978f58d9c593ee3e63bf8affc1b8d2e56b212e84d317a35cb2f6846003
+#2 DONE 0.2s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.23.3@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+#3 ...
+
+#4 [internal] load metadata for docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#4 DONE 1.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.23.3@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+#3 DONE 1.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [builder 1/6] FROM quay.io/cilium/cilium-builder:12d704cc695d5f38782aec98b04b33d87b90fa07@sha256:05c9bc978f58d9c593ee3e63bf8affc1b8d2e56b212e84d317a35cb2f6846003
+#6 resolve quay.io/cilium/cilium-builder:12d704cc695d5f38782aec98b04b33d87b90fa07@sha256:05c9bc978f58d9c593ee3e63bf8affc1b8d2e56b212e84d317a35cb2f6846003 0.1s done
+#6 DONE 0.1s
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 resolve docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 resolve docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c 0.1s done
+#7 DONE 0.1s
+
+#8 [certs 1/2] FROM docker.io/library/alpine:3.23.3@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+#8 resolve docker.io/library/alpine:3.23.3@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 0.1s done
+#8 DONE 0.2s
+
+#5 [internal] load build context
+#5 transferring context: 1.60MB 0.1s
+#5 transferring context: 127.87MB 5.2s
+#5 transferring context: 222.41MB 10.1s done
+#5 DONE 10.2s
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 ...
+
+#9 [builder 2/6] WORKDIR /go/src/github.com/cilium/cilium
+#9 CACHED
+
+#10 [builder 3/6] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=amd64 DESTDIR=/out/linux/amd64 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"') NOSTRIP=1     build-container-operator-generic install-container-binary-operator-generic
+#10 ...
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 DONE 1.0s
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 sha256:93087e76a1e2e414b67bdb5aae343d9757f462cafc76441021d2208fde0c315e 125B / 125B 0.1s done
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 0B / 60.18MB 0.2s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 0B / 102.17MB 0.2s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 0B / 67.78MB 0.2s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 0B / 25.62MB 0.2s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 3.15MB / 60.18MB 0.6s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 2.10MB / 25.62MB 0.6s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 4.19MB / 67.78MB 0.9s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 4.19MB / 25.62MB 0.9s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 6.29MB / 60.18MB 1.1s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 5.24MB / 102.17MB 1.1s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 6.29MB / 25.62MB 1.4s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 9.44MB / 60.18MB 1.7s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 8.39MB / 67.78MB 1.7s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 8.39MB / 25.62MB 1.7s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 10.49MB / 102.17MB 2.0s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 10.49MB / 25.62MB 2.0s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 12.58MB / 60.18MB 2.1s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 12.58MB / 67.78MB 2.3s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 12.58MB / 25.62MB 2.3s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 14.68MB / 25.62MB 2.6s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 15.73MB / 60.18MB 2.7s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 15.73MB / 102.17MB 2.7s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 16.78MB / 67.78MB 2.9s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 16.78MB / 25.62MB 2.9s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 18.87MB / 60.18MB 3.2s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 18.87MB / 25.62MB 3.2s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 20.97MB / 102.17MB 3.5s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 20.97MB / 25.62MB 3.5s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 22.02MB / 60.18MB 3.6s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 20.97MB / 67.78MB 3.6s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 23.07MB / 25.62MB 3.8s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 25.17MB / 60.18MB 4.1s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 25.15MB / 25.62MB 4.1s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 26.21MB / 102.17MB 4.2s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 25.17MB / 67.78MB 4.2s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 28.31MB / 60.18MB 4.5s
+#7 sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 25.62MB / 25.62MB 4.3s done
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 0B / 49.30MB 0.2s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 31.46MB / 60.18MB 4.8s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 29.36MB / 67.78MB 4.7s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 31.46MB / 102.17MB 5.0s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 3.15MB / 49.30MB 0.6s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 34.60MB / 60.18MB 5.3s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 33.55MB / 67.78MB 5.3s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 6.29MB / 49.30MB 1.1s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 37.75MB / 60.18MB 5.7s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 36.70MB / 102.17MB 5.7s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 37.75MB / 67.78MB 5.9s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 9.44MB / 49.30MB 1.5s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 40.89MB / 60.18MB 6.2s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 12.58MB / 49.30MB 1.8s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 41.94MB / 102.17MB 6.3s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 44.04MB / 60.18MB 6.6s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 41.94MB / 67.78MB 6.5s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 15.73MB / 49.30MB 2.3s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 48.23MB / 60.18MB 7.2s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 47.19MB / 102.17MB 7.1s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 46.14MB / 67.78MB 7.1s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 18.87MB / 49.30MB 2.9s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 51.38MB / 60.18MB 7.8s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 22.02MB / 49.30MB 3.3s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 52.43MB / 102.17MB 7.8s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 50.33MB / 67.78MB 7.8s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 54.53MB / 60.18MB 8.3s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 25.17MB / 49.30MB 3.8s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 54.53MB / 67.78MB 8.4s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 57.67MB / 60.18MB 8.7s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 57.67MB / 102.17MB 8.7s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 28.31MB / 49.30MB 4.4s
+#7 sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 60.18MB / 60.18MB 9.1s done
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 58.72MB / 67.78MB 9.0s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 31.46MB / 49.30MB 4.8s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 63.96MB / 102.17MB 9.5s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 34.60MB / 49.30MB 5.1s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 63.96MB / 67.78MB 9.6s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 37.75MB / 49.30MB 5.4s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 70.25MB / 102.17MB 10.1s
+#7 sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 67.78MB / 67.78MB 10.1s done
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 40.89MB / 49.30MB 5.7s
+#7 ...
+
+#10 [builder 3/6] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=amd64 DESTDIR=/out/linux/amd64 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"') NOSTRIP=1     build-container-operator-generic install-container-binary-operator-generic
+#10 0.969 make  -C operator cilium-operator-generic
+#10 0.977 make[1]: Entering directory '/go/src/github.com/cilium/cilium/operator'
+#10 1.153 CGO_ENABLED=0 GOARCH=amd64 go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.19.3 " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=2437d2edeaf4d9b56ef279bd0d71127440c067aa" ' -tags=osusergo,ipam_provider_operator  -o cilium-operator-generic
+#10 ...
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 76.15MB / 102.17MB 10.5s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 45.09MB / 49.30MB 6.0s
+#7 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 49.30MB / 49.30MB 6.4s done
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 83.89MB / 102.17MB 11.0s
+#7 extracting sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 89.13MB / 102.17MB 11.4s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 94.37MB / 102.17MB 11.7s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 100.66MB / 102.17MB 12.0s
+#7 sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 102.17MB / 102.17MB 12.3s done
+#7 extracting sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 2.4s done
+#7 DONE 14.3s
+
+#10 [builder 3/6] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=amd64 DESTDIR=/out/linux/amd64 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"') NOSTRIP=1     build-container-operator-generic install-container-binary-operator-generic
+#10 ...
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 extracting sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55
+#7 extracting sha256:f33970743aee750df25f6c661132b7401c8fefe930e5f4803f4c8b6f567a6b55 1.0s done
+#7 DONE 15.3s
+
+#10 [builder 3/6] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=amd64 DESTDIR=/out/linux/amd64 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"') NOSTRIP=1     build-container-operator-generic install-container-binary-operator-generic
+#10 ...
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 extracting sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987
+#7 extracting sha256:5397da1d1537c4d725f3090c5688a582e14eeaf7743d75d9b38bad1649554987 4.5s done
+#7 DONE 19.9s
+
+#10 [builder 3/6] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=amd64 DESTDIR=/out/linux/amd64 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"') NOSTRIP=1     build-container-operator-generic install-container-binary-operator-generic
+#10 17.05 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/operator'
+#10 17.05 install -m 0755 -d /out/linux/amd64/usr/bin
+#10 17.06 make  -C operator install-generic
+#10 17.07 make[1]: Entering directory '/go/src/github.com/cilium/cilium/operator'
+#10 17.19 install -m 0755 -d /out/linux/amd64/usr/bin
+#10 17.19 install -m 0755 cilium-operator-generic /out/linux/amd64/usr/bin
+#10 17.36 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/operator'
+#10 DONE 20.9s
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 extracting sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd
+#7 ...
+
+#11 [builder 4/6] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=${BUILDARCH} licenses-all && mv LICENSE.all /out/linux/amd64
+#11 DONE 2.4s
+
+#12 [builder 5/6] RUN set -xe &&     export D=/tmp/debug/linux/amd64 &&     cd /out/linux/amd64 &&     find . -type f       -executable       -exec sh -c         'filename=$(basename ${0}) &&          objcopy --only-keep-debug ${0} ${0}.debug &&          if ! echo "$MODIFIERS" | grep "NOSTRIP=1" ; then objcopy --strip-all ${0} && (cd $(dirname ${0}) && objcopy --add-gnu-debuglink=${filename}.debug ${filename}) ; fi &&          mkdir -p $(dirname ${D}/${0}) &&          mv -v ${0}.debug ${D}/${0}.debug'       {} ;
+#12 0.413 + export D=/tmp/debug/linux/amd64
+#12 0.413 + cd /out/linux/amd64
+#12 0.413 + find . -type f -executable -exec sh -c filename=$(basename ${0}) &&          objcopy --only-keep-debug ${0} ${0}.debug &&          if ! echo "$MODIFIERS" | grep "NOSTRIP=1" ; then objcopy --strip-all ${0} && (cd $(dirname ${0}) && objcopy --add-gnu-debuglink=${filename}.debug ${filename}) ; fi &&          mkdir -p $(dirname ${D}/${0}) &&          mv -v ${0}.debug ${D}/${0}.debug {} ;
+#12 0.470 renamed './bin/debug-wrapper.debug' -> '/tmp/debug/linux/amd64/./bin/debug-wrapper.debug'
+#12 ...
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 extracting sha256:934f80f75ed76fbbbbc5c12d3497690c39a3d4281c58f3c1584ffe73e53c9fbd 4.5s done
+#7 DONE 24.4s
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 extracting sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6
+#7 ...
+
+#12 [builder 5/6] RUN set -xe &&     export D=/tmp/debug/linux/amd64 &&     cd /out/linux/amd64 &&     find . -type f       -executable       -exec sh -c         'filename=$(basename ${0}) &&          objcopy --only-keep-debug ${0} ${0}.debug &&          if ! echo "$MODIFIERS" | grep "NOSTRIP=1" ; then objcopy --strip-all ${0} && (cd $(dirname ${0}) && objcopy --add-gnu-debuglink=${filename}.debug ${filename}) ; fi &&          mkdir -p $(dirname ${D}/${0}) &&          mv -v ${0}.debug ${D}/${0}.debug'       {} ;
+#12 2.076 renamed './usr/bin/cilium-operator-generic.debug' -> '/tmp/debug/linux/amd64/./usr/bin/cilium-operator-generic.debug'
+#12 DONE 3.6s
+
+#13 [builder 6/6] RUN for f in $(find /tmp/debug -type f -name '*.debug' -not -name 'debug-wrapper.debug') ; do readelf -S ${f} | grep -q \.symtab ||     (echo Debug symbols are missing in ${f} - possibly due to incorrect build parameters && false); done
+#13 DONE 0.6s
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 extracting sha256:f2975120dd41bd35f641db62b50cab83d9b4d923ffb4e7ec012a7ed4775d33e6 5.4s done
+#7 DONE 29.8s
+
+#7 [gops 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#7 extracting sha256:93087e76a1e2e414b67bdb5aae343d9757f462cafc76441021d2208fde0c315e 0.1s done
+#7 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0.1s done
+#7 DONE 29.9s
+
+#14 [gops 2/3] WORKDIR /go/src/github.com/cilium/cilium/images/runtime
+#14 DONE 0.2s
+
+#15 [gops 3/3] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     GOARCH=amd64 ./build-gops.sh
+#15 0.486 + set -o errexit
+#15 0.486 + set -o pipefail
+#15 0.486 + set -o nounset
+#15 0.486 + gops_version=v0.3.27
+#15 0.486 + mkdir -p /go/src/github.com/google
+#15 0.490 + cd /go/src/github.com/google
+#15 0.490 + git clone https://github.com/google/gops.git
+#15 0.493 Cloning into 'gops'...
+#15 1.321 + cd gops
+#15 1.321 + git checkout -b v0.3.27 v0.3.27
+#15 1.329 Switched to a new branch 'v0.3.27'
+#15 1.331 + git --no-pager remote -v
+#15 1.333 origin	https://github.com/google/gops.git (fetch)
+#15 1.333 origin	https://github.com/google/gops.git (push)
+#15 1.333 + git --no-pager log -1
+#15 1.337 commit 70408a1556a9d904d8c79722aebe1aaa3b24beca
+#15 1.337 Author: Tobias Klauser <tklauser@distanz.ch>
+#15 1.337 Date:   Fri Feb 10 14:18:59 2023 +0100
+#15 1.337 
+#15 1.337     Update CI to Go 1.20
+#15 1.338 + mkdir -p /out/usr/bin
+#15 1.342 + CGO_ENABLED=0
+#15 1.342 + go build -ldflags '-s -w' -o /out/usr/bin/gops github.com/google/gops
+#15 DONE 2.7s
+
+#16 [release 1/6] COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+#16 CACHED
+
+#17 [certs 2/2] RUN apk --update add ca-certificates
+#17 CACHED
+
+#18 [release 2/6] COPY --from=gops /out /
+#18 CACHED
+
+#19 [release 3/6] COPY --from=builder /out/linux/amd64/usr/bin/cilium-operator-generic /usr/bin/cilium-operator-generic
+#19 DONE 0.5s
+
+#20 [release 4/6] COPY --from=builder /out/linux/amd64/LICENSE.all /LICENSE.all
+#20 DONE 0.2s
+
+#21 [release 5/6] COPY --chmod=777 --from=scratch / /home/gops
+#21 DONE 0.2s
+
+#22 exporting to image
+#22 exporting layers
+#22 exporting layers 4.8s done
+#22 exporting manifest sha256:0822fabb2c29c8dc9be8fa13e0305c0a07fc9c6f6fc33df9e2e174c0db640cff 0.1s done
+#22 exporting config sha256:9d093405047fd0bf20e26140c608934351313b6813f8b00dce56c03c2d38ee4b
+#22 exporting config sha256:9d093405047fd0bf20e26140c608934351313b6813f8b00dce56c03c2d38ee4b 0.1s done
+#22 exporting attestation manifest sha256:c4745f8dc0851490d8d52d9d5d68f20f6a890638c7268b75cc47d2c0dd83b317
+#22 exporting attestation manifest sha256:c4745f8dc0851490d8d52d9d5d68f20f6a890638c7268b75cc47d2c0dd83b317 0.1s done
+#22 exporting manifest list sha256:0911b3fdd0c2f793e29235e994c82fad7793d3dc90e2b10ba51209f0e758158e
+#22 exporting manifest list sha256:0911b3fdd0c2f793e29235e994c82fad7793d3dc90e2b10ba51209f0e758158e 0.1s done
+#22 naming to acnpublic.azurecr.io/cilium/operator-generic:amd64-dns-perf-v1.19 done
+#22 unpacking to acnpublic.azurecr.io/cilium/operator-generic:amd64-dns-perf-v1.19
+#22 unpacking to acnpublic.azurecr.io/cilium/operator-generic:amd64-dns-perf-v1.19 0.9s done
+#22 DONE 6.1s
+Define "DOCKER_FLAGS=--push" to push the build results.
+[03:09:28] Pushing acnpublic.azurecr.io/cilium/operator-generic:amd64-dns-perf-v1.19
+The push refers to repository [acnpublic.azurecr.io/cilium/operator-generic]
+4ad5adec0ca3: Waiting
+f40d901a9707: Waiting
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+6c703ca23c3f: Waiting
+4ad5adec0ca3: Waiting
+f40d901a9707: Waiting
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+f40d901a9707: Waiting
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+4ad5adec0ca3: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+4ad5adec0ca3: Waiting
+f40d901a9707: Waiting
+ab2afc194462: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+4ad5adec0ca3: Waiting
+f40d901a9707: Waiting
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+4ad5adec0ca3: Waiting
+f40d901a9707: Waiting
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+4ad5adec0ca3: Waiting
+f40d901a9707: Waiting
+4ad5adec0ca3: Waiting
+f40d901a9707: Waiting
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+f40d901a9707: Layer already exists
+ab2afc194462: Waiting
+9dc5c0a12ef2: Waiting
+30097b588fc3: Waiting
+6c703ca23c3f: Waiting
+9dc5c0a12ef2: Waiting
+4ad5adec0ca3: Pushed
+9dc5c0a12ef2: Pushed
+6c703ca23c3f: Pushed
+ab2afc194462: Pushed
+30097b588fc3: Pushed
+amd64-dns-perf-v1.19: digest: sha256:0911b3fdd0c2f793e29235e994c82fad7793d3dc90e2b10ba51209f0e758158e size: 856
+[03:09:33] Building standalone-dns-proxy (v1.19)...
+Using Docker Buildx builder "lucid_ganguly" with build flags "--platform linux/amd64 --build-arg BASE_IMAGE=mcr.microsoft.com/azurelinux/distroless/minimal:3.0 --load".
+: images/standalone-dns-proxy/Dockerfile acnpublic.azurecr.io/cilium/clustermesh-apiserver:amd64-dns-perf-v1.19
+docker buildx build -f images/standalone-dns-proxy/Dockerfile  --platform linux/amd64 --build-arg BASE_IMAGE=mcr.microsoft.com/azurelinux/distroless/minimal:3.0 --load  --build-arg MODIFIERS="NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN= " --build-arg CILIUM_SHA= --build-arg OPERATOR_VARIANT=standalone-dns-proxy --build-arg DEBUG_HOLD= --target release -t acnpublic.azurecr.io/cilium/standalone-dns-proxy:amd64-dns-perf-v1.19 .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 4.84kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#2 DONE 0.1s
+
+#3 [internal] load metadata for mcr.microsoft.com/azurelinux/distroless/minimal:3.0
+#3 DONE 0.2s
+
+#4 [release 1/2] FROM mcr.microsoft.com/azurelinux/distroless/minimal:3.0@sha256:5a66f9f16ac675db2a8229dac72d83811b73b502d6ad192d8b374c7f3be498af
+#4 resolve mcr.microsoft.com/azurelinux/distroless/minimal:3.0@sha256:5a66f9f16ac675db2a8229dac72d83811b73b502d6ad192d8b374c7f3be498af 0.1s done
+#4 CACHED
+
+#5 [builder 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#5 resolve docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c 0.1s done
+#5 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context:
+#6 transferring context: 130.73MB 5.1s
+#6 transferring context: 222.41MB 8.9s done
+#6 DONE 9.1s
+
+#5 [builder 1/3] FROM docker.io/library/golang:1.25.9@sha256:a95d3d115ec2643a014c9539962dcecba297fb4ed5e5cbfab84cf726327e8b8c
+#5 CACHED
+
+#7 [builder 2/3] WORKDIR /go/src/github.com/cilium/cilium
+#7 DONE 1.6s
+
+#8 [builder 3/3] RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=amd64 DESTDIR=/out/linux/amd64 $(echo NOSTRIP= NOOPT= LOCKDEBUG= RACE= V= LIBNETWORK_PLUGIN=  | tr -d '"')     build-container-standalone-dns-proxy install-container-binary-standalone-dns-proxy
+#8 0.772 make  -C standalone-dns-proxy all
+#8 0.777 make[1]: Entering directory '/go/src/github.com/cilium/cilium/standalone-dns-proxy'
+#8 0.857 CGO_ENABLED=0 GOARCH=amd64 go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.19.3 " -s -w -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=2437d2edeaf4d9b56ef279bd0d71127440c067aa" ' -tags=osusergo  -o standalone-dns-proxy
+#8 5.018 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/standalone-dns-proxy'
+#8 5.019 install -m 0755 -d /out/linux/amd64/usr/bin
+#8 5.026 make  -C standalone-dns-proxy install-binary
+#8 5.031 make[1]: Entering directory '/go/src/github.com/cilium/cilium/standalone-dns-proxy'
+#8 5.108 install -m 0755 -d /out/linux/amd64/usr/bin
+#8 5.113 install -m 0755 standalone-dns-proxy /out/linux/amd64/usr/bin
+#8 5.177 make[1]: Leaving directory '/go/src/github.com/cilium/cilium/standalone-dns-proxy'
+#8 DONE 6.0s
+
+#9 [release 2/2] COPY --from=builder /out/linux/amd64/usr/bin/standalone-dns-proxy /usr/bin/standalone-dns-proxy
+#9 DONE 0.4s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 3.3s done
+#10 exporting manifest sha256:a15967efc7ea518dbab82eddcdac27ed10bf091ecfbc9f607e49e48c9f91c685 0.0s done
+#10 exporting config sha256:9aeaf39e9051cf10a34adb7422dfd88121f46f24e4530d73c378ab46d417b139 0.1s done
+#10 exporting attestation manifest sha256:7d06e277b5899ae1bf4030699fb2bbedd2a18fe6a4c37ce5a801bdca0adbcc1b 0.1s done
+#10 exporting manifest list sha256:3605f915f51c6d810b4d8244030f03f18822647769496fdb0c14e80e32ef94f4
+#10 exporting manifest list sha256:3605f915f51c6d810b4d8244030f03f18822647769496fdb0c14e80e32ef94f4 0.1s done
+#10 naming to acnpublic.azurecr.io/cilium/standalone-dns-proxy:amd64-dns-perf-v1.19 done
+#10 unpacking to acnpublic.azurecr.io/cilium/standalone-dns-proxy:amd64-dns-perf-v1.19
+#10 unpacking to acnpublic.azurecr.io/cilium/standalone-dns-proxy:amd64-dns-perf-v1.19 0.6s done
+#10 DONE 4.3s
+Define "DOCKER_FLAGS=--push" to push the build results.
+[03:09:59] Pushing acnpublic.azurecr.io/cilium/dns-proxy:amd64-dns-perf-v1.19
+The push refers to repository [acnpublic.azurecr.io/cilium/dns-proxy]
+tag does not exist: acnpublic.azurecr.io/cilium/dns-proxy:amd64-dns-perf-v1.19

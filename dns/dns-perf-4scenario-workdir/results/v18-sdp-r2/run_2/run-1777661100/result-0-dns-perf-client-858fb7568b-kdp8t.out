@@ -1,0 +1,1026 @@
+code: 0
+data:
+  avg_latency: 0.04998
+  histogram:
+  - - 0
+    - 0
+  - - 1
+    - 169
+  - - 2
+    - 741
+  - - 3
+    - 1162
+  - - 4
+    - 1411
+  - - 5
+    - 1664
+  - - 6
+    - 1855
+  - - 7
+    - 1969
+  - - 8
+    - 1905
+  - - 9
+    - 2040
+  - - 10
+    - 2160
+  - - 11
+    - 2323
+  - - 12
+    - 2517
+  - - 13
+    - 2474
+  - - 14
+    - 2488
+  - - 15
+    - 2657
+  - - 16
+    - 2754
+  - - 17
+    - 2847
+  - - 18
+    - 3016
+  - - 19
+    - 3018
+  - - 20
+    - 3130
+  - - 21
+    - 3273
+  - - 22
+    - 3343
+  - - 23
+    - 3376
+  - - 24
+    - 3430
+  - - 25
+    - 3342
+  - - 26
+    - 3416
+  - - 27
+    - 3545
+  - - 28
+    - 3583
+  - - 29
+    - 3643
+  - - 30
+    - 3669
+  - - 31
+    - 3469
+  - - 32
+    - 3501
+  - - 33
+    - 3708
+  - - 34
+    - 3651
+  - - 35
+    - 3600
+  - - 36
+    - 3612
+  - - 37
+    - 3662
+  - - 38
+    - 3518
+  - - 39
+    - 3513
+  - - 40
+    - 3593
+  - - 41
+    - 3314
+  - - 42
+    - 3334
+  - - 43
+    - 3404
+  - - 44
+    - 3277
+  - - 45
+    - 3094
+  - - 46
+    - 3218
+  - - 47
+    - 3052
+  - - 48
+    - 3099
+  - - 49
+    - 3075
+  - - 50
+    - 2811
+  - - 51
+    - 2824
+  - - 52
+    - 2792
+  - - 53
+    - 2770
+  - - 54
+    - 2609
+  - - 55
+    - 2539
+  - - 56
+    - 2562
+  - - 57
+    - 2501
+  - - 58
+    - 2408
+  - - 59
+    - 2416
+  - - 60
+    - 2341
+  - - 61
+    - 2254
+  - - 62
+    - 2099
+  - - 63
+    - 2059
+  - - 64
+    - 1996
+  - - 65
+    - 1930
+  - - 66
+    - 1941
+  - - 67
+    - 1869
+  - - 68
+    - 1768
+  - - 69
+    - 1684
+  - - 70
+    - 1690
+  - - 71
+    - 1658
+  - - 72
+    - 1602
+  - - 73
+    - 1487
+  - - 74
+    - 1519
+  - - 75
+    - 1450
+  - - 76
+    - 1371
+  - - 77
+    - 1351
+  - - 78
+    - 1242
+  - - 79
+    - 1212
+  - - 80
+    - 1268
+  - - 81
+    - 1173
+  - - 82
+    - 1110
+  - - 83
+    - 1095
+  - - 84
+    - 1017
+  - - 85
+    - 1061
+  - - 86
+    - 1002
+  - - 87
+    - 969
+  - - 88
+    - 989
+  - - 89
+    - 945
+  - - 90
+    - 838
+  - - 91
+    - 864
+  - - 92
+    - 810
+  - - 93
+    - 820
+  - - 94
+    - 746
+  - - 95
+    - 800
+  - - 96
+    - 682
+  - - 97
+    - 679
+  - - 98
+    - 631
+  - - 99
+    - 641
+  - - 100
+    - 589
+  - - 101
+    - 601
+  - - 102
+    - 521
+  - - 103
+    - 635
+  - - 104
+    - 546
+  - - 105
+    - 528
+  - - 106
+    - 524
+  - - 107
+    - 485
+  - - 108
+    - 535
+  - - 109
+    - 439
+  - - 110
+    - 435
+  - - 111
+    - 395
+  - - 112
+    - 415
+  - - 113
+    - 378
+  - - 114
+    - 360
+  - - 115
+    - 342
+  - - 116
+    - 342
+  - - 117
+    - 305
+  - - 118
+    - 351
+  - - 119
+    - 320
+  - - 120
+    - 315
+  - - 121
+    - 306
+  - - 122
+    - 289
+  - - 123
+    - 288
+  - - 124
+    - 292
+  - - 125
+    - 280
+  - - 126
+    - 230
+  - - 127
+    - 259
+  - - 128
+    - 221
+  - - 129
+    - 243
+  - - 130
+    - 229
+  - - 131
+    - 191
+  - - 132
+    - 194
+  - - 133
+    - 200
+  - - 134
+    - 175
+  - - 135
+    - 183
+  - - 136
+    - 165
+  - - 137
+    - 167
+  - - 138
+    - 192
+  - - 139
+    - 174
+  - - 140
+    - 174
+  - - 141
+    - 147
+  - - 142
+    - 162
+  - - 143
+    - 128
+  - - 144
+    - 130
+  - - 145
+    - 122
+  - - 146
+    - 126
+  - - 147
+    - 124
+  - - 148
+    - 127
+  - - 149
+    - 92
+  - - 150
+    - 94
+  - - 151
+    - 108
+  - - 152
+    - 114
+  - - 153
+    - 98
+  - - 154
+    - 99
+  - - 155
+    - 95
+  - - 156
+    - 85
+  - - 157
+    - 84
+  - - 158
+    - 85
+  - - 159
+    - 96
+  - - 160
+    - 83
+  - - 161
+    - 76
+  - - 162
+    - 55
+  - - 163
+    - 88
+  - - 164
+    - 69
+  - - 165
+    - 67
+  - - 166
+    - 64
+  - - 167
+    - 62
+  - - 168
+    - 63
+  - - 169
+    - 59
+  - - 170
+    - 60
+  - - 171
+    - 48
+  - - 172
+    - 76
+  - - 173
+    - 56
+  - - 174
+    - 63
+  - - 175
+    - 63
+  - - 176
+    - 53
+  - - 177
+    - 43
+  - - 178
+    - 48
+  - - 179
+    - 44
+  - - 180
+    - 44
+  - - 181
+    - 29
+  - - 182
+    - 41
+  - - 183
+    - 41
+  - - 184
+    - 42
+  - - 185
+    - 33
+  - - 186
+    - 25
+  - - 187
+    - 40
+  - - 188
+    - 40
+  - - 189
+    - 34
+  - - 190
+    - 37
+  - - 191
+    - 42
+  - - 192
+    - 36
+  - - 193
+    - 35
+  - - 194
+    - 30
+  - - 195
+    - 27
+  - - 196
+    - 36
+  - - 197
+    - 22
+  - - 198
+    - 29
+  - - 199
+    - 18
+  - - 200
+    - 25
+  - - 201
+    - 22
+  - - 202
+    - 25
+  - - 203
+    - 17
+  - - 204
+    - 29
+  - - 205
+    - 25
+  - - 206
+    - 21
+  - - 207
+    - 35
+  - - 208
+    - 25
+  - - 209
+    - 27
+  - - 210
+    - 25
+  - - 211
+    - 22
+  - - 212
+    - 15
+  - - 213
+    - 18
+  - - 214
+    - 20
+  - - 215
+    - 23
+  - - 216
+    - 12
+  - - 217
+    - 13
+  - - 218
+    - 17
+  - - 219
+    - 14
+  - - 220
+    - 16
+  - - 221
+    - 15
+  - - 222
+    - 13
+  - - 223
+    - 13
+  - - 224
+    - 16
+  - - 225
+    - 13
+  - - 226
+    - 10
+  - - 227
+    - 5
+  - - 228
+    - 16
+  - - 229
+    - 8
+  - - 230
+    - 11
+  - - 231
+    - 18
+  - - 232
+    - 10
+  - - 233
+    - 8
+  - - 234
+    - 10
+  - - 235
+    - 14
+  - - 236
+    - 9
+  - - 237
+    - 7
+  - - 238
+    - 13
+  - - 239
+    - 7
+  - - 240
+    - 9
+  - - 241
+    - 6
+  - - 242
+    - 5
+  - - 243
+    - 8
+  - - 244
+    - 8
+  - - 245
+    - 9
+  - - 246
+    - 13
+  - - 247
+    - 6
+  - - 248
+    - 7
+  - - 249
+    - 8
+  - - 250
+    - 4
+  - - 251
+    - 6
+  - - 252
+    - 9
+  - - 253
+    - 5
+  - - 254
+    - 5
+  - - 255
+    - 10
+  - - 256
+    - 7
+  - - 257
+    - 7
+  - - 258
+    - 8
+  - - 259
+    - 1
+  - - 260
+    - 2
+  - - 261
+    - 5
+  - - 262
+    - 10
+  - - 263
+    - 4
+  - - 264
+    - 2
+  - - 265
+    - 6
+  - - 266
+    - 5
+  - - 267
+    - 3
+  - - 268
+    - 4
+  - - 269
+    - 5
+  - - 270
+    - 6
+  - - 271
+    - 2
+  - - 272
+    - 5
+  - - 273
+    - 4
+  - - 274
+    - 4
+  - - 275
+    - 1
+  - - 276
+    - 4
+  - - 277
+    - 5
+  - - 278
+    - 1
+  - - 279
+    - 1
+  - - 280
+    - 4
+  - - 281
+    - 4
+  - - 282
+    - 2
+  - - 284
+    - 2
+  - - 285
+    - 2
+  - - 286
+    - 3
+  - - 287
+    - 4
+  - - 288
+    - 2
+  - - 290
+    - 1
+  - - 291
+    - 2
+  - - 292
+    - 2
+  - - 295
+    - 1
+  - - 297
+    - 1
+  - - 299
+    - 1
+  - - 300
+    - 3
+  - - 301
+    - 2
+  - - 302
+    - 1
+  - - 304
+    - 2
+  - - 305
+    - 1
+  - - 306
+    - 3
+  - - 307
+    - 3
+  - - 309
+    - 1
+  - - 310
+    - 1
+  - - 311
+    - 1
+  - - 313
+    - 1
+  - - 314
+    - 1
+  - - 316
+    - 1
+  - - 318
+    - 1
+  - - 320
+    - 1
+  - - 322
+    - 1
+  - - 323
+    - 1
+  - - 324
+    - 1
+  - - 327
+    - 1
+  - - 329
+    - 1
+  - - 331
+    - 1
+  - - 336
+    - 2
+  - - 345
+    - 1
+  - - 354
+    - 1
+  - - 355
+    - 1
+  - - 356
+    - 1
+  - - 379
+    - 1
+  - - 444
+    - 1
+  - - 458
+    - 1
+  latency_50_percentile: 43.0
+  latency_95_percentile: 113.0
+  latency_99_5_percentile: 191.0
+  latency_99_percentile: 166.0
+  max_kubedns_cpu: 976
+  max_kubedns_memory: 26
+  max_latency: 0.458127
+  max_perfserver_cpu: 0
+  max_perfserver_memory: 0
+  min_latency: 0.00111
+  msg: null
+  ok: true
+  qps: 1991.950625
+  queries_completed: 239310
+  queries_lost: 0
+  queries_sent: 239310
+  run_time: 120.13852
+  stddev_latency: 0.033933
+params:
+  max_qps: null
+  pod_name: dns-perf-client-858fb7568b-kdp8t
+  query_file: all-queries.txt
+  run_id: 1777661100
+  run_length_seconds: 120
+  run_subid: 0
+stderr:
+- ''
+stdout:
+- DNS Performance Testing Tool
+- Nominum Version 2.1.0.0
+- ''
+- '[Status] Command line: dnsperf -s 10.0.0.10 -l 120 -d /queries/all-queries.txt'
+- '[Status] Sending queries (to 10.0.0.10)'
+- '[Status] Started at: Fri May  1 18:45:31 2026'
+- '[Status] Stopping after 120.000000 seconds'
+- '[Status] Testing complete (time limit)'
+- ''
+- 'Statistics:'
+- ''
+- '  Queries sent:         239310'
+- '  Queries completed:    239310 (100.00%)'
+- '  Queries lost:         0 (0.00%)'
+- ''
+- '  Response codes:       NOERROR 28716 (12.00%), NXDOMAIN 210594 (88.00%)'
+- '  Average packet size:  request 38, response 122'
+- '  Run time (s):         120.138520'
+- '  Queries per second:   1991.950625'
+- ''
+- '  Average Latency (s):  0.049980 (min 0.001110, max 0.458127)'
+- '  Latency StdDev (s):   0.033933'
+- ''
+- '  Latency histogram'
+- '#histogram 0 0'
+- '#histogram 1 169'
+- '#histogram 2 741'
+- '#histogram 3 1162'
+- '#histogram 4 1411'
+- '#histogram 5 1664'
+- '#histogram 6 1855'
+- '#histogram 7 1969'
+- '#histogram 8 1905'
+- '#histogram 9 2040'
+- '#histogram 10 2160'
+- '#histogram 11 2323'
+- '#histogram 12 2517'
+- '#histogram 13 2474'
+- '#histogram 14 2488'
+- '#histogram 15 2657'
+- '#histogram 16 2754'
+- '#histogram 17 2847'
+- '#histogram 18 3016'
+- '#histogram 19 3018'
+- '#histogram 20 3130'
+- '#histogram 21 3273'
+- '#histogram 22 3343'
+- '#histogram 23 3376'
+- '#histogram 24 3430'
+- '#histogram 25 3342'
+- '#histogram 26 3416'
+- '#histogram 27 3545'
+- '#histogram 28 3583'
+- '#histogram 29 3643'
+- '#histogram 30 3669'
+- '#histogram 31 3469'
+- '#histogram 32 3501'
+- '#histogram 33 3708'
+- '#histogram 34 3651'
+- '#histogram 35 3600'
+- '#histogram 36 3612'
+- '#histogram 37 3662'
+- '#histogram 38 3518'
+- '#histogram 39 3513'
+- '#histogram 40 3593'
+- '#histogram 41 3314'
+- '#histogram 42 3334'
+- '#histogram 43 3404'
+- '#histogram 44 3277'
+- '#histogram 45 3094'
+- '#histogram 46 3218'
+- '#histogram 47 3052'
+- '#histogram 48 3099'
+- '#histogram 49 3075'
+- '#histogram 50 2811'
+- '#histogram 51 2824'
+- '#histogram 52 2792'
+- '#histogram 53 2770'
+- '#histogram 54 2609'
+- '#histogram 55 2539'
+- '#histogram 56 2562'
+- '#histogram 57 2501'
+- '#histogram 58 2408'
+- '#histogram 59 2416'
+- '#histogram 60 2341'
+- '#histogram 61 2254'
+- '#histogram 62 2099'
+- '#histogram 63 2059'
+- '#histogram 64 1996'
+- '#histogram 65 1930'
+- '#histogram 66 1941'
+- '#histogram 67 1869'
+- '#histogram 68 1768'
+- '#histogram 69 1684'
+- '#histogram 70 1690'
+- '#histogram 71 1658'
+- '#histogram 72 1602'
+- '#histogram 73 1487'
+- '#histogram 74 1519'
+- '#histogram 75 1450'
+- '#histogram 76 1371'
+- '#histogram 77 1351'
+- '#histogram 78 1242'
+- '#histogram 79 1212'
+- '#histogram 80 1268'
+- '#histogram 81 1173'
+- '#histogram 82 1110'
+- '#histogram 83 1095'
+- '#histogram 84 1017'
+- '#histogram 85 1061'
+- '#histogram 86 1002'
+- '#histogram 87 969'
+- '#histogram 88 989'
+- '#histogram 89 945'
+- '#histogram 90 838'
+- '#histogram 91 864'
+- '#histogram 92 810'
+- '#histogram 93 820'
+- '#histogram 94 746'
+- '#histogram 95 800'
+- '#histogram 96 682'
+- '#histogram 97 679'
+- '#histogram 98 631'
+- '#histogram 99 641'
+- '#histogram 100 589'
+- '#histogram 101 601'
+- '#histogram 102 521'
+- '#histogram 103 635'
+- '#histogram 104 546'
+- '#histogram 105 528'
+- '#histogram 106 524'
+- '#histogram 107 485'
+- '#histogram 108 535'
+- '#histogram 109 439'
+- '#histogram 110 435'
+- '#histogram 111 395'
+- '#histogram 112 415'
+- '#histogram 113 378'
+- '#histogram 114 360'
+- '#histogram 115 342'
+- '#histogram 116 342'
+- '#histogram 117 305'
+- '#histogram 118 351'
+- '#histogram 119 320'
+- '#histogram 120 315'
+- '#histogram 121 306'
+- '#histogram 122 289'
+- '#histogram 123 288'
+- '#histogram 124 292'
+- '#histogram 125 280'
+- '#histogram 126 230'
+- '#histogram 127 259'
+- '#histogram 128 221'
+- '#histogram 129 243'
+- '#histogram 130 229'
+- '#histogram 131 191'
+- '#histogram 132 194'
+- '#histogram 133 200'
+- '#histogram 134 175'
+- '#histogram 135 183'
+- '#histogram 136 165'
+- '#histogram 137 167'
+- '#histogram 138 192'
+- '#histogram 139 174'
+- '#histogram 140 174'
+- '#histogram 141 147'
+- '#histogram 142 162'
+- '#histogram 143 128'
+- '#histogram 144 130'
+- '#histogram 145 122'
+- '#histogram 146 126'
+- '#histogram 147 124'
+- '#histogram 148 127'
+- '#histogram 149 92'
+- '#histogram 150 94'
+- '#histogram 151 108'
+- '#histogram 152 114'
+- '#histogram 153 98'
+- '#histogram 154 99'
+- '#histogram 155 95'
+- '#histogram 156 85'
+- '#histogram 157 84'
+- '#histogram 158 85'
+- '#histogram 159 96'
+- '#histogram 160 83'
+- '#histogram 161 76'
+- '#histogram 162 55'
+- '#histogram 163 88'
+- '#histogram 164 69'
+- '#histogram 165 67'
+- '#histogram 166 64'
+- '#histogram 167 62'
+- '#histogram 168 63'
+- '#histogram 169 59'
+- '#histogram 170 60'
+- '#histogram 171 48'
+- '#histogram 172 76'
+- '#histogram 173 56'
+- '#histogram 174 63'
+- '#histogram 175 63'
+- '#histogram 176 53'
+- '#histogram 177 43'
+- '#histogram 178 48'
+- '#histogram 179 44'
+- '#histogram 180 44'
+- '#histogram 181 29'
+- '#histogram 182 41'
+- '#histogram 183 41'
+- '#histogram 184 42'
+- '#histogram 185 33'
+- '#histogram 186 25'
+- '#histogram 187 40'
+- '#histogram 188 40'
+- '#histogram 189 34'
+- '#histogram 190 37'
+- '#histogram 191 42'
+- '#histogram 192 36'
+- '#histogram 193 35'
+- '#histogram 194 30'
+- '#histogram 195 27'
+- '#histogram 196 36'
+- '#histogram 197 22'
+- '#histogram 198 29'
+- '#histogram 199 18'
+- '#histogram 200 25'
+- '#histogram 201 22'
+- '#histogram 202 25'
+- '#histogram 203 17'
+- '#histogram 204 29'
+- '#histogram 205 25'
+- '#histogram 206 21'
+- '#histogram 207 35'
+- '#histogram 208 25'
+- '#histogram 209 27'
+- '#histogram 210 25'
+- '#histogram 211 22'
+- '#histogram 212 15'
+- '#histogram 213 18'
+- '#histogram 214 20'
+- '#histogram 215 23'
+- '#histogram 216 12'
+- '#histogram 217 13'
+- '#histogram 218 17'
+- '#histogram 219 14'
+- '#histogram 220 16'
+- '#histogram 221 15'
+- '#histogram 222 13'
+- '#histogram 223 13'
+- '#histogram 224 16'
+- '#histogram 225 13'
+- '#histogram 226 10'
+- '#histogram 227 5'
+- '#histogram 228 16'
+- '#histogram 229 8'
+- '#histogram 230 11'
+- '#histogram 231 18'
+- '#histogram 232 10'
+- '#histogram 233 8'
+- '#histogram 234 10'
+- '#histogram 235 14'
+- '#histogram 236 9'
+- '#histogram 237 7'
+- '#histogram 238 13'
+- '#histogram 239 7'
+- '#histogram 240 9'
+- '#histogram 241 6'
+- '#histogram 242 5'
+- '#histogram 243 8'
+- '#histogram 244 8'
+- '#histogram 245 9'
+- '#histogram 246 13'
+- '#histogram 247 6'
+- '#histogram 248 7'
+- '#histogram 249 8'
+- '#histogram 250 4'
+- '#histogram 251 6'
+- '#histogram 252 9'
+- '#histogram 253 5'
+- '#histogram 254 5'
+- '#histogram 255 10'
+- '#histogram 256 7'
+- '#histogram 257 7'
+- '#histogram 258 8'
+- '#histogram 259 1'
+- '#histogram 260 2'
+- '#histogram 261 5'
+- '#histogram 262 10'
+- '#histogram 263 4'
+- '#histogram 264 2'
+- '#histogram 265 6'
+- '#histogram 266 5'
+- '#histogram 267 3'
+- '#histogram 268 4'
+- '#histogram 269 5'
+- '#histogram 270 6'
+- '#histogram 271 2'
+- '#histogram 272 5'
+- '#histogram 273 4'
+- '#histogram 274 4'
+- '#histogram 275 1'
+- '#histogram 276 4'
+- '#histogram 277 5'
+- '#histogram 278 1'
+- '#histogram 279 1'
+- '#histogram 280 4'
+- '#histogram 281 4'
+- '#histogram 282 2'
+- '#histogram 284 2'
+- '#histogram 285 2'
+- '#histogram 286 3'
+- '#histogram 287 4'
+- '#histogram 288 2'
+- '#histogram 290 1'
+- '#histogram 291 2'
+- '#histogram 292 2'
+- '#histogram 295 1'
+- '#histogram 297 1'
+- '#histogram 299 1'
+- '#histogram 300 3'
+- '#histogram 301 2'
+- '#histogram 302 1'
+- '#histogram 304 2'
+- '#histogram 305 1'
+- '#histogram 306 3'
+- '#histogram 307 3'
+- '#histogram 309 1'
+- '#histogram 310 1'
+- '#histogram 311 1'
+- '#histogram 313 1'
+- '#histogram 314 1'
+- '#histogram 316 1'
+- '#histogram 318 1'
+- '#histogram 320 1'
+- '#histogram 322 1'
+- '#histogram 323 1'
+- '#histogram 324 1'
+- '#histogram 327 1'
+- '#histogram 329 1'
+- '#histogram 331 1'
+- '#histogram 336 2'
+- '#histogram 345 1'
+- '#histogram 354 1'
+- '#histogram 355 1'
+- '#histogram 356 1'
+- '#histogram 379 1'
+- '#histogram 444 1'
+- '#histogram 458 1'
+- ''

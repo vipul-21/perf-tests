@@ -1,0 +1,78 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hubble-generate-certs
+  namespace: kube-system
+  labels:
+    k8s-app: hubble-generate-certs
+    app.kubernetes.io/name: hubble-generate-certs
+    app.kubernetes.io/part-of: cilium
+spec:
+  schedule: "0 0 1 */4 *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            k8s-app: hubble-generate-certs
+            kubernetes.azure.com/managedby: aks
+        spec:
+          containers:
+            - name: certgen
+              image: mcr.microsoft.com/containernetworking/cilium/certgen:v0.3.2
+              imagePullPolicy: IfNotPresent
+              command:
+                - "/usr/bin/cilium-certgen"
+              args:
+                - "--ca-generate=true"
+                - "--ca-reuse-secret"
+                - "--ca-secret-namespace=kube-system"
+                - "--ca-secret-name=cilium-ca"
+                - "--ca-common-name=Cilium CA"
+              env:
+                - name: CILIUM_CERTGEN_CONFIG
+                  value: |
+                    certs:
+                    - name: hubble-server-certs
+                      namespace: "kube-system"
+                      commonName: {{ list "*" ("default" | replace "." "-") "hubble-grpc.cilium.io" | join "." | quote }}
+                      hosts:
+                      - {{ list "*" ("default" | replace "." "-") "hubble-grpc.cilium.io" | join "." | quote }}
+                      usage:
+                      - signing
+                      - key encipherment
+                      - server auth
+                      - client auth
+                      validity: 10368000s
+                    - name: hubble-relay-client-certs
+                      namespace: "kube-system"
+                      commonName: "*.hubble-relay.cilium.io"
+                      hosts:
+                      - "*.hubble-relay.cilium.io"
+                      usage:
+                      - signing
+                      - key encipherment
+                      - client auth
+                      validity: 10368000s
+                    - name: hubble-relay-server-certs
+                      namespace: "kube-system"
+                      commonName: "*.hubble-relay.cilium.io"
+                      hosts:
+                      - "*.hubble-relay.cilium.io"
+                      usage:
+                      - signing
+                      - key encipherment
+                      - server auth
+                      validity: 10368000s
+          hostNetwork: true
+          tolerations:
+          - key: CriticalAddonsOnly
+            operator: Exists
+          serviceAccount: "hubble-generate-certs"
+          serviceAccountName: "hubble-generate-certs"
+          automountServiceAccountToken: true
+          restartPolicy: OnFailure
+      ttlSecondsAfterFinished: 1800
